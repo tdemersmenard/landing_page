@@ -60,17 +60,17 @@ export function StickyBar({ heroId }: { heroId: string }) {
           <div className="flex items-center gap-4 pt-1.5">
             <del
               role="img"
-              aria-label={`Programme complet avec coaching, ${FULL_PRICE} dollars canadiens`}
+              aria-label={`Prix d'avant, ${FULL_PRICE} dollars canadiens`}
               className="barre chiffre text-2xl"
             >
               {money(FULL_PRICE)}
             </del>
-            <span role="img" aria-label={`Les modules seuls, ${PRICE} dollars canadiens`} className="chiffre text-5xl">
+            <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-5xl">
               {money(PRICE)}
             </span>
           </div>
           <p className="mt-3 text-xs leading-tight">
-            {`Les 8 modules du programme à ${money(FULL_PRICE)}. Coaching non inclus.`}
+            {`Le programme que je vendais ${money(FULL_PRICE)}.`}
           </p>
         </div>
         <div className="shrink-0 text-right">

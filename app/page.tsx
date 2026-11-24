@@ -3,7 +3,7 @@ import { Contact } from "@/components/Contact";
 import { EbookForm } from "@/components/EbookForm";
 import { BuyButton, Countdown, StickyBar } from "@/components/offer";
 import { FULL_PRICE, PRICE, SKOOL_MEMBERS } from "@/lib/config";
-import { comparison, extras, faq, modules, situations } from "@/lib/content";
+import { extras, faq, included, modules, situations } from "@/lib/content";
 import { money, t } from "@/lib/text";
 
 const P = ({ children }: { children: string }) => <mark className="placeholder">{t(children)}</mark>;
@@ -23,11 +23,11 @@ export default function Page() {
             <div>
               <div className="flex items-center gap-5 lg:block">
                 <p className="max-w-56 text-base leading-snug font-bold lg:max-w-80 lg:text-xl">
-                  {t("Les 8 modules du programme Touch Grass Academy à 997 $")}
+                  {t("Le programme Touch Grass Academy que je vendais 997 $")}
                 </p>
                 <del
                   role="img"
-                  aria-label={`Programme complet avec coaching, ${FULL_PRICE} dollars canadiens`}
+                  aria-label={`Prix d'avant, ${FULL_PRICE} dollars canadiens`}
                   className="barre hero-barre chiffre shrink-0 text-[3.75rem] lg:mt-6 lg:text-[6rem]"
                 >
                   {money(FULL_PRICE)}
@@ -35,7 +35,7 @@ export default function Page() {
               </div>
               <span
                 role="img"
-                aria-label={`Prix Black Friday, les modules seuls, ${PRICE} dollars canadiens`}
+                aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`}
                 className="hero-prix chiffre mt-11 text-[min(48vw,20rem)] lg:mt-16 lg:text-[19rem]"
               >
                 {money(PRICE)}
@@ -61,7 +61,7 @@ export default function Page() {
               </div>
               <p className="mt-4 font-bold">{`${SKOOL_MEMBERS} personnes sont déjà dans la communauté Skool.`}</p>
               <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed">
-                Accès immédiat aux modules. Paiement sur Skool. Les appels de coaching ne sont pas inclus.
+                Accès immédiat aux modules. Paiement sur Skool.
               </p>
             </div>
           </div>
@@ -141,10 +141,12 @@ export default function Page() {
 
         <section className="gazon border-y-8 border-peinture">
           <div className="wrap py-16 lg:py-24">
-            <h2 className="titre">La différence, sans détour</h2>
-            <div className="mt-12 grid items-start gap-12 md:grid-cols-2 md:gap-8">
-              <Card title="Programme complet avec coaching" price={FULL_PRICE} full />
-              <Card title="Les modules seuls" price={PRICE} />
+            <h2 className="titre">Le même programme, au prix Black Friday</h2>
+            <p className="mt-4 max-w-2xl text-lg leading-relaxed">
+              {t("Je le vendais 997 $. C'est exactement le même contenu : rien n'est enlevé.")}
+            </p>
+            <div className="mt-14">
+              <OfferCard />
             </div>
           </div>
         </section>
@@ -192,13 +194,13 @@ export default function Page() {
             <h2 className="titre">Lance ta business de service</h2>
             <span
               role="img"
-              aria-label={`Les modules seuls, ${PRICE} dollars canadiens`}
+              aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`}
               className="chiffre mt-14 text-[min(46vw,16rem)]"
             >
               {money(PRICE)}
             </span>
             <p className="mt-10 mb-6 text-lg font-semibold">
-              Les 8 modules et les 4 extras. Les appels de coaching ne sont pas inclus.
+              Le programme au complet : les 8 modules et les 4 extras.
             </p>
             <BuyButton className="w-full sm:w-auto">{ctaText}</BuyButton>
           </div>
@@ -235,42 +237,31 @@ export default function Page() {
   );
 }
 
-function Card({ title, price, full = false }: { title: string; price: number; full?: boolean }) {
+function OfferCard() {
   return (
-    <div className={`relative p-6 text-encre sm:p-8 ${full ? "bg-pale" : "bg-peinture outline-8 outline-cone"}`}>
-      {!full && <p className="absolute -top-6 left-6 bg-cone px-4 py-1.5 font-extrabold">Black Friday</p>}
-      <h3 className="text-xl font-extrabold">{t(`${title} :`)}</h3>
-      <p
-        role="img"
-        aria-label={`${price} dollars canadiens`}
-        className={`chiffre ${full ? "mt-5 text-6xl" : "mt-9 text-[8.5rem] text-gazon"}`}
-      >
-        {money(price)}
-      </p>
-      <ul className="mt-7 grid gap-3">
-        {comparison.map(([label, inModules]) => {
-          const yes = full || inModules;
-          return (
-            <li key={label} className="flex gap-3 leading-snug">
-              <span
-                aria-hidden="true"
-                className={`w-5 shrink-0 font-extrabold ${yes ? "text-gazon" : "text-[#b3261e]"}`}
-              >
-                {yes ? "✓" : "✕"}
-              </span>
-              <span className={yes ? "" : "font-bold"}>
-                {label}
-                <span className="sr-only">{yes ? " (inclus)" : " (pas inclus)"}</span>
-              </span>
-            </li>
-          );
-        })}
+    <div className="relative max-w-2xl bg-peinture p-6 text-encre outline-8 outline-cone sm:p-8">
+      <p className="absolute -top-6 left-6 bg-cone px-4 py-1.5 font-extrabold">Black Friday</p>
+      <div className="mt-5 flex flex-wrap items-end gap-x-8 gap-y-8">
+        <del role="img" aria-label={`Prix d'avant, ${FULL_PRICE} dollars canadiens`} className="barre chiffre text-6xl">
+          {money(FULL_PRICE)}
+        </del>
+        <p role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-[8.5rem] text-gazon">
+          {money(PRICE)}
+        </p>
+      </div>
+      <ul className="mt-8 grid gap-3">
+        {included.map((label) => (
+          <li key={label} className="flex gap-3 leading-snug">
+            <span aria-hidden="true" className="w-5 shrink-0 font-extrabold text-gazon">
+              ✓
+            </span>
+            {label}
+          </li>
+        ))}
       </ul>
-      {!full && (
-        <div className="mt-8">
-          <BuyButton className="w-full">{ctaText}</BuyButton>
-        </div>
-      )}
+      <div className="mt-8">
+        <BuyButton className="w-full">{ctaText}</BuyButton>
+      </div>
     </div>
   );
 }

@@ -24,21 +24,18 @@ export const extras = [
   ["La communauté Skool privée", "Pour jaser avec les autres membres."],
 ];
 
-/** [élément, inclus à 87 $] */
-export const comparison: [string, boolean][] = [
-  ["Les 8 modules vidéo", true],
-  ["Le Kit Copier-Coller", true],
-  ["Les 25 scripts qui signent", true],
-  ["Les automatisations IA", true],
-  ["La communauté Skool privée", true],
-  ["L'appel 1-on-1", false],
-  ["12 semaines d'appels de groupe", false],
+export const included = [
+  "Les 8 modules vidéo",
+  "Le Kit Copier-Coller",
+  "Les 25 scripts qui signent",
+  "Les automatisations IA",
+  "La communauté Skool privée",
 ];
 
 export const faq = [
   [
-    "Est-ce que le coaching est inclus ?",
-    "Non. À 87 $, t'as les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et la communauté Skool privée. L'appel 1-on-1 et les 12 semaines d'appels de groupe viennent seulement avec le programme à 997 $.",
+    "Est-ce que c'est le même programme qu'à 997 $ ?",
+    "Oui, exactement le même : les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et la communauté Skool privée. Y'avait pas d'appels 1-on-1 à 997 $, et y'en a pas à 87 $ non plus.",
   ],
   [
     "Ça me prend combien d'argent pour partir ?",
@@ -54,6 +51,6 @@ export const faq = [
   ],
   [
     "Pourquoi juste 87 $ ?",
-    "Parce que c'est les modules préenregistrés, sans les appels. Le programme à 997 $ comprend le coaching, qui demande du temps en direct avec toi. Le 87 $ est le prix Black Friday, jusqu'au lundi 30 novembre 2026 à 23 h 59, heure de l'Est.",
+    "C'est le prix Black Friday. Je baisse le prix, pas le contenu. L'offre finit le lundi 30 novembre 2026 à 23 h 59, heure de l'Est.",
   ],
 ];

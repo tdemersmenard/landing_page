@@ -17,7 +17,7 @@ const body = Figtree({ subsets: ["latin"], variable: "--font-figtree" });
 export const metadata: Metadata = {
   title: t("Touch Grass Academy : les 8 modules à 87 $ (Black Friday)"),
   description: t(
-    "Lance ta business de service avec les 8 modules vidéo de Touch Grass Academy, à 87 $ CAD jusqu'au 30 novembre 2026. Coaching non inclus.",
+    "Lance ta business de service avec le programme Touch Grass Academy : 8 modules vidéo à 87 $ CAD jusqu'au 30 novembre 2026.",
   ),
 };
 

@@ -262,7 +262,7 @@ Jusqu'au lundi 30 novembre 2026, 23 h 59, heure de l'Est
 
 {{bouton}}
 
-Les 8 modules seuls. L'appel 1-on-1 et les 12 semaines d'appels de groupe ne sont pas inclus. Les revenus ne sont pas garantis : les tiens vont dépendre de ton travail, de ton coin, de ton service et de la demande.
+Programme préenregistré, sans appels de coaching. Les revenus ne sont pas garantis : les tiens vont dépendre de ton travail, de ton coin, de ton service et de la demande.
 
 <!-- page: valider -->
 
