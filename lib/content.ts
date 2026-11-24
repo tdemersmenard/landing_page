@@ -21,7 +21,7 @@ export const extras = [
   ["Le Kit Copier-Coller", "Soumission, contrat, facture, flyer et annonce Marketplace."],
   ["Les 25 scripts qui signent", "Pour savoir quoi dire à tes clients."],
   ["Les automatisations IA", "Prêtes à installer."],
-  ["La communauté Skool privée", "Pour jaser avec les autres membres."],
+  ["La communauté Skool", "Pour jaser avec les autres membres."],
 ];
 
 export const included = [
@@ -29,13 +29,13 @@ export const included = [
   "Le Kit Copier-Coller",
   "Les 25 scripts qui signent",
   "Les automatisations IA",
-  "La communauté Skool privée",
+  "La communauté Skool",
 ];
 
 export const faq = [
   [
     "Est-ce que c'est le même programme qu'à 997 $ ?",
-    "Oui, exactement le même : les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et la communauté Skool privée. Y'avait pas d'appels 1-on-1 à 997 $, et y'en a pas à 87 $ non plus.",
+    "Oui, exactement le même : les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et la communauté Skool. Y'avait pas d'appels 1-on-1 à 997 $, et y'en a pas à 87 $ non plus.",
   ],
   [
     "Ça me prend combien d'argent pour partir ?",

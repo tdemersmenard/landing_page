@@ -45,9 +45,9 @@ Vendre, fixer un prix, tenir ta parole, gérer ton temps. Même si tu changes de
 
 # Pourquoi tu devrais m'écouter
 
-Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. J'ai décidé de sortir de ce qu'on voit partout et de lancer une business de service bien physique : l'entretien de piscines. Résultat : près de 100 000 $ en un seul été, et aujourd'hui je prends de mon temps pour aider ceux qui veulent lancer la leur.
+Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. J'ai décidé de sortir de ce qu'on voit partout et de lancer une business de service bien physique : l'entretien de piscines. Résultat : près de 100 000 $ de ventes en un seul été, et aujourd'hui je prends de mon temps pour aider ceux qui veulent lancer la leur.
 
-Ce près de 100 000 $, c'est [Préciser : ventes ou profit]. C'est mon résultat à moi, pas une promesse. Le tien va dépendre de ton travail, de ton coin, de ton service et de la demande.
+Ce sont des ventes, avant les dépenses. C'est mon résultat à moi, pas une promesse. Le tien va dépendre de ton travail, de ton coin, de ton service et de la demande.
 
 ## Ce que je t'ai mis dans ce guide
 
@@ -256,7 +256,7 @@ Jusqu'au lundi 30 novembre 2026, 23 h 59, heure de l'Est
 - **Module 5 : trouve tes clients en 7 jours.** Porte-à-porte, Marketplace, groupes Facebook, flyers, références.
 - **Module 6 : vends sans être gêné.** Des scripts pour la porte, le téléphone et les textos, et les réponses aux objections.
 - **Les 6 autres modules :** choisir ton service, partir avec presque rien, le légal, tes prix, la paperasse, grossir.
-- **Aussi inclus :** le Kit Copier-Coller, les 25 scripts qui signent, les automatisations IA prêtes à installer et la communauté Skool privée.
+- **Aussi inclus :** le Kit Copier-Coller, les 25 scripts qui signent, les automatisations IA prêtes à installer et la communauté Skool.
 
 **La garantie.** « Fais les modules 1 à 5 et contacte au moins 100 clients potentiels dans les 30 jours. Si t'as pas signé ton premier client, je te rembourse tes 87 $ au complet. »
 

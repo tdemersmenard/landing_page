@@ -15,16 +15,16 @@ export default function Conditions() {
         ],
         [
           "Ce que tu achètes",
-          "Les 8 modules vidéo préenregistrés, le Kit Copier-Coller (soumission, contrat, facture, flyer, annonce Marketplace), les 25 scripts qui signent, les automatisations IA prêtes à installer et la communauté Skool privée.",
+          "Les 8 modules vidéo préenregistrés, le Kit Copier-Coller (soumission, contrat, facture, flyer, annonce Marketplace), les 25 scripts qui signent, les automatisations IA prêtes à installer et la communauté Skool.",
           "C'est le même programme que celui vendu 997 $ avant le Black Friday. Il ne comprend pas d'appels de coaching.",
         ],
         [
           "Le prix et le paiement",
-          "Le prix Black Friday est de 87 $ CAD, paiement unique, jusqu'au lundi 30 novembre 2026 à 23 h 59, heure de l'Est. Le paiement se fait sur Skool, qui facture en dollars américains : [montant en USD]. Le taux de change et les frais de ta carte peuvent changer le montant final. Taxes : [à confirmer].",
+          "Le prix Black Friday est de 87 $ CAD, paiement unique, jusqu'au lundi 30 novembre 2026 à 23 h 59, heure de l'Est. Le paiement se fait sur Skool, qui facture en dollars américains : 60 $ US. Le taux de change et les frais de ta carte peuvent changer le montant final. Taxes : [à confirmer].",
         ],
         [
           "Ton accès",
-          "Ton accès est donné sur Skool une fois le paiement confirmé. Durée de l'accès : [à confirmer]. Il est personnel : tu ne peux pas le partager, le revendre ni redistribuer le contenu. Les modèles du Kit peuvent être adaptés et utilisés dans ta propre business.",
+          "Tu rejoins gratuitement la communauté Skool, puis tu débloques le cours SYSTÈME TDM dans la salle de classe. Ton accès est donné une fois le paiement confirmé. Durée de l'accès : [à confirmer]. Il est personnel : tu ne peux pas le partager, le revendre ni redistribuer le contenu. Les modèles du Kit peuvent être adaptés et utilisés dans ta propre business.",
         ],
         [
           "Les remboursements",

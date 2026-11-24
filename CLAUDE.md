@@ -6,10 +6,10 @@
 - Offre Black Friday : le programme (8 modules préenregistrés) passe de 997 $ à 87 $ CAD. C'est exactement le même contenu, sans coaching dans les deux cas.
 - Le prix 87 $ doit être L'ÉLÉMENT LE PLUS VISIBLE de la page. Le 997 $ apparaît barré, toujours avec une mention qui dit que c'est le prix auquel le programme se vendait (Loi sur la concurrence, prix de comparaison : le 997 $ doit être un vrai prix de vente antérieur).
 - Fin de l'offre : lundi 30 novembre 2026, 23 h 59, heure de l'Est. Après, les boutons d'achat se désactivent.
-- Inclus à 87 $ : les 8 modules vidéo, le Kit Copier-Coller (soumission, contrat, facture, flyer, annonce Marketplace), les 25 scripts qui signent, les automatisations IA prêtes à installer, la communauté Skool privée.
+- Inclus à 87 $ : les 8 modules vidéo, le Kit Copier-Coller (soumission, contrat, facture, flyer, annonce Marketplace), les 25 scripts qui signent, les automatisations IA prêtes à installer, la communauté Skool.
 - Pas d'appels de coaching, ni avant à 997 $, ni maintenant à 87 $.
 - Garantie : « Fais les modules 1 à 5 et contacte au moins 100 clients potentiels dans les 30 jours. Si t'as pas signé ton premier client, je te rembourse tes 87 $ au complet. »
-- Preuve du fondateur : près de 100 000 $ en un été avec une business de service.
+- Preuve du fondateur : près de 100 000 $ de ventes (avant dépenses) en un été avec une business de service.
 
 ## Les 8 modules (dans l'ordre)
 1. Choisis ton service : grille selon ton coin, ton budget, la demande, avec une calculatrice de rentabilité.
@@ -31,7 +31,7 @@ Ebook gratuit : « Les 7 services que tu peux lancer avec moins de 500 $ ».
 
 ## Stack technique
 - Next.js (App Router) + TypeScript + Tailwind, déployé sur Vercel.
-- Paiement : page de paiement unique Skool (NEXT_PUBLIC_SKOOL_URL). Skool encaisse et donne l'accès automatiquement. Skool facture en USD.
+- Paiement : sur Skool (lib/config.ts) : la personne rejoint la communauté gratuite, puis débloque le cours SYSTÈME TDM. Skool encaisse et donne l'accès automatiquement. Skool facture en USD.
 - Leads : envoyés à un webhook Make (variable d'environnement MAKE_WEBHOOK_URL), qui s'occupe des courriels et des textos.
 - Les secrets vont TOUJOURS dans .env.local, jamais dans le code. Tiens un fichier .env.example à jour.
 

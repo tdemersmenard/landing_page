@@ -6,8 +6,6 @@ import { FULL_PRICE, PRICE, SKOOL_MEMBERS } from "@/lib/config";
 import { extras, faq, included, modules, situations } from "@/lib/content";
 import { money, t } from "@/lib/text";
 
-const P = ({ children }: { children: string }) => <mark className="placeholder">{t(children)}</mark>;
-
 const ctaText = `J'embarque à ${money(PRICE)}`;
 
 export default function Page() {
@@ -59,7 +57,7 @@ export default function Page() {
               <div className="mt-6">
                 <BuyButton className="w-full sm:w-auto">{ctaText}</BuyButton>
               </div>
-              <p className="mt-4 font-bold">{`${SKOOL_MEMBERS} personnes sont déjà dans la communauté Skool.`}</p>
+              <p className="mt-4 font-bold">{`${SKOOL_MEMBERS} personnes sont déjà dans la communauté Skool gratuite.`}</p>
               <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed">
                 Accès immédiat aux modules. Paiement sur Skool.
               </p>
@@ -89,10 +87,10 @@ export default function Page() {
               <p aria-hidden="true" className="chiffre mt-3 text-[min(38vw,15rem)] lg:text-[13rem]">
                 100K
               </p>
-              <h2 className="titre mt-8">{t("Près de 100 000 $ en un été, avec une business de service")}</h2>
+              <h2 className="titre mt-8">{t("Près de 100 000 $ de ventes en un été, avec une business de service")}</h2>
               <p className="mt-5 max-w-lg leading-relaxed">
                 C&apos;est mon résultat à moi, pas une promesse. Le tien va dépendre de ton travail, de ton coin et de
-                ton service. <P>[Préciser : ventes ou profit]</P>
+                ton service. Ce sont des ventes, avant les dépenses.
               </p>
             </div>
             <figure className="bg-peinture p-5 text-encre">
@@ -105,7 +103,7 @@ export default function Page() {
                   {"Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. Fait que j'ai décidé de sortir de ce qu'on voit partout et de lancer une business de service bien physique : l'entretien de piscines."}
                 </p>
                 <p className="mt-3 leading-relaxed">
-                  {t("Résultat : près de 100 000 $ en un seul été. Aujourd'hui, je prends de mon temps pour aider ceux qui veulent lancer leur business de service à leur tour.")}
+                  {t("Résultat : près de 100 000 $ de ventes en un seul été. Aujourd'hui, je prends de mon temps pour aider ceux qui veulent lancer leur business de service à leur tour.")}
                 </p>
               </figcaption>
             </figure>

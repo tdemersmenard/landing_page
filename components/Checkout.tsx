@@ -5,7 +5,7 @@ import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
 import { captureAttribution } from "@/lib/attribution";
 import { useRemaining } from "@/lib/clock";
-import { OFFER_END, PRICE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
+import { OFFER_END, PRICE, SKOOL_COURSE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
 import { CHAMPS } from "@/lib/lead";
 import { money, t } from "@/lib/text";
 import { useLeadForm } from "@/lib/useLeadForm";
@@ -21,25 +21,28 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   const pressedOutside = useRef(false);
   const ended = useRemaining() === 0;
   const [message, setMessage] = useState("");
+  const [ready, setReady] = useState(false); // Formulaire envoyé : on montre les étapes Skool.
+  const skoolLink = useRef<HTMLAnchorElement>(null);
 
   useEffect(captureAttribution, []);
+  useEffect(() => {
+    if (ready) skoolLink.current?.focus();
+  }, [ready]);
 
   const { onSubmit, pending, field } = useLeadForm("achat_commence", CHAMPS, () => {
     // Fenêtre fermée pendant l'envoi : la personne a changé d'idée, on ne la redirige pas.
     if (!dialog.current?.open) return;
     setMessage("");
-    // Vers Skool, même si le lead n'est pas parti : rien ne bloque une vente.
+    // Étapes Skool, même si le lead n'est pas parti : rien ne bloque une vente.
     if (Date.now() >= END) return setMessage("L'offre Black Friday est terminée.");
-    if (!SKOOL_URL) return setMessage("[Lien de paiement Skool à ajouter : NEXT_PUBLIC_SKOOL_URL]");
-    window.location.assign(SKOOL_URL);
-    return "leaving";
+    setReady(true);
   });
 
   // Synchrone dans le clic : iOS n'ouvre le clavier que dans ce cas.
   function open() {
     setMessage("");
     if (!dialog.current?.open) dialog.current?.showModal();
-    first.current?.focus();
+    (first.current ?? skoolLink.current)?.focus();
   }
 
   const isOutside = (e: MouseEvent<HTMLDialogElement>) => {
@@ -81,23 +84,46 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
             <span className="chiffre text-6xl text-gazon">{money(PRICE)}</span>
           </p>
 
+          {ready ? (
+            <div className="mt-4">
+              <h3 className="text-xl font-extrabold">Il te reste 3 étapes sur Skool</h3>
+              <ol className="mt-3 list-decimal space-y-3 pl-6 text-lg leading-snug">
+                <li>Rejoins la communauté. C&apos;est gratuit.</li>
+                <li>
+                  Va dans la salle de classe et choisis <strong>{SKOOL_COURSE}</strong>.
+                </li>
+                <li>
+                  {"Clique sur « Débloquer » et paie "}
+                  <strong>{t(SKOOL_PRICE_USD)}</strong>
+                  {". Ton accès s'ouvre tout seul."}
+                </li>
+              </ol>
+              <p className="mt-4 text-[0.95rem]">Utilise le même courriel que dans le formulaire.</p>
+              {ended ? (
+                <p className="mt-5 font-bold">{"L'offre Black Friday est terminée."}</p>
+              ) : (
+                <a ref={skoolLink} href={SKOOL_URL} className="btn mt-5 w-full">
+                  Ouvrir Skool
+                </a>
+              )}
+            </div>
+          ) : (
           <form noValidate onSubmit={onSubmit} className="mt-4 grid gap-4">
             <Field ref={first} label="Prénom" autoComplete="given-name" {...field("prenom")} />
             <Field label="Téléphone" type="tel" autoComplete="tel" {...field("telephone")} />
             <Field label="Courriel" type="email" autoComplete="email" {...field("email")} />
             <Consent />
             <p className="text-[0.95rem] leading-snug">
-              {"Le paiement se fait sur Skool, qui facture en dollars américains : "}
-              {SKOOL_PRICE_USD.startsWith("[") ? <mark className="placeholder">{SKOOL_PRICE_USD}</mark> : SKOOL_PRICE_USD}
-              . Utilise le même courriel.
+              {`Le paiement se fait sur Skool, en dollars américains : ${SKOOL_PRICE_USD}. Utilise le même courriel.`}
             </p>
             <button type="submit" disabled={pending || ended} className="btn">
               {ended ? "Offre terminée" : pending ? "Un instant…" : "Continuer vers le paiement"}
             </button>
             <p role="alert" className="font-semibold text-[#b3261e] empty:hidden">
-              {message.startsWith("[") ? <mark className="placeholder">{message}</mark> : message}
+              {message}
             </p>
           </form>
+          )}
         </div>
       </dialog>
     </CheckoutContext>
