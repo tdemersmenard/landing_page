@@ -1,15 +1,14 @@
 @import "tailwindcss";
 
-/* Noir chaud, orange pour les actions et les chiffres, jaune pour les pastilles. */
+/* Vert nuit et crème, vert vif pour les actions et le prix. */
 @theme {
-  --color-nuit: #0d0b0a;
-  --color-panneau: #1a1715;
-  --color-trait: #342e2a;
-  --color-clair: #fbf7f2;
-  --color-doux: #b5aca4;
+  --color-nuit: #08140e;
+  --color-panneau: #10211a;
+  --color-trait: #24392f;
+  --color-clair: #f6f8f3;
+  --color-doux: #a9b8af;
   --color-erreur: #ff8f85;
-  --color-accent: #ff5a1f;
-  --color-jaune: #ffe03b;
+  --color-accent: #43e07a;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-titre: var(--font-archivo), system-ui, sans-serif;
 }
@@ -59,8 +58,8 @@
     --color-clair: #0a0a0a;
     --color-doux: #565656;
     --color-erreur: #b3261e;
-    --color-accent: #c93a06;
-    background: #f7f7f5;
+    --color-accent: #0a7a3c;
+    background: #f4f1e8;
     color: var(--color-clair);
     color-scheme: light;
   }
@@ -84,19 +83,12 @@
   .carte {
     background: var(--color-panneau);
     border: 1px solid var(--color-trait);
-    border-radius: 20px;
+    border-radius: 14px;
   }
   .sous {
     font-weight: 700;
     letter-spacing: -0.015em;
     line-height: 1.25;
-  }
-  /* Halo orange et grille discrète. */
-  .halo {
-    background:
-      radial-gradient(60rem 34rem at 50% -6rem, rgb(255 90 31 / 0.42), transparent 70%),
-      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px) 0 0 / 100% 48px,
-      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px) 0 0 / 48px 100%;
   }
   .pastille {
     display: inline-block;
@@ -118,24 +110,22 @@
   }
   .btn {
     display: inline-block;
-    background: #e8450a;
-    color: #fff;
+    background: #43e07a;
+    color: #06140c;
     font-family: var(--font-titre);
     font-weight: 800;
     font-size: 1.2rem;
-    box-shadow: 0 0 26px rgb(255 90 31 / 0.45);
     line-height: 1.2;
     text-align: center;
     padding: 1.15rem 1.75rem;
-    border-radius: 99px;
+    border-radius: 12px;
     transition: background 0.15s;
   }
   .btn:hover:not(:disabled) {
-    background: #cf3c06;
+    background: #6bee98;
   }
   .btn:disabled {
     background: #4a4a4a;
-    box-shadow: none;
     color: #e2e2e2;
     cursor: not-allowed;
   }
