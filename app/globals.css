@@ -69,24 +69,6 @@
   .titre {
     font-size: clamp(2.25rem, 5.5vw, 3.75rem);
   }
-  .barre {
-    position: relative;
-    display: inline-block;
-    white-space: nowrap;
-    text-decoration: none;
-  }
-  .barre::after {
-    content: "";
-    position: absolute;
-    left: -6%;
-    right: -6%;
-    top: 50%;
-    height: max(3px, 0.1em);
-    margin-top: calc(max(3px, 0.1em) / -2);
-    background: var(--color-cone);
-    border-radius: 99px;
-    transform: rotate(-14deg);
-  }
   .placeholder {
     background: #ffe94a;
     color: var(--color-encre);
@@ -141,21 +123,10 @@ html:has(dialog[open]) {
   }
 }
 
-/* Hero : le 997 $ se fait barrer, puis le 87 $ arrive. */
+/* Hero : le 87 $ arrive. */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-barre::after {
-    animation: barrer 0.45s 0.35s ease-out backwards;
-  }
   .hero-prix {
-    animation: apparaitre 0.35s 0.85s ease-out backwards;
-  }
-}
-@keyframes barrer {
-  from {
-    clip-path: inset(-100% 100% -100% 0);
-  }
-  to {
-    clip-path: inset(-100% 0 -100% 0);
+    animation: apparaitre 0.35s 0.2s ease-out backwards;
   }
 }
 @keyframes apparaitre {

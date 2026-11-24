@@ -13,4 +13,3 @@ export const SKOOL_PRICE_USD = "60 $ US";
 export const SKOOL_MEMBERS = "Plus de 130";
 
 export const PRICE = 87;
-export const FULL_PRICE = 997;

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useCheckout } from "@/components/Checkout";
 import { useRemaining } from "@/lib/clock";
-import { FULL_PRICE, PRICE } from "@/lib/config";
+import { PRICE } from "@/lib/config";
 import { money } from "@/lib/text";
 
 export function Countdown() {
@@ -58,19 +58,12 @@ export function StickyBar({ heroId }: { heroId: string }) {
       <div className="wrap flex items-center justify-between gap-3 py-2">
         <div className="min-w-0">
           <div className="flex items-center gap-4 pt-1.5">
-            <del
-              role="img"
-              aria-label={`Prix d'avant, ${FULL_PRICE} dollars canadiens`}
-              className="barre chiffre text-2xl"
-            >
-              {money(FULL_PRICE)}
-            </del>
             <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-5xl">
               {money(PRICE)}
             </span>
           </div>
           <p className="mt-3 text-xs leading-tight">
-            {`Le programme que je vendais ${money(FULL_PRICE)}.`}
+            Le programme au complet, préenregistré.
           </p>
         </div>
         <div className="shrink-0 text-right">

@@ -34,8 +34,8 @@ export const included = [
 
 export const faq = [
   [
-    "Est-ce que c'est le même programme qu'à 997 $ ?",
-    "Oui, exactement le même : les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et la communauté Skool. Y'avait pas d'appels 1-on-1 à 997 $, et y'en a pas à 87 $ non plus.",
+    "Qu'est-ce qui est inclus ?",
+    "Les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et la communauté Skool. C'est préenregistré : y'a pas d'appels de coaching.",
   ],
   [
     "Ça me prend combien d'argent pour partir ?",
@@ -51,6 +51,6 @@ export const faq = [
   ],
   [
     "Pourquoi juste 87 $ ?",
-    "C'est le prix Black Friday. Je baisse le prix, pas le contenu. L'offre finit le lundi 30 novembre 2026 à 23 h 59, heure de l'Est.",
+    "C'est le prix Black Friday, pour un programme préenregistré, sans appels de coaching. L'offre finit le lundi 30 novembre 2026 à 23 h 59, heure de l'Est.",
   ],
 ];

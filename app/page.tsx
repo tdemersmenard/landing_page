@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Contact } from "@/components/Contact";
 import { EbookForm } from "@/components/EbookForm";
 import { BuyButton, Countdown, StickyBar } from "@/components/offer";
-import { FULL_PRICE, PRICE, SKOOL_MEMBERS } from "@/lib/config";
+import { PRICE, SKOOL_MEMBERS } from "@/lib/config";
 import { extras, faq, included, modules, situations } from "@/lib/content";
 import { money, t } from "@/lib/text";
 
@@ -19,22 +19,13 @@ export default function Page() {
         <section id="hero" className="gazon border-b-8 border-peinture">
           <div className="wrap grid items-center gap-x-14 gap-y-8 pt-6 pb-10 lg:grid-cols-[auto_1fr] lg:py-12">
             <div>
-              <div className="flex items-center gap-5 lg:block">
-                <p className="max-w-56 text-base leading-snug font-bold lg:max-w-80 lg:text-xl">
-                  {t("Le programme Touch Grass Academy que je vendais 997 $")}
-                </p>
-                <del
-                  role="img"
-                  aria-label={`Prix d'avant, ${FULL_PRICE} dollars canadiens`}
-                  className="barre hero-barre chiffre shrink-0 text-[3.75rem] lg:mt-6 lg:text-[6rem]"
-                >
-                  {money(FULL_PRICE)}
-                </del>
-              </div>
+              <p className="text-base leading-snug font-bold lg:text-xl">
+                Le programme Touch Grass Academy, prix Black Friday
+              </p>
               <span
                 role="img"
                 aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`}
-                className="hero-prix chiffre mt-11 text-[min(48vw,20rem)] lg:mt-16 lg:text-[19rem]"
+                className="hero-prix chiffre mt-9 text-[min(48vw,20rem)] lg:mt-16 lg:text-[19rem]"
               >
                 {money(PRICE)}
               </span>
@@ -139,10 +130,7 @@ export default function Page() {
 
         <section className="gazon border-y-8 border-peinture">
           <div className="wrap py-16 lg:py-24">
-            <h2 className="titre">Le même programme, au prix Black Friday</h2>
-            <p className="mt-4 max-w-2xl text-lg leading-relaxed">
-              {t("Je le vendais 997 $. C'est exactement le même contenu : rien n'est enlevé.")}
-            </p>
+            <h2 className="titre">Tout ça, au prix Black Friday</h2>
             <div className="mt-14">
               <OfferCard />
             </div>
@@ -239,14 +227,9 @@ function OfferCard() {
   return (
     <div className="relative max-w-2xl bg-peinture p-6 text-encre outline-8 outline-cone sm:p-8">
       <p className="absolute -top-6 left-6 bg-cone px-4 py-1.5 font-extrabold">Black Friday</p>
-      <div className="mt-5 flex flex-wrap items-end gap-x-8 gap-y-8">
-        <del role="img" aria-label={`Prix d'avant, ${FULL_PRICE} dollars canadiens`} className="barre chiffre text-6xl">
-          {money(FULL_PRICE)}
-        </del>
-        <p role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-[8.5rem] text-gazon">
-          {money(PRICE)}
-        </p>
-      </div>
+      <p role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre mt-9 text-[8.5rem] text-gazon">
+        {money(PRICE)}
+      </p>
       <ul className="mt-8 grid gap-3">
         {included.map((label) => (
           <li key={label} className="flex gap-3 leading-snug">

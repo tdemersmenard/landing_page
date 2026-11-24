@@ -16,7 +16,7 @@ export default function Conditions() {
         [
           "Ce que tu achètes",
           "Les 8 modules vidéo préenregistrés, le Kit Copier-Coller (soumission, contrat, facture, flyer, annonce Marketplace), les 25 scripts qui signent, les automatisations IA prêtes à installer et la communauté Skool.",
-          "C'est le même programme que celui vendu 997 $ avant le Black Friday. Il ne comprend pas d'appels de coaching.",
+          "Le programme est préenregistré. Il ne comprend pas d'appels de coaching.",
         ],
         [
           "Le prix et le paiement",

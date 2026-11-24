@@ -3,11 +3,11 @@
 ## L'offre
 - Programme : Touch Grass Academy, une formation pour les jeunes qui veulent lancer une business de service (tonte de gazon, piscines, lavage de vitres, déneigement, etc.).
 - Promesse : « Lance ta business de service et signe ton premier client en 30 jours. Sinon, t'es remboursé. »
-- Offre Black Friday : le programme (8 modules préenregistrés) passe de 997 $ à 87 $ CAD. C'est exactement le même contenu, sans coaching dans les deux cas.
-- Le prix 87 $ doit être L'ÉLÉMENT LE PLUS VISIBLE de la page. Le 997 $ apparaît barré, toujours avec une mention qui dit que c'est le prix auquel le programme se vendait (Loi sur la concurrence, prix de comparaison : le 997 $ doit être un vrai prix de vente antérieur).
+- Offre Black Friday : le programme (8 modules préenregistrés) à 87 $ CAD, sans coaching.
+- Le prix 87 $ doit être L'ÉLÉMENT LE PLUS VISIBLE de la page. Pas de prix barré ni de comparaison avec un ancien prix.
 - Fin de l'offre : lundi 30 novembre 2026, 23 h 59, heure de l'Est. Après, les boutons d'achat se désactivent.
 - Inclus à 87 $ : les 8 modules vidéo, le Kit Copier-Coller (soumission, contrat, facture, flyer, annonce Marketplace), les 25 scripts qui signent, les automatisations IA prêtes à installer, la communauté Skool.
-- Pas d'appels de coaching, ni avant à 997 $, ni maintenant à 87 $.
+- Pas d'appels de coaching.
 - Garantie : « Fais les modules 1 à 5 et contacte au moins 100 clients potentiels dans les 30 jours. Si t'as pas signé ton premier client, je te rembourse tes 87 $ au complet. »
 - Preuve du fondateur : près de 100 000 $ de ventes (avant dépenses) en un été avec une business de service.
 
