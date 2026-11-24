@@ -22,7 +22,7 @@ const etapes = [
 ];
 
 const Prix = ({ className = "" }: { className?: string }) => (
-  <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className={`chiffre inline-block text-accent ${className}`}>
+  <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className={`chiffre inline-block ${className}`}>
     {money(PRICE)}
   </span>
 );
@@ -57,7 +57,7 @@ export default function Page() {
               <Profil />
               <h1 className="large mt-5 text-[clamp(2rem,5vw,3.7rem)] leading-[1.08]">
                 {t("Lance ta business de service et signe ton ")}
-                <span className="text-accent">premier client en 30 jours</span>
+                premier client en 30 jours
               </h1>
               <p className="mt-3 text-lg font-semibold">
                 {"Sinon, t'es remboursé. "}
@@ -86,12 +86,12 @@ export default function Page() {
           </div>
         </section>
 
-        <section aria-label="En chiffres" className="bg-accent text-[#06140c]">
+        <section aria-label="En chiffres" className="border-y border-trait bg-panneau">
           <dl className="wrap grid grid-cols-2 gap-5 py-6 lg:py-8">
             {chiffres.map(([n, d]) => (
               <div key={n}>
                 <dt className="large text-2xl leading-tight lg:text-4xl">{t(n)}</dt>
-                <dd className="mt-1 text-sm leading-snug font-medium lg:text-base">{d}</dd>
+                <dd className="mt-1 text-sm leading-snug text-doux lg:text-base">{d}</dd>
               </div>
             ))}
           </dl>

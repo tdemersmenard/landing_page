@@ -58,7 +58,7 @@ export function StickyBar({ heroId }: { heroId: string }) {
       <div className="wrap flex items-center justify-between gap-3 py-2">
         <div className="min-w-0">
           <div className="flex items-center gap-4 pt-1">
-            <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-4xl text-accent">
+            <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-4xl">
               {money(PRICE)}
             </span>
           </div>

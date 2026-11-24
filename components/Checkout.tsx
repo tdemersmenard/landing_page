@@ -81,7 +81,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
           </div>
           <p className="mt-2 flex items-center justify-between gap-4 border-y-2 border-trait py-3 font-semibold">
             <span>{t("Système TDM, les 8 modules :")}</span>{" "}
-            <span className="chiffre text-5xl text-accent">{money(PRICE)}</span>
+            <span className="chiffre text-5xl">{money(PRICE)}</span>
           </p>
 
           {ready ? (
