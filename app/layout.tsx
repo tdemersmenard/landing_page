@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo } from "next/font/google";
+import { Bebas_Neue, Inter } from "next/font/google";
 import { CheckoutProvider } from "@/components/Checkout";
 import { t } from "@/lib/text";
 import "./globals.css";
 
-const archivo = Archivo({ subsets: ["latin"], weight: "variable", axes: ["wdth"], variable: "--font-archivo" });
+const bebas = Bebas_Neue({ subsets: ["latin"], weight: "400", variable: "--font-bebas" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: t("Système TDM : les 8 modules à 87 $ (Black Friday)"),
@@ -13,11 +14,11 @@ export const metadata: Metadata = {
   ),
 };
 
-export const viewport: Viewport = { themeColor: "#05080c" };
+export const viewport: Viewport = { themeColor: "#000000" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr-CA" className={archivo.variable}>
+    <html lang="fr-CA" className={`${bebas.variable} ${inter.variable}`}>
       <body>
         <CheckoutProvider>{children}</CheckoutProvider>
       </body>

@@ -36,24 +36,30 @@ export default function Page() {
       </div>
 
       <main>
-        <section id="hero" className="eau eau-hero">
+        <section id="hero" className="bg-nuit">
           <div className="wrap pt-5 pb-14 lg:pb-24">
-            <p className="large text-lg">{BRAND}</p>
-            <div className="mt-8 grid items-end gap-x-16 gap-y-6 lg:mt-20 lg:grid-cols-[1.35fr_1fr]">
+            <div className="flex items-center justify-between gap-4">
+              <p className="large text-2xl">{BRAND}</p>
+              <p className="flex items-center gap-2.5 text-[0.95rem] font-medium">
+                Par Thomas
+                <Image src="/thomas-visage.jpg" alt="Thomas" width={96} height={96} className="size-10 rounded-full" />
+              </p>
+            </div>
+            <div className="mt-9 grid items-end gap-x-16 gap-y-6 lg:mt-16 lg:grid-cols-[1.35fr_1fr]">
               <div>
-                <h1 className="large text-[clamp(1.85rem,8vw,4.4rem)] leading-[1.03]">
+                <h1 className="large text-[clamp(2.9rem,13.4vw,6.6rem)] leading-[0.92]">
                   {t("Lance ta business de service et signe ton premier client en 30 jours.")}
                 </h1>
                 <p className="mt-4 text-lg leading-snug font-semibold lg:text-2xl">
                   {"Sinon, t'es remboursé. "}
-                  <a href="#garantie" className="underline decoration-eau decoration-2 underline-offset-4">
+                  <a href="#garantie" className="whitespace-nowrap underline underline-offset-4">
                     Voir les conditions
                   </a>
                 </p>
               </div>
               <div>
-                <Prix className="text-[min(36vw,11rem)] lg:text-[11.5rem]" />
-                <p className="mt-4 font-semibold">8 modules vidéo. Un seul paiement.</p>
+                <Prix className="text-[min(46vw,14rem)] lg:text-[17rem]" />
+                <p className="mt-5 font-semibold">8 modules vidéo. Un seul paiement.</p>
                 <BuyButton className="mt-4 w-full">{cta}</BuyButton>
                 <p className="mt-3 text-[0.95rem]">Accès immédiat. Paiement sur Skool, en dollars américains.</p>
               </div>
@@ -65,26 +71,28 @@ export default function Page() {
           <dl className="wrap grid divide-y divide-trait md:grid-cols-3 md:divide-x md:divide-y-0">
             {chiffres.map(([n, d]) => (
               <div key={n} className="py-6 md:px-8 md:py-9 md:first:pl-0">
-                <dt className="large text-2xl leading-tight lg:text-[1.7rem]">{t(n)}</dt>
-                <dd className="mt-1 leading-snug text-doux">{d}</dd>
+                <dt className="large text-4xl leading-none">{t(n)}</dt>
+                <dd className="mt-2 leading-snug text-doux">{d}</dd>
               </div>
             ))}
           </dl>
         </section>
 
-        <section className="section wrap grid gap-10 lg:grid-cols-2 lg:gap-20">
+        <section className="jour">
+          <div className="section wrap grid gap-10 lg:grid-cols-2 lg:gap-20">
           <h2 className="titre">{"Tu veux partir de quoi à toi. T'es juste bloqué."}</h2>
           <ul className="space-y-5">
             {situations.map((s) => (
-              <li key={s} className="flex gap-4 text-xl leading-snug">
-                <span aria-hidden="true" className="mt-1 h-6 w-1 shrink-0 bg-eau" />
+              <li key={s} className="border-b border-trait pb-5 text-xl leading-snug font-medium last:border-0">
                 {s}
               </li>
             ))}
           </ul>
+          </div>
         </section>
 
-        <section className="border-y border-trait bg-panneau">
+
+        <section className="bg-nuit">
           <div className="mx-auto grid max-w-[90rem] lg:grid-cols-2">
             <Image
               src="/thomas.jpg"
@@ -92,7 +100,7 @@ export default function Page() {
               width={520}
               height={620}
               sizes="(min-width: 64rem) 50vw, 100vw"
-              className="h-[26rem] w-full object-cover object-top lg:h-full lg:max-h-[46rem]"
+              className="h-[26rem] w-full object-cover object-top grayscale lg:h-full lg:max-h-[46rem]"
             />
             <div className="px-5 py-14 lg:px-20 lg:py-24">
               <h2 className="titre">{"Moi, c'est Thomas. J'ai 18 ans pis je nettoie des piscines."}</h2>
@@ -112,39 +120,40 @@ export default function Page() {
 
         <Proofs />
 
-        <section className="section wrap">
+        <section className="border-t border-trait">
+          <div className="section wrap">
           <h2 className="titre">Comment ça marche</h2>
           <ol className="mt-10 grid gap-4 md:grid-cols-3">
             {etapes.map(([titre, texte], i) => (
               <li key={titre} className="carte p-6 lg:p-8">
-                <span aria-hidden="true" className="chiffre text-5xl text-eau">
+                <span aria-hidden="true" className="chiffre text-6xl">
                   {i + 1}
                 </span>
-                <h3 className="large mt-5 text-2xl">{titre}</h3>
+                <h3 className="sous mt-5 text-xl">{titre}</h3>
                 <p className="mt-2 text-doux">{texte}</p>
               </li>
             ))}
           </ol>
+          </div>
         </section>
 
-        <section className="pb-[clamp(4.5rem,10vw,8rem)]">
-          <div className="wrap">
-            <h2 className="titre">{"Les 8 modules. Du peu profond jusqu'au creux."}</h2>
+        <section className="jour">
+          <div className="section wrap">
+            <h2 className="titre">{"Les 8 modules, dans l'ordre"}</h2>
             <p className="mt-4 max-w-xl text-lg text-doux">
-              Tu commences où t&apos;as pied, pis tu descends une étape à la fois.
+              De « je sais pas quoi lancer » jusqu&apos;à ton premier employé.
             </p>
             <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {modules.map(([titre, texte], i) => (
                 <li key={titre} className="carte flex overflow-hidden sm:block">
-                  <div
-                    aria-hidden="true"
-                    className="eau grid w-24 shrink-0 place-items-center sm:h-40 sm:w-auto"
-                    style={{ "--eau-lumiere": 1.9 - i * 0.2 } as React.CSSProperties}
-                  >
-                    <span className="chiffre text-6xl sm:text-8xl">{i + 1}</span>
+                  <div aria-hidden="true" className="couverture w-24 shrink-0 p-3 sm:h-40 sm:w-auto">
+                    <span>
+                      <span className="block text-lg text-[#adadad]">Module</span>
+                      <span className="block text-6xl sm:text-7xl">{i + 1}</span>
+                    </span>
                   </div>
                   <div className="p-5">
-                    <h3 className="large text-lg leading-tight">{titre}</h3>
+                    <h3 className="sous text-lg">{titre}</h3>
                     <p className="mt-2 text-[0.95rem] leading-snug text-doux">{t(texte)}</p>
                   </div>
                 </li>
@@ -156,7 +165,7 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="border-y border-trait bg-panneau">
+        <section className="bg-nuit">
           <div className="section wrap">
             <h2 className="titre">{"Pas juste des vidéos. Des outils prêts à servir."}</h2>
             <div className="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-8">
@@ -166,8 +175,8 @@ export default function Page() {
                 ["Les automatisations IA", "Prêtes à installer, pour perdre moins de temps.", <Automatisation key="a" />],
               ].map(([titre, texte, visuel]) => (
                 <div key={titre as string} className="flex flex-col">
-                  <div className="grid h-84 place-items-center rounded-[14px] bg-nuit p-6">{visuel}</div>
-                  <h3 className="large mt-6 text-xl">{titre}</h3>
+                  <div className="grid h-84 place-items-center rounded-[10px] border border-trait bg-nuit p-6">{visuel}</div>
+                  <h3 className="sous mt-6 text-xl">{titre}</h3>
                   <p className="mt-1 text-doux">{texte}</p>
                 </div>
               ))}
@@ -176,19 +185,20 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="offre" className="section wrap grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
-          <div className="rounded-[18px] border-2 border-eau bg-panneau p-6 sm:p-10">
+        <section id="offre" className="jour">
+          <div className="section wrap grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
+          <div className="rounded-[10px] border-2 border-clair bg-panneau p-6 sm:p-10">
             <h2 className="titre">Tout ce que t&apos;as</h2>
             <ul className="mt-6 divide-y divide-trait border-y border-trait">
               {included.map((x) => (
                 <li key={x} className="flex justify-between gap-4 py-3.5 text-lg leading-snug font-semibold">
                   {x}
-                  <span className="shrink-0 text-eau">Inclus</span>
+                  <span className="shrink-0 font-medium text-doux">Inclus</span>
                 </li>
               ))}
             </ul>
             <p className="mt-4 text-[0.95rem] text-doux">Préenregistré. Pas d&apos;appels de coaching.</p>
-            <Prix className="mt-9 text-[min(31vw,11rem)]" />
+            <Prix className="mt-9 text-[min(48vw,14rem)]" />
             <p className="mt-5 font-semibold">{t("Prix Black Friday, jusqu'au lundi 30 novembre, 23 h 59.")}</p>
             <BuyButton className="mt-5 w-full">{cta}</BuyButton>
           </div>
@@ -203,7 +213,7 @@ export default function Page() {
             <ol className="mt-6 space-y-4">
               {["Fais les modules 1 à 5.", "Contacte au moins 100 clients potentiels en 30 jours.", "Toujours pas de premier client ? Tu récupères ton 87 $."].map((x, i) => (
                 <li key={x} className="flex gap-4 leading-snug font-semibold">
-                  <span aria-hidden="true" className="chiffre w-6 shrink-0 text-2xl text-eau">
+                  <span aria-hidden="true" className="chiffre w-6 shrink-0 pt-1 text-3xl">
                     {i + 1}
                   </span>
                   {t(x)}
@@ -214,16 +224,18 @@ export default function Page() {
               Lire la politique de remboursement
             </a>
           </div>
+          </div>
         </section>
 
-        <section className="wrap grid gap-10 pb-[clamp(4.5rem,10vw,8rem)] lg:grid-cols-[1fr_1.7fr]">
+        <section className="jour border-t border-trait">
+          <div className="wrap section grid gap-8 lg:grid-cols-[1fr_1.7fr]">
           <h2 className="titre">Tes questions</h2>
           <div className="border-b border-trait">
             {faq.map(([q, a]) => (
               <details key={q} className="border-t border-trait">
                 <summary className="flex items-center justify-between gap-4 py-5 text-lg font-bold">
                   {t(q)}
-                  <span aria-hidden="true" className="plus text-3xl leading-none text-eau">
+                  <span aria-hidden="true" className="plus text-3xl leading-none">
                     +
                   </span>
                 </summary>
@@ -231,29 +243,32 @@ export default function Page() {
               </details>
             ))}
           </div>
+          </div>
         </section>
 
-        <section className="eau border-y border-trait">
+        <section className="bg-nuit">
           <div className="wrap py-20 text-center lg:py-28">
             <h2 className="titre mx-auto max-w-3xl">{"L'été prochain, t'as un boss ou t'as des clients ?"}</h2>
-            <Prix className="mt-10 text-[min(36vw,14rem)]" />
+            <Prix className="mt-10 text-[min(48vw,17rem)]" />
             <div className="mt-9">
               <BuyButton className="w-full sm:w-auto">{cta}</BuyButton>
             </div>
           </div>
         </section>
 
-        <section id="ebook" className="section wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
+        <section id="ebook" className="jour">
+          <div className="section wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
           <div className="flex items-center gap-6">
             <Image src="/ebook-couverture.webp" alt="" width={306} height={396} className="w-28 shrink-0 rounded-md sm:w-44" />
             <div>
               <p className="font-semibold text-doux">{t("Pas prêt ? Prends l'ebook gratuit.")}</p>
-              <h2 className="large mt-2 text-2xl leading-tight lg:text-3xl">
+              <h2 className="large mt-2 text-4xl leading-none">
                 {t("Les 7 services que tu peux lancer avec moins de 500 $")}
               </h2>
             </div>
           </div>
           <EbookForm />
+          </div>
         </section>
       </main>
 

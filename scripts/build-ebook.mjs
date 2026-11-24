@@ -162,8 +162,8 @@ for (const s of services) if (!seen.has(s.id)) throw new Error(`Aucune page pour
 const font = (p) => `data:font/woff2;base64,${fs.readFileSync(file("node_modules", "@fontsource-variable", p)).toString("base64")}`;
 const doc = fs
   .readFileSync(file("scripts", "ebook-template.html"), "utf8")
-  .replace("%FONT_TITRE%", () => font("archivo/files/archivo-latin-wdth-normal.woff2"))
-  .replace("%EAU%", () => `data:image/webp;base64,${fs.readFileSync(file("public", "eau.webp")).toString("base64")}`)
+  .replace("%FONT_TITRE%", () => font("../@fontsource/bebas-neue/files/bebas-neue-latin-400-normal.woff2"))
+  .replace("%FONT_TEXTE%", () => font("inter/files/inter-latin-wght-normal.woff2"))
   .replace("%PAGES%", () => html);
 
 // ---------- PDF ----------

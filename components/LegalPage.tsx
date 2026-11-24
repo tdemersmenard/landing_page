@@ -21,7 +21,7 @@ export type Section = [titre: string, ...blocs: (string | string[])[]];
 export function LegalPage({ titre, sections }: { titre: string; sections: Section[] }) {
   return (
     <>
-      <header className="border-b border-trait bg-panneau">
+      <header className="bg-nuit">
         <div className="wrap py-10">
           <a href="/" className="font-semibold underline underline-offset-4">
             Retour à la page
@@ -30,11 +30,12 @@ export function LegalPage({ titre, sections }: { titre: string; sections: Sectio
           <p className="mt-3">Dernière mise à jour : 24 novembre 2026</p>
         </div>
       </header>
-      <main className="wrap py-12 lg:py-16">
+      <main className="jour">
+        <div className="wrap py-12 lg:py-16">
         <div className="max-w-3xl">
           {sections.map(([h, ...blocs]) => (
             <section key={h} className="mb-9">
-              <h2 className="large text-xl">
+              <h2 className="sous text-xl">
                 <Texte>{h}</Texte>
               </h2>
               {blocs.map((b, i) =>
@@ -54,6 +55,7 @@ export function LegalPage({ titre, sections }: { titre: string; sections: Sectio
               )}
             </section>
           ))}
+        </div>
         </div>
       </main>
     </>

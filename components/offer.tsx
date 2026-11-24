@@ -53,12 +53,12 @@ export function StickyBar({ heroId }: { heroId: string }) {
       hidden={!show}
       role="region"
       aria-label="Offre Black Friday"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-trait bg-panneau pb-[env(safe-area-inset-bottom)] text-clair"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-trait bg-nuit pb-[env(safe-area-inset-bottom)] text-clair"
     >
       <div className="wrap flex items-center justify-between gap-3 py-2">
         <div className="min-w-0">
           <div className="flex items-center gap-4 pt-1">
-            <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-4xl">
+            <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre text-5xl">
               {money(PRICE)}
             </span>
           </div>

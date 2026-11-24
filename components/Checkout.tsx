@@ -63,11 +63,11 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
         onClick={(e) => {
           if (pressedOutside.current && isOutside(e)) dialog.current?.close();
         }}
-        className="feuille mx-0 mt-auto mb-0 max-h-[94dvh] w-full max-w-none overflow-y-auto overscroll-contain rounded-t-2xl border border-trait bg-panneau text-clair sm:m-auto sm:max-w-lg sm:rounded-2xl"
+        className="feuille jour mx-0 mt-auto mb-0 max-h-[94dvh] w-full max-w-none overflow-y-auto overscroll-contain rounded-t-2xl border border-trait !bg-white text-clair sm:m-auto sm:max-w-lg sm:rounded-2xl"
       >
         <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8">
           <div className="flex items-start justify-between gap-4">
-            <h2 id="achat-titre" className="large text-2xl">
+            <h2 id="achat-titre" className="large text-4xl">
               Presque fini.
             </h2>
             <button
@@ -81,7 +81,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
           </div>
           <p className="mt-2 flex items-center justify-between gap-4 border-y-2 border-trait py-3 font-semibold">
             <span>{t("Système TDM, les 8 modules :")}</span>{" "}
-            <span className="chiffre text-6xl text-clair">{money(PRICE)}</span>
+            <span className="chiffre text-7xl">{money(PRICE)}</span>
           </p>
 
           {ready ? (

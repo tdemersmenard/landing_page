@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
+/* Noir et blanc, comme le Skool. Aucune couleur d'accent. */
 @theme {
-  --color-nuit: #05080c;
-  --color-panneau: #0d141b;
-  --color-trait: #22303c;
-  --color-clair: #f3f8fb;
-  --color-doux: #a9b8c4;
-  --color-eau: #3ad8ff;
+  --color-nuit: #000000;
+  --color-panneau: #0d0d0d;
+  --color-trait: #2b2b2b;
+  --color-clair: #ffffff;
+  --color-doux: #adadad;
   --color-erreur: #ff8f85;
-  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-titre: var(--font-bebas), Impact, sans-serif;
 }
 
 @layer base {
@@ -48,46 +49,54 @@
   .section {
     padding-block: clamp(4.5rem, 10vw, 8rem);
   }
+  /* Sections claires : mêmes classes, couleurs inversées. */
+  .jour {
+    --color-nuit: #ffffff;
+    --color-panneau: #ffffff;
+    --color-trait: #dededb;
+    --color-clair: #0a0a0a;
+    --color-doux: #565656;
+    --color-erreur: #b3261e;
+    background: #f7f7f5;
+    color: var(--color-clair);
+    color-scheme: light;
+  }
   .large,
   .titre,
   .chiffre {
-    font-stretch: 125%;
-    font-weight: 800;
-    letter-spacing: -0.035em;
+    font-family: var(--font-titre);
+    font-weight: 400;
+    text-transform: uppercase;
   }
   .titre {
-    font-size: clamp(1.85rem, 5vw, 3.4rem);
-    line-height: 1.06;
+    font-size: clamp(2.6rem, 6.4vw, 4.75rem);
+    line-height: 0.96;
   }
   .chiffre {
-    line-height: 0.85;
+    line-height: 0.8;
     white-space: nowrap;
-    letter-spacing: -0.06em;
-    font-variant-numeric: lining-nums;
+    word-spacing: -0.08em;
   }
   .carte {
     background: var(--color-panneau);
     border: 1px solid var(--color-trait);
-    border-radius: 14px;
+    border-radius: 10px;
   }
-  /* L'eau : la seule image de marque. Plus on descend, plus c'est creux. */
-  .eau {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
+  .sous {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
   }
-  .eau::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: url("/eau.webp") center / cover;
-    filter: brightness(var(--eau-lumiere, 1.15));
-  }
-  .eau-hero::before {
-    inset: -12% 0;
-    filter: brightness(1.6) saturate(1.1);
-    mask-image: linear-gradient(#000 0%, rgb(0 0 0 / 0.6) 50%, transparent 92%);
+  /* Couverture de module : comme les cours dans la salle de classe. */
+  .couverture {
+    display: grid;
+    place-items: center;
+    background: #000;
+    color: #fff;
+    font-family: var(--font-titre);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 0.95;
   }
   .placeholder {
     background: #ffe94a;
@@ -101,22 +110,22 @@
   }
   .btn {
     display: inline-block;
-    background: var(--color-eau);
-    color: #021018;
-    font-weight: 800;
-    font-size: 1.15rem;
+    background: var(--color-clair);
+    color: var(--color-nuit);
+    font-weight: 700;
+    font-size: 1.1rem;
     line-height: 1.2;
     text-align: center;
     padding: 1.15rem 1.75rem;
-    border-radius: 10px;
-    transition: background-color 0.15s;
+    border-radius: 8px;
+    transition: opacity 0.15s;
   }
   .btn:hover:not(:disabled) {
-    background: #8ae8ff;
+    opacity: 0.82;
   }
   .btn:disabled {
-    background: #3a4752;
-    color: #d5dee5;
+    background: #4a4a4a;
+    color: #e2e2e2;
     cursor: not-allowed;
   }
   summary::-webkit-details-marker {
@@ -131,21 +140,11 @@ html:has(dialog[open]) {
   overflow: hidden;
 }
 .feuille::backdrop {
-  background: rgb(2 5 8 / 0.82);
+  background: rgb(0 0 0 / 0.8);
 }
-@media (prefers-reduced-motion: no-preference) {
-  .eau-hero::before {
-    animation: derive 24s ease-in-out infinite alternate;
-  }
-  @media (max-width: 39.99rem) {
-    .feuille[open] {
-      animation: monter 0.25s ease-out;
-    }
-  }
-}
-@keyframes derive {
-  to {
-    transform: translate3d(0, 5%, 0) scale(1.08);
+@media (prefers-reduced-motion: no-preference) and (max-width: 39.99rem) {
+  .feuille[open] {
+    animation: monter 0.25s ease-out;
   }
 }
 @keyframes monter {
