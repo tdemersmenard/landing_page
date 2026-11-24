@@ -1,8 +1,8 @@
-import { CancelBanner } from "@/components/CancelBanner";
+import Image from "next/image";
 import { Contact } from "@/components/Contact";
 import { EbookForm } from "@/components/EbookForm";
 import { BuyButton, Countdown, StickyBar } from "@/components/offer";
-import { FULL_PRICE, PRICE } from "@/lib/config";
+import { FULL_PRICE, PRICE, SKOOL_MEMBERS } from "@/lib/config";
 import { comparison, extras, faq, modules, situations } from "@/lib/content";
 import { money, t } from "@/lib/text";
 
@@ -13,7 +13,6 @@ const ctaText = `J'embarque à ${money(PRICE)}`;
 export default function Page() {
   return (
     <>
-      <CancelBanner />
       <div className="bg-encre px-4 py-2.5 text-center text-[0.95rem] text-peinture">
         <Countdown />
       </div>
@@ -60,8 +59,9 @@ export default function Page() {
               <div className="mt-6">
                 <BuyButton className="w-full sm:w-auto">{ctaText}</BuyButton>
               </div>
+              <p className="mt-4 font-bold">{`${SKOOL_MEMBERS} personnes sont déjà dans la communauté Skool.`}</p>
               <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed">
-                Accès immédiat aux modules. Paiement sécurisé par Stripe. Les appels de coaching ne sont pas inclus.
+                Accès immédiat aux modules. Paiement sur Skool. Les appels de coaching ne sont pas inclus.
               </p>
             </div>
           </div>
@@ -96,13 +96,16 @@ export default function Page() {
               </p>
             </div>
             <figure className="bg-peinture p-5 text-encre">
-              <div className="placeholder grid aspect-[4/3] place-items-center text-center text-xl">[Ta photo]</div>
+              <Image src="/thomas.jpg" alt="Thomas, fondateur de Touch Grass Academy" width={520} height={620} sizes="(min-width: 64rem) 32rem, 90vw" className="w-full" />
               <figcaption className="mt-5 leading-loose">
                 <p className="text-xl font-bold">
-                  <P>[Ton nom]</P>, <P>[Ton âge]</P> ans
+                  Thomas, 18 ans
                 </p>
-                <p className="mt-2">
-                  <P>[Ton histoire : comment t&apos;as commencé, ton service, ton été]</P>
+                <p className="mt-2 leading-relaxed">
+                  {"Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. Fait que j'ai décidé de sortir de ce qu'on voit partout et de lancer une business de service bien physique : l'entretien de piscines."}
+                </p>
+                <p className="mt-3 leading-relaxed">
+                  {t("Résultat : près de 100 000 $ en un seul été. Aujourd'hui, je prends de mon temps pour aider ceux qui veulent lancer leur business de service à leur tour.")}
                 </p>
               </figcaption>
             </figure>

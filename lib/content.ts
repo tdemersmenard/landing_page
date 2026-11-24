@@ -21,7 +21,7 @@ export const extras = [
   ["Le Kit Copier-Coller", "Soumission, contrat, facture, flyer et annonce Marketplace."],
   ["Les 25 scripts qui signent", "Pour savoir quoi dire à tes clients."],
   ["Les automatisations IA", "Prêtes à installer."],
-  ["Le Discord privé", "Pour jaser avec les autres membres."],
+  ["La communauté Skool privée", "Pour jaser avec les autres membres."],
 ];
 
 /** [élément, inclus à 87 $] */
@@ -30,7 +30,7 @@ export const comparison: [string, boolean][] = [
   ["Le Kit Copier-Coller", true],
   ["Les 25 scripts qui signent", true],
   ["Les automatisations IA", true],
-  ["Le Discord privé", true],
+  ["La communauté Skool privée", true],
   ["L'appel 1-on-1", false],
   ["12 semaines d'appels de groupe", false],
 ];
@@ -38,7 +38,7 @@ export const comparison: [string, boolean][] = [
 export const faq = [
   [
     "Est-ce que le coaching est inclus ?",
-    "Non. À 87 $, t'as les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et le Discord privé. L'appel 1-on-1 et les 12 semaines d'appels de groupe viennent seulement avec le programme à 997 $.",
+    "Non. À 87 $, t'as les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et la communauté Skool privée. L'appel 1-on-1 et les 12 semaines d'appels de groupe viennent seulement avec le programme à 997 $.",
   ],
   [
     "Ça me prend combien d'argent pour partir ?",

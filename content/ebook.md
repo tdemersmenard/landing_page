@@ -45,11 +45,9 @@ Vendre, fixer un prix, tenir ta parole, gérer ton temps. Même si tu changes de
 
 # Pourquoi tu devrais m'écouter
 
-[ton histoire en 3 phrases]
+Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. J'ai décidé de sortir de ce qu'on voit partout et de lancer une business de service bien physique : l'entretien de piscines. Résultat : près de 100 000 $ en un seul été, et aujourd'hui je prends de mon temps pour aider ceux qui veulent lancer la leur.
 
-Ma preuve, c'est près de 100 000 $ en un été avec une business de service. [Préciser : ventes ou profit]
-
-C'est mon résultat à moi, pas une promesse. Le tien va dépendre de ton travail, de ton coin, de ton service et de la demande.
+Ce près de 100 000 $, c'est [Préciser : ventes ou profit]. C'est mon résultat à moi, pas une promesse. Le tien va dépendre de ton travail, de ton coin, de ton service et de la demande.
 
 ## Ce que je t'ai mis dans ce guide
 
@@ -57,11 +55,13 @@ Sept services que tu peux commencer avec un budget de départ de moins de 500 $.
 
 Lis-les au complet une fois. Après, va au tableau comparatif, pis choisis-en un. Un seul.
 
-[Ton nom]
+Thomas
 
 <!-- page: texte -->
 
 # Comment lire les fiches
+
+Tous les prix, les coûts et les revenus sont des estimations. Ils varient selon ton coin, la saison et la job.
 
 ## L'équipement de départ
 
@@ -171,7 +171,7 @@ Tu laves les entrées, les patios, les trottoirs et les clôtures. Le avant-apr�
 
 {{comparaison}}
 
-Les revenus sont avant dépenses, avec le nombre de contrats écrit sur chaque fiche. Ce sont des exemples de calcul, pas une promesse.
+Tous les chiffres sont des estimations. Les revenus sont avant dépenses, avec le nombre de contrats écrit sur chaque fiche. Ce sont des exemples de calcul, pas une promesse.
 
 ## Pas capable de choisir ?
 
@@ -256,7 +256,7 @@ Jusqu'au lundi 30 novembre 2026, 23 h 59, heure de l'Est
 - **Module 5 : trouve tes clients en 7 jours.** Porte-à-porte, Marketplace, groupes Facebook, flyers, références.
 - **Module 6 : vends sans être gêné.** Des scripts pour la porte, le téléphone et les textos, et les réponses aux objections.
 - **Les 6 autres modules :** choisir ton service, partir avec presque rien, le légal, tes prix, la paperasse, grossir.
-- **Aussi inclus :** le Kit Copier-Coller, les 25 scripts qui signent, les automatisations IA prêtes à installer et le Discord privé.
+- **Aussi inclus :** le Kit Copier-Coller, les 25 scripts qui signent, les automatisations IA prêtes à installer et la communauté Skool privée.
 
 **La garantie.** « Fais les modules 1 à 5 et contacte au moins 100 clients potentiels dans les 30 jours. Si t'as pas signé ton premier client, je te rembourse tes 87 $ au complet. »
 
@@ -284,44 +284,44 @@ Les totaux sont calculés. Chaque total doit rester sous 500 $.
 
 | id         | Service                        | Prix min | Prix max | Unité       | Contrats/sem. | Saison                | Difficulté |
 | ---------- | ------------------------------ | -------- | -------- | ----------- | ------------- | --------------------- | ---------- |
-| gazon      | Tonte de gazon                 | [45]     | [60]     | par tonte   | [12]          | Mai à octobre         | Facile     |
-| piscine    | Entretien de piscines          | [60]     | [80]     | par visite  | [10]          | Mai à septembre       | Moyenne    |
-| vitres     | Lavage de vitres               | [120]    | [180]    | par maison  | [5]           | Avril à octobre       | Facile     |
-| neige      | Déneigement                    | [30]     | [40]     | par passage | [15]          | Novembre à mars       | Facile     |
-| auto       | Lavage de voitures à domicile  | [90]     | [130]    | par auto    | [6]           | Avril à octobre       | Moyenne    |
-| gouttieres | Nettoyage de gouttières        | [120]    | [180]    | par maison  | [5]           | Printemps et automne  | Exigeante  |
-| pression   | Lavage à pression              | [150]    | [220]    | par entrée  | [4]           | Mai à octobre         | Moyenne    |
+| gazon      | Tonte de gazon                 | 45     | 60     | par tonte   | 12          | Mai à octobre         | Facile     |
+| piscine    | Entretien de piscines          | 60     | 80     | par visite  | 10          | Mai à septembre       | Moyenne    |
+| vitres     | Lavage de vitres               | 120    | 180    | par maison  | 5           | Avril à octobre       | Facile     |
+| neige      | Déneigement                    | 30     | 40     | par passage | 15          | Novembre à mars       | Facile     |
+| auto       | Lavage de voitures à domicile  | 90     | 130    | par auto    | 6           | Avril à octobre       | Moyenne    |
+| gouttieres | Nettoyage de gouttières        | 120    | 180    | par maison  | 5           | Printemps et automne  | Exigeante  |
+| pression   | Lavage à pression              | 150    | 220    | par entrée  | 4           | Mai à octobre         | Moyenne    |
 
 <!-- donnees: equipement -->
 
 | id         | Équipement                                  | Coût  |
 | ---------- | ------------------------------------------- | ----- |
-| gazon      | Tondeuse usagée                             | [200] |
-| gazon      | Coupe-bordure usagé                         | [80]  |
-| gazon      | Souffleur usagé                             | [60]  |
-| gazon      | Lunettes, coquilles et bidon d'essence      | [40]  |
-| piscine    | Perche, épuisette et brosse                 | [110] |
-| piscine    | Aspirateur manuel et boyau                  | [120] |
-| piscine    | Trousse d'analyse d'eau                     | [40]  |
-| piscine    | Gants, lunettes et seau                     | [40]  |
-| vitres     | Raclette et mouilleur                       | [60]  |
-| vitres     | Perche télescopique                         | [70]  |
-| vitres     | Escabeau usagé                              | [60]  |
-| vitres     | Seau, linges et savon                       | [40]  |
-| neige      | Pelle et pousse-neige                       | [85]  |
-| neige      | Pic à glace et épandeur à main              | [65]  |
-| neige      | Crampons et lampe frontale                  | [80]  |
-| auto       | Aspirateur sec et humide usagé              | [80]  |
-| auto       | Boyau, fusil et rallonge électrique         | [70]  |
-| auto       | Savons et nettoyants                        | [70]  |
-| auto       | Microfibres, mitaine et brosses             | [60]  |
-| auto       | Deux seaux avec grilles                     | [50]  |
-| gouttieres | Échelle usagée en bon état                  | [200] |
-| gouttieres | Stabilisateur d'échelle                     | [80]  |
-| gouttieres | Boyau et fusil                              | [40]  |
-| gouttieres | Gants, lunettes, truelle, seau et crochet   | [70]  |
-| pression   | Laveuse à pression usagée                   | [250] |
-| pression   | Buse de surface                             | [80]  |
-| pression   | Rallonge de boyau                           | [60]  |
-| pression   | Lunettes, coquilles, bottes                 | [50]  |
-| pression   | Savon biodégradable                         | [30]  |
+| gazon      | Tondeuse usagée                             | 200 |
+| gazon      | Coupe-bordure usagé                         | 80  |
+| gazon      | Souffleur usagé                             | 60  |
+| gazon      | Lunettes, coquilles et bidon d'essence      | 40  |
+| piscine    | Perche, épuisette et brosse                 | 110 |
+| piscine    | Aspirateur manuel et boyau                  | 120 |
+| piscine    | Trousse d'analyse d'eau                     | 40  |
+| piscine    | Gants, lunettes et seau                     | 40  |
+| vitres     | Raclette et mouilleur                       | 60  |
+| vitres     | Perche télescopique                         | 70  |
+| vitres     | Escabeau usagé                              | 60  |
+| vitres     | Seau, linges et savon                       | 40  |
+| neige      | Pelle et pousse-neige                       | 85  |
+| neige      | Pic à glace et épandeur à main              | 65  |
+| neige      | Crampons et lampe frontale                  | 80  |
+| auto       | Aspirateur sec et humide usagé              | 80  |
+| auto       | Boyau, fusil et rallonge électrique         | 70  |
+| auto       | Savons et nettoyants                        | 70  |
+| auto       | Microfibres, mitaine et brosses             | 60  |
+| auto       | Deux seaux avec grilles                     | 50  |
+| gouttieres | Échelle usagée en bon état                  | 200 |
+| gouttieres | Stabilisateur d'échelle                     | 80  |
+| gouttieres | Boyau et fusil                              | 40  |
+| gouttieres | Gants, lunettes, truelle, seau et crochet   | 70  |
+| pression   | Laveuse à pression usagée                   | 250 |
+| pression   | Buse de surface                             | 80  |
+| pression   | Rallonge de boyau                           | 60  |
+| pression   | Lunettes, coquilles, bottes                 | 50  |
+| pression   | Savon biodégradable                         | 30  |

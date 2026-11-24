@@ -8,7 +8,7 @@ export type SendResult =
   | { status: "invalid"; erreurs: Erreurs }
   | { status: "failed" };
 
-// Un nouvel essai avec les mêmes infos (ex. Stripe a planté) ne renvoie pas le même lead à Make.
+// Un nouvel essai avec les mêmes infos (ex. double essai) ne renvoie pas le même lead à Make.
 const sent = new Map<string, string>();
 
 /** Ne lance jamais d'erreur : c'est l'appelant qui décide si un échec bloque ou pas. */

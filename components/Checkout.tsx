@@ -1,14 +1,16 @@
 "use client";
 
 import { createContext, type MouseEvent, useContext, useEffect, useRef, useState } from "react";
+import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
 import { captureAttribution } from "@/lib/attribution";
 import { useRemaining } from "@/lib/clock";
-import { PRICE } from "@/lib/config";
+import { OFFER_END, PRICE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
 import { CHAMPS } from "@/lib/lead";
-import { startCheckout } from "@/lib/startCheckout";
 import { money, t } from "@/lib/text";
 import { useLeadForm } from "@/lib/useLeadForm";
+
+const END = new Date(OFFER_END).getTime();
 
 const CheckoutContext = createContext<() => void>(() => {});
 export const useCheckout = () => useContext(CheckoutContext);
@@ -22,23 +24,15 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(captureAttribution, []);
 
-  const { onSubmit, pending, field } = useLeadForm("achat_commence", CHAMPS, async (lead, values) => {
+  const { onSubmit, pending, field } = useLeadForm("achat_commence", CHAMPS, () => {
     // Fenêtre fermée pendant l'envoi : la personne a changé d'idée, on ne la redirige pas.
     if (!dialog.current?.open) return;
     setMessage("");
-    // On continue même si le lead n'est pas parti : rien ne bloque une vente.
-    const r = await startCheckout({ ...values, reference: lead.status === "ok" ? lead.reference : undefined });
-    if (r.status === "invalid") return r.erreurs;
-    if (r.status === "ok") {
-      if (!dialog.current?.open) return;
-      window.location.assign(r.url);
-      return "leaving";
-    }
-    setMessage(
-      r.status === "ended"
-        ? "L'offre Black Friday est terminée."
-        : "La page de paiement n'a pas pu s'ouvrir. Rien n'a été facturé. Réessaie dans un instant.",
-    );
+    // Vers Skool, même si le lead n'est pas parti : rien ne bloque une vente.
+    if (Date.now() >= END) return setMessage("L'offre Black Friday est terminée.");
+    if (!SKOOL_URL) return setMessage("[Lien de paiement Skool à ajouter : NEXT_PUBLIC_SKOOL_URL]");
+    window.location.assign(SKOOL_URL);
+    return "leaving";
   });
 
   // Synchrone dans le clic : iOS n'ouvre le clavier que dans ce cas.
@@ -91,18 +85,17 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
             <Field ref={first} label="Prénom" autoComplete="given-name" {...field("prenom")} />
             <Field label="Téléphone" type="tel" autoComplete="tel" {...field("telephone")} />
             <Field label="Courriel" type="email" autoComplete="email" {...field("email")} />
-            <label className="flex gap-3 text-[0.95rem] leading-snug">
-              <input type="checkbox" name="consentement" className="mt-0.5 size-5 shrink-0 accent-gazon" />
-              <span>
-                J&apos;accepte de recevoir des courriels et des textos de Touch Grass Academy. Je peux me désabonner
-                n&apos;importe quand.
-              </span>
-            </label>
+            <Consent />
+            <p className="text-[0.95rem] leading-snug">
+              {"Le paiement se fait sur Skool, qui facture en dollars américains : "}
+              {SKOOL_PRICE_USD.startsWith("[") ? <mark className="placeholder">{SKOOL_PRICE_USD}</mark> : SKOOL_PRICE_USD}
+              . Utilise le même courriel.
+            </p>
             <button type="submit" disabled={pending || ended} className="btn">
               {ended ? "Offre terminée" : pending ? "Un instant…" : "Continuer vers le paiement"}
             </button>
             <p role="alert" className="font-semibold text-[#b3261e] empty:hidden">
-              {message}
+              {message.startsWith("[") ? <mark className="placeholder">{message}</mark> : message}
             </p>
           </form>
         </div>

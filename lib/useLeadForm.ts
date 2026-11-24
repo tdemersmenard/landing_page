@@ -1,20 +1,20 @@
 import { type FormEvent, useEffect, useState } from "react";
 import { type Champ, type Erreurs, type LeadType, validate } from "@/lib/lead";
-import { sendLead, type SendResult, type Values } from "@/lib/sendLead";
+import { sendLead, type SendResult } from "@/lib/sendLead";
 
 /** Ce que fait l'appelant après l'envoi : "leaving" garde le bouton occupé pendant la redirection. */
-type Next = void | "leaving" | Erreurs;
+type Next = void | "leaving";
 
 /** Validation, messages d'erreur et envoi, communs au formulaire d'achat et à celui de l'ebook. */
 export function useLeadForm(
   type: LeadType,
   champs: readonly Champ[],
-  onSent: (r: Exclude<SendResult, { status: "invalid" }>, values: Values) => Next | Promise<Next>,
+  onSent: (r: Exclude<SendResult, { status: "invalid" }>) => Next,
 ) {
   const [erreurs, setErreurs] = useState<Erreurs>({});
   const [pending, setPending] = useState(false);
 
-  // Bouton « Précédent » depuis Stripe : la page revient telle quelle, on libère le bouton.
+  // Bouton « Précédent » depuis Skool : la page revient telle quelle, on libère le bouton.
   useEffect(() => {
     const reset = (e: PageTransitionEvent) => e.persisted && setPending(false);
     window.addEventListener("pageshow", reset);
@@ -39,7 +39,7 @@ export function useLeadForm(
     setPending(true);
     const values = { ...fields, consentement: data.get("consentement") === "on" };
     const result = await sendLead({ type, ...values });
-    const next = result.status === "invalid" ? result.erreurs : await onSent(result, values);
+    const next = result.status === "invalid" ? result.erreurs : onSent(result);
     if (next === "leaving") return;
     setPending(false);
     if (next) show(next);

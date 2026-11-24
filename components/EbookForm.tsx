@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
 import { useLeadForm } from "@/lib/useLeadForm";
 
@@ -27,6 +28,7 @@ export function EbookForm() {
     <form noValidate onSubmit={onSubmit} className="grid gap-4">
       <Field label="Ton prénom" autoComplete="given-name" {...field("prenom")} />
       <Field label="Ton courriel" type="email" autoComplete="email" {...field("email")} />
+      <Consent />
       <button type="submit" disabled={pending} className="btn">
         {pending ? "Un instant…" : "Envoie-moi l'ebook"}
       </button>
