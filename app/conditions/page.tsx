@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
 import { CONTACT_EMAIL } from "@/lib/config";
 
-export const metadata: Metadata = { title: "Conditions : Touch Grass Academy" };
+export const metadata: Metadata = { title: "Conditions : Système TDM" };
 
 export default function Conditions() {
   return (

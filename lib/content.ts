@@ -17,13 +17,6 @@ export const modules = [
   ["Grossis", "Les pubs locales et ton premier employé."],
 ];
 
-export const extras = [
-  ["Le Kit Copier-Coller", "Soumission, contrat, facture, flyer et annonce Marketplace."],
-  ["Les 25 scripts qui signent", "Pour savoir quoi dire à tes clients."],
-  ["Les automatisations IA", "Prêtes à installer."],
-  ["La communauté Skool", "Pour jaser avec les autres membres."],
-];
-
 export const included = [
   "Les 8 modules vidéo",
   "Le Kit Copier-Coller",

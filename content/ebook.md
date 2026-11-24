@@ -247,7 +247,7 @@ La porte s'ouvre. T'as quelques secondes. Le client te demande ton prix, pis tu 
 
 # Trouve tes clients. Vends sans être gêné.
 
-Les 8 modules vidéo de Touch Grass Academy
+Les 8 modules vidéo de Système TDM
 
 {{prix}}
 

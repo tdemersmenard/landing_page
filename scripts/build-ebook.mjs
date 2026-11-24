@@ -151,9 +151,9 @@ const html = pages
     });
     if (s) out = out.replace(/<h1>(.*?)<\/h1>/, `<header class="gazon"><span class="chiffre">${++rang}</span><h1>$1</h1></header>`);
     if (kind === "couverture")
-      out = `<p class="cadeau">Ebook gratuit</p><span class="sept chiffre" aria-hidden="true">${services.length}</span>${out}<p class="marque">Touch Grass Academy</p>`;
+      out = `<p class="cadeau">Ebook gratuit</p><span class="sept chiffre" aria-hidden="true">${services.length}</span>${out}<p class="marque">Système TDM</p>`;
     const gazon = ["couverture", "pivot", "offre"].includes(kind);
-    const pied = kind === "couverture" || kind === "offre" ? "" : `<div class="pied"><span>Touch Grass Academy</span><span>${i + 1}</span></div>`;
+    const pied = kind === "couverture" || kind === "offre" ? "" : `<div class="pied"><span>Système TDM</span><span>${i + 1}</span></div>`;
     return `<section class="page ${kind} ${gazon ? "gazon" : ""}">${out}${pied}</section>`;
   })
   .join("\n");
@@ -162,8 +162,8 @@ for (const s of services) if (!seen.has(s.id)) throw new Error(`Aucune page pour
 const font = (p) => `data:font/woff2;base64,${fs.readFileSync(file("node_modules", "@fontsource-variable", p)).toString("base64")}`;
 const doc = fs
   .readFileSync(file("scripts", "ebook-template.html"), "utf8")
-  .replace("%FONT_TITRE%", () => font("big-shoulders/files/big-shoulders-latin-opsz-normal.woff2"))
-  .replace("%FONT_TEXTE%", () => font("figtree/files/figtree-latin-wght-normal.woff2"))
+  .replace("%FONT_TITRE%", () => font("archivo/files/archivo-latin-wdth-normal.woff2"))
+  .replace("%EAU%", () => `data:image/webp;base64,${fs.readFileSync(file("public", "eau.webp")).toString("base64")}`)
   .replace("%PAGES%", () => html);
 
 // ---------- PDF ----------

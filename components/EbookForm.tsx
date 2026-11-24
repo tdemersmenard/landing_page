@@ -32,7 +32,7 @@ export function EbookForm() {
       <button type="submit" disabled={pending} className="btn">
         {pending ? "Un instant…" : "Envoie-moi l'ebook"}
       </button>
-      <p role="alert" className="font-semibold text-[#b3261e] empty:hidden">
+      <p role="alert" className="font-semibold text-erreur empty:hidden">
         {state === "failed" && !pending && "Ça n'a pas marché. Vérifie ta connexion et réessaie."}
       </p>
     </form>

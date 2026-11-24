@@ -1,203 +1,267 @@
 import Image from "next/image";
 import { Contact } from "@/components/Contact";
 import { EbookForm } from "@/components/EbookForm";
+import { Automatisation, Soumission, Textos } from "@/components/Kit";
 import { BuyButton, Countdown, StickyBar } from "@/components/offer";
-import { PRICE, SKOOL_MEMBERS } from "@/lib/config";
-import { extras, faq, included, modules, situations } from "@/lib/content";
+import { Proofs } from "@/components/Proofs";
+import { BRAND, PRICE, SKOOL_MEMBERS } from "@/lib/config";
+import { faq, included, modules, situations } from "@/lib/content";
 import { money, t } from "@/lib/text";
 
-const ctaText = `J'embarque à ${money(PRICE)}`;
+const cta = `J'embarque à ${money(PRICE)}`;
+
+const chiffres = [
+  ["Près de 100 000 $", "de ventes en un été, avant dépenses. Mon résultat, pas une promesse."],
+  [SKOOL_MEMBERS, "personnes dans ma communauté Skool gratuite"],
+  ["Plus de 54 000 j'aime", "sur mon TikTok, @tdmlarp"],
+];
+
+const etapes = [
+  ["Choisis", "Un service qui marche dans ton coin, avec le budget que t'as. Modules 1 à 4."],
+  ["Vends", "Tu contactes du monde, tu sais quoi dire, tu signes. Modules 5 et 6."],
+  ["Roule", "La paperasse se fait vite, pis tu grossis. Modules 7 et 8."],
+];
+
+const Prix = ({ className = "" }: { className?: string }) => (
+  <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className={`chiffre inline-block ${className}`}>
+    {money(PRICE)}
+  </span>
+);
 
 export default function Page() {
   return (
     <>
-      <div className="bg-encre px-4 py-2.5 text-center text-[0.95rem] text-peinture">
+      <div className="border-b border-trait bg-nuit px-4 py-2.5 text-center text-[0.95rem]">
         <Countdown />
       </div>
 
       <main>
-        <section id="hero" className="gazon border-b-8 border-peinture">
-          <div className="wrap grid items-center gap-x-14 gap-y-8 pt-6 pb-10 lg:grid-cols-[auto_1fr] lg:py-12">
-            <div>
-              <p className="text-base leading-snug font-bold lg:text-xl">
-                Le programme Touch Grass Academy, prix Black Friday
-              </p>
-              <span
-                role="img"
-                aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`}
-                className="hero-prix chiffre mt-9 text-[min(48vw,20rem)] lg:mt-16 lg:text-[19rem]"
-              >
-                {money(PRICE)}
-              </span>
-            </div>
-
-            <div>
-              <h1 className="text-[clamp(2.1rem,8.6vw,3.75rem)] lg:text-[3.6rem]">
-                {t("Lance ta business de service et signe ton premier client en 30 jours. Sinon, t'es remboursé.")}
-              </h1>
-              <p className="mt-3">
-                <a href="#garantie" className="font-semibold underline underline-offset-4">
-                  Voir les conditions de la garantie
-                </a>
-              </p>
-              <p className="mt-4 max-w-xl text-lg leading-relaxed">
-                {t(
-                  "Gazon, piscines, vitres, déneigement : choisis ton service, pis suis les 8 modules vidéo pour fixer tes prix, trouver tes clients et vendre sans être gêné.",
-                )}
-              </p>
-              <div className="mt-6">
-                <BuyButton className="w-full sm:w-auto">{ctaText}</BuyButton>
+        <section id="hero" className="eau eau-hero">
+          <div className="wrap pt-5 pb-14 lg:pb-24">
+            <p className="large text-lg">{BRAND}</p>
+            <div className="mt-8 grid items-end gap-x-16 gap-y-6 lg:mt-20 lg:grid-cols-[1.35fr_1fr]">
+              <div>
+                <h1 className="large text-[clamp(1.85rem,8vw,4.4rem)] leading-[1.03]">
+                  {t("Lance ta business de service et signe ton premier client en 30 jours.")}
+                </h1>
+                <p className="mt-4 text-lg leading-snug font-semibold lg:text-2xl">
+                  {"Sinon, t'es remboursé. "}
+                  <a href="#garantie" className="underline decoration-eau decoration-2 underline-offset-4">
+                    Voir les conditions
+                  </a>
+                </p>
               </div>
-              <p className="mt-4 font-bold">{`${SKOOL_MEMBERS} personnes sont déjà dans la communauté Skool gratuite.`}</p>
-              <p className="mt-4 max-w-md text-[0.95rem] leading-relaxed">
-                Accès immédiat aux modules. Paiement sur Skool.
-              </p>
+              <div>
+                <Prix className="text-[min(36vw,11rem)] lg:text-[11.5rem]" />
+                <p className="mt-4 font-semibold">8 modules vidéo. Un seul paiement.</p>
+                <BuyButton className="mt-4 w-full">{cta}</BuyButton>
+                <p className="mt-3 text-[0.95rem]">Accès immédiat. Paiement sur Skool, en dollars américains.</p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="wrap py-16 lg:py-24">
-          <div className="grid gap-8 lg:grid-cols-[1fr_1.6fr]">
-            <h2 className="titre">C&apos;est pour toi si…</h2>
-            <ul className="divide-y-2 divide-encre/20 border-y-2 border-encre/20">
-              {situations.map((s) => (
-                <li key={s} className="py-4 text-xl leading-snug font-semibold">
-                  {s}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="gazon border-y-8 border-peinture">
-          <div className="wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:py-24">
-            <div>
-              <p aria-hidden="true" className="text-xl font-bold">
-                Près de
-              </p>
-              <p aria-hidden="true" className="chiffre mt-3 text-[min(38vw,15rem)] lg:text-[13rem]">
-                100K
-              </p>
-              <h2 className="titre mt-8">{t("Près de 100 000 $ de ventes en un été, avec une business de service")}</h2>
-              <p className="mt-5 max-w-lg leading-relaxed">
-                C&apos;est mon résultat à moi, pas une promesse. Le tien va dépendre de ton travail, de ton coin et de
-                ton service. Ce sont des ventes, avant les dépenses.
-              </p>
-            </div>
-            <figure className="bg-peinture p-5 text-encre">
-              <Image src="/thomas.jpg" alt="Thomas, fondateur de Touch Grass Academy" width={520} height={620} sizes="(min-width: 64rem) 32rem, 90vw" className="w-full" />
-              <figcaption className="mt-5 leading-loose">
-                <p className="text-xl font-bold">
-                  Thomas, 18 ans
-                </p>
-                <p className="mt-2 leading-relaxed">
-                  {"Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. Fait que j'ai décidé de sortir de ce qu'on voit partout et de lancer une business de service bien physique : l'entretien de piscines."}
-                </p>
-                <p className="mt-3 leading-relaxed">
-                  {t("Résultat : près de 100 000 $ de ventes en un seul été. Aujourd'hui, je prends de mon temps pour aider ceux qui veulent lancer leur business de service à leur tour.")}
-                </p>
-              </figcaption>
-            </figure>
-          </div>
-        </section>
-
-        <section className="wrap py-16 lg:py-24">
-          <h2 className="titre">Les 8 modules, dans l&apos;ordre</h2>
-          <ol className="mt-8 grid gap-x-14 lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-4">
-            {modules.map(([title, text], i) => (
-              <li key={title} className="flex gap-5 border-t-2 border-encre/20 py-5">
-                <span aria-hidden="true" className="chiffre w-12 shrink-0 pt-1 text-7xl text-gazon">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="text-xl font-extrabold">{title}</h3>
-                  <p className="mt-1 leading-relaxed">{t(text)}</p>
-                </div>
-              </li>
+        <section aria-label="En chiffres" className="border-y border-trait bg-panneau">
+          <dl className="wrap grid divide-y divide-trait md:grid-cols-3 md:divide-x md:divide-y-0">
+            {chiffres.map(([n, d]) => (
+              <div key={n} className="py-6 md:px-8 md:py-9 md:first:pl-0">
+                <dt className="large text-2xl leading-tight lg:text-[1.7rem]">{t(n)}</dt>
+                <dd className="mt-1 leading-snug text-doux">{d}</dd>
+              </div>
             ))}
-          </ol>
+          </dl>
+        </section>
 
-          <h2 className="titre mt-14">{t("Aussi inclus dans ton 87 $")}</h2>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-            {extras.map(([title, text]) => (
-              <li key={title} className="bg-peinture p-5">
-                <h3 className="text-xl font-extrabold">{title}</h3>
-                <p className="mt-1 leading-relaxed">{text}</p>
+        <section className="section wrap grid gap-10 lg:grid-cols-2 lg:gap-20">
+          <h2 className="titre">{"Tu veux partir de quoi à toi. T'es juste bloqué."}</h2>
+          <ul className="space-y-5">
+            {situations.map((s) => (
+              <li key={s} className="flex gap-4 text-xl leading-snug">
+                <span aria-hidden="true" className="mt-1 h-6 w-1 shrink-0 bg-eau" />
+                {s}
               </li>
             ))}
           </ul>
         </section>
 
-        <section className="gazon border-y-8 border-peinture">
-          <div className="wrap py-16 lg:py-24">
-            <h2 className="titre">Tout ça, au prix Black Friday</h2>
-            <div className="mt-14">
-              <OfferCard />
+        <section className="border-y border-trait bg-panneau">
+          <div className="mx-auto grid max-w-[90rem] lg:grid-cols-2">
+            <Image
+              src="/thomas.jpg"
+              alt={`Thomas, fondateur de ${BRAND}`}
+              width={520}
+              height={620}
+              sizes="(min-width: 64rem) 50vw, 100vw"
+              className="h-[26rem] w-full object-cover object-top lg:h-full lg:max-h-[46rem]"
+            />
+            <div className="px-5 py-14 lg:px-20 lg:py-24">
+              <h2 className="titre">{"Moi, c'est Thomas. J'ai 18 ans pis je nettoie des piscines."}</h2>
+              <div className="mt-6 max-w-xl space-y-4 text-lg">
+                <p>
+                  {"Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. Fait que j'ai décidé de sortir de ce qu'on voit partout et de lancer une business de service bien physique : l'entretien de piscines."}
+                </p>
+                <p className="font-bold">{t("Résultat : près de 100 000 $ de ventes en un seul été.")}</p>
+                <p>{"Aujourd'hui, je prends de mon temps pour aider ceux qui veulent lancer leur business de service à leur tour."}</p>
+                <p className="text-[0.95rem] text-doux">
+                  {"Ce sont des ventes, avant les dépenses. C'est mon résultat à moi. Le tien va dépendre de ton travail, de ton coin et de ton service."}
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="garantie" className="wrap py-16 lg:py-24">
-          <div className="border-8 border-gazon-pale bg-encre p-6 text-peinture sm:p-12">
-            <h2 className="titre">La garantie</h2>
-            <p className="mt-5 max-w-3xl text-xl leading-relaxed font-semibold">
-              {t(
-                "Fais les modules 1 à 5 et contacte au moins 100 clients potentiels dans les 30 jours. Si t'as pas signé ton premier client, je te rembourse tes 87 $ au complet.",
-              )}
+        <Proofs />
+
+        <section className="section wrap">
+          <h2 className="titre">Comment ça marche</h2>
+          <ol className="mt-10 grid gap-4 md:grid-cols-3">
+            {etapes.map(([titre, texte], i) => (
+              <li key={titre} className="carte p-6 lg:p-8">
+                <span aria-hidden="true" className="chiffre text-5xl text-eau">
+                  {i + 1}
+                </span>
+                <h3 className="large mt-5 text-2xl">{titre}</h3>
+                <p className="mt-2 text-doux">{texte}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="pb-[clamp(4.5rem,10vw,8rem)]">
+          <div className="wrap">
+            <h2 className="titre">{"Les 8 modules. Du peu profond jusqu'au creux."}</h2>
+            <p className="mt-4 max-w-xl text-lg text-doux">
+              Tu commences où t&apos;as pied, pis tu descends une étape à la fois.
             </p>
+            <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {modules.map(([titre, texte], i) => (
+                <li key={titre} className="carte flex overflow-hidden sm:block">
+                  <div
+                    aria-hidden="true"
+                    className="eau grid w-24 shrink-0 place-items-center sm:h-40 sm:w-auto"
+                    style={{ "--eau-lumiere": 1.9 - i * 0.2 } as React.CSSProperties}
+                  >
+                    <span className="chiffre text-6xl sm:text-8xl">{i + 1}</span>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="large text-lg leading-tight">{titre}</h3>
+                    <p className="mt-2 text-[0.95rem] leading-snug text-doux">{t(texte)}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <div className="mt-10 text-center">
+              <BuyButton className="w-full sm:w-auto">{cta}</BuyButton>
+            </div>
           </div>
         </section>
 
-        <section className="wrap grid gap-8 pb-16 lg:grid-cols-[1fr_1.6fr] lg:pb-24">
+        <section className="border-y border-trait bg-panneau">
+          <div className="section wrap">
+            <h2 className="titre">{"Pas juste des vidéos. Des outils prêts à servir."}</h2>
+            <div className="mt-12 grid gap-12 lg:grid-cols-3 lg:gap-8">
+              {[
+                ["Le Kit Copier-Coller", "Soumission, contrat, facture, flyer et annonce Marketplace.", <Soumission key="s" />],
+                ["Les 25 scripts qui signent", "Quoi dire à la porte, au téléphone et par texto.", <Textos key="t" />],
+                ["Les automatisations IA", "Prêtes à installer, pour perdre moins de temps.", <Automatisation key="a" />],
+              ].map(([titre, texte, visuel]) => (
+                <div key={titre as string} className="flex flex-col">
+                  <div className="grid h-84 place-items-center rounded-[14px] bg-nuit p-6">{visuel}</div>
+                  <h3 className="large mt-6 text-xl">{titre}</h3>
+                  <p className="mt-1 text-doux">{texte}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-8 text-[0.95rem] text-doux">Images à titre d&apos;exemple.</p>
+          </div>
+        </section>
+
+        <section id="offre" className="section wrap grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
+          <div className="rounded-[18px] border-2 border-eau bg-panneau p-6 sm:p-10">
+            <h2 className="titre">Tout ce que t&apos;as</h2>
+            <ul className="mt-6 divide-y divide-trait border-y border-trait">
+              {included.map((x) => (
+                <li key={x} className="flex justify-between gap-4 py-3.5 text-lg leading-snug font-semibold">
+                  {x}
+                  <span className="shrink-0 text-eau">Inclus</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-[0.95rem] text-doux">Préenregistré. Pas d&apos;appels de coaching.</p>
+            <Prix className="mt-9 text-[min(31vw,11rem)]" />
+            <p className="mt-5 font-semibold">{t("Prix Black Friday, jusqu'au lundi 30 novembre, 23 h 59.")}</p>
+            <BuyButton className="mt-5 w-full">{cta}</BuyButton>
+          </div>
+
+          <div id="garantie" className="carte p-6 sm:p-10">
+            <h2 className="titre">{"Pas de client ? Je te rembourse."}</h2>
+            <p className="mt-5 text-lg">
+              {t(
+                "« Fais les modules 1 à 5 et contacte au moins 100 clients potentiels dans les 30 jours. Si t'as pas signé ton premier client, je te rembourse tes 87 $ au complet. »",
+              )}
+            </p>
+            <ol className="mt-6 space-y-4">
+              {["Fais les modules 1 à 5.", "Contacte au moins 100 clients potentiels en 30 jours.", "Toujours pas de premier client ? Tu récupères ton 87 $."].map((x, i) => (
+                <li key={x} className="flex gap-4 leading-snug font-semibold">
+                  <span aria-hidden="true" className="chiffre w-6 shrink-0 text-2xl text-eau">
+                    {i + 1}
+                  </span>
+                  {t(x)}
+                </li>
+              ))}
+            </ol>
+            <a href="/remboursement" className="mt-6 inline-block underline underline-offset-4">
+              Lire la politique de remboursement
+            </a>
+          </div>
+        </section>
+
+        <section className="wrap grid gap-10 pb-[clamp(4.5rem,10vw,8rem)] lg:grid-cols-[1fr_1.7fr]">
           <h2 className="titre">Tes questions</h2>
-          <div className="border-b-2 border-encre/20">
+          <div className="border-b border-trait">
             {faq.map(([q, a]) => (
-              <details key={q} className="border-t-2 border-encre/20">
-                <summary className="flex items-center justify-between gap-4 py-5 text-lg font-extrabold">
+              <details key={q} className="border-t border-trait">
+                <summary className="flex items-center justify-between gap-4 py-5 text-lg font-bold">
                   {t(q)}
-                  <span aria-hidden="true" className="plus text-3xl leading-none text-gazon">
+                  <span aria-hidden="true" className="plus text-3xl leading-none text-eau">
                     +
                   </span>
                 </summary>
-                <p className="pb-6 leading-relaxed">{t(a)}</p>
+                <p className="pb-6 text-doux">{t(a)}</p>
               </details>
             ))}
           </div>
         </section>
 
-        <section id="ebook" className="border-t-2 border-encre/20 bg-peinture">
-          <div className="wrap grid items-center gap-8 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
-            <div>
-              <p className="text-lg font-bold">{t("Pas prêt à embarquer ? Prends l'ebook gratuit.")}</p>
-              <h2 className="titre mt-3">{t("Les 7 services que tu peux lancer avec moins de 500 $")}</h2>
+        <section className="eau border-y border-trait">
+          <div className="wrap py-20 text-center lg:py-28">
+            <h2 className="titre mx-auto max-w-3xl">{"L'été prochain, t'as un boss ou t'as des clients ?"}</h2>
+            <Prix className="mt-10 text-[min(36vw,14rem)]" />
+            <div className="mt-9">
+              <BuyButton className="w-full sm:w-auto">{cta}</BuyButton>
             </div>
-            <EbookForm />
           </div>
         </section>
 
-        <section className="gazon border-t-8 border-peinture">
-          <div className="wrap flex flex-col items-center py-16 text-center lg:py-24">
-            <h2 className="titre">Lance ta business de service</h2>
-            <span
-              role="img"
-              aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`}
-              className="chiffre mt-14 text-[min(46vw,16rem)]"
-            >
-              {money(PRICE)}
-            </span>
-            <p className="mt-10 mb-6 text-lg font-semibold">
-              Le programme au complet : les 8 modules et les 4 extras.
-            </p>
-            <BuyButton className="w-full sm:w-auto">{ctaText}</BuyButton>
+        <section id="ebook" className="section wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
+          <div className="flex items-center gap-6">
+            <Image src="/ebook-couverture.webp" alt="" width={306} height={396} className="w-28 shrink-0 rounded-md sm:w-44" />
+            <div>
+              <p className="font-semibold text-doux">{t("Pas prêt ? Prends l'ebook gratuit.")}</p>
+              <h2 className="large mt-2 text-2xl leading-tight lg:text-3xl">
+                {t("Les 7 services que tu peux lancer avec moins de 500 $")}
+              </h2>
+            </div>
           </div>
+          <EbookForm />
         </section>
       </main>
 
-      <footer className="bg-encre pt-12 pb-40 text-peinture">
+      <footer className="border-t border-trait pt-12 pb-40 text-doux">
         <div className="wrap">
-          <p className="max-w-3xl leading-relaxed">
-            Les revenus ne sont pas garantis. Les résultats mentionnés sont ceux du fondateur. Les tiens vont dépendre
-            de ton travail, de ton coin, de ton service et de la demande.
+          <p className="max-w-3xl">
+            Les revenus ne sont pas garantis. Les résultats mentionnés sont ceux du fondateur. Les tiens vont dépendre de
+            ton travail, de ton coin, de ton service et de la demande.
           </p>
           <nav aria-label="Liens légaux" className="mt-8 flex flex-col gap-x-8 gap-y-4 sm:flex-row sm:flex-wrap">
             {[
@@ -214,35 +278,11 @@ export default function Page() {
             {t("Contact : ")}
             <Contact />
           </p>
-          <p className="mt-8">© 2026 Touch Grass Academy</p>
+          <p className="mt-8">© 2026 {BRAND}</p>
         </div>
       </footer>
 
       <StickyBar heroId="hero" />
     </>
-  );
-}
-
-function OfferCard() {
-  return (
-    <div className="relative max-w-2xl bg-peinture p-6 text-encre outline-8 outline-cone sm:p-8">
-      <p className="absolute -top-6 left-6 bg-cone px-4 py-1.5 font-extrabold">Black Friday</p>
-      <p role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className="chiffre mt-9 text-[8.5rem] text-gazon">
-        {money(PRICE)}
-      </p>
-      <ul className="mt-8 grid gap-3">
-        {included.map((label) => (
-          <li key={label} className="flex gap-3 leading-snug">
-            <span aria-hidden="true" className="w-5 shrink-0 font-extrabold text-gazon">
-              ✓
-            </span>
-            {label}
-          </li>
-        ))}
-      </ul>
-      <div className="mt-8">
-        <BuyButton className="w-full">{ctaText}</BuyButton>
-      </div>
-    </div>
   );
 }

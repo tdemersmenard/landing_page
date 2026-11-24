@@ -63,11 +63,11 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
         onClick={(e) => {
           if (pressedOutside.current && isOutside(e)) dialog.current?.close();
         }}
-        className="feuille mx-0 mt-auto mb-0 max-h-[94dvh] w-full max-w-none overflow-y-auto overscroll-contain rounded-t-2xl bg-peinture text-encre sm:m-auto sm:max-w-lg sm:rounded-2xl"
+        className="feuille mx-0 mt-auto mb-0 max-h-[94dvh] w-full max-w-none overflow-y-auto overscroll-contain rounded-t-2xl border border-trait bg-panneau text-clair sm:m-auto sm:max-w-lg sm:rounded-2xl"
       >
         <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8">
           <div className="flex items-start justify-between gap-4">
-            <h2 id="achat-titre" className="text-4xl">
+            <h2 id="achat-titre" className="large text-2xl">
               Presque fini.
             </h2>
             <button
@@ -79,9 +79,9 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
               ×
             </button>
           </div>
-          <p className="mt-2 flex items-center justify-between gap-4 border-y-2 border-encre/20 py-3 font-semibold">
-            <span>{t("Touch Grass Academy, les 8 modules :")}</span>{" "}
-            <span className="chiffre text-6xl text-gazon">{money(PRICE)}</span>
+          <p className="mt-2 flex items-center justify-between gap-4 border-y-2 border-trait py-3 font-semibold">
+            <span>{t("Système TDM, les 8 modules :")}</span>{" "}
+            <span className="chiffre text-6xl text-clair">{money(PRICE)}</span>
           </p>
 
           {ready ? (
@@ -114,12 +114,12 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
             <Field label="Courriel" type="email" autoComplete="email" {...field("email")} />
             <Consent />
             <p className="text-[0.95rem] leading-snug">
-              {`Le paiement se fait sur Skool, en dollars américains : ${SKOOL_PRICE_USD}. Utilise le même courriel.`}
+              {t(`Le paiement se fait sur Skool, en dollars américains : ${SKOOL_PRICE_USD}. Utilise le même courriel.`)}
             </p>
             <button type="submit" disabled={pending || ended} className="btn">
               {ended ? "Offre terminée" : pending ? "Un instant…" : "Continuer vers le paiement"}
             </button>
-            <p role="alert" className="font-semibold text-[#b3261e] empty:hidden">
+            <p role="alert" className="font-semibold text-erreur empty:hidden">
               {message}
             </p>
           </form>

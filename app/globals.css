@@ -1,78 +1,98 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gazon: #2c6a33;
-  --color-gazon-pale: #37803f;
-  --color-peinture: #fbfbf4;
-  --color-cone: #ff6a13;
-  --color-encre: #14281b;
-  --color-pale: #eef2e8;
-  --font-display: var(--font-big-shoulders), Impact, sans-serif;
-  --font-sans: var(--font-figtree), system-ui, sans-serif;
+  --color-nuit: #05080c;
+  --color-panneau: #0d141b;
+  --color-trait: #22303c;
+  --color-clair: #f3f8fb;
+  --color-doux: #a9b8c4;
+  --color-eau: #3ad8ff;
+  --color-erreur: #ff8f85;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
 }
 
 @layer base {
   html {
     scroll-padding: 1rem 0 7rem;
+    color-scheme: dark;
   }
   body {
-    background: var(--color-pale);
-    color: var(--color-encre);
+    background: var(--color-nuit);
+    color: var(--color-clair);
+    font-size: 1.0625rem;
+    line-height: 1.6;
     overflow-wrap: break-word;
   }
   h1,
-  h2 {
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-variation-settings: "opsz" 72;
-    line-height: 1;
+  h2,
+  h3 {
     text-wrap: balance;
   }
   button:not(:disabled),
   summary {
     cursor: pointer;
   }
-  /* Double anneau : visible sur le gazon, le blanc, le foncé et l'orange. */
   :focus-visible {
-    outline: 3px solid var(--color-encre);
-    outline-offset: 2px;
-    box-shadow: 0 0 0 8px var(--color-peinture);
-    border-radius: 4px;
+    outline: 3px solid var(--color-clair);
+    outline-offset: 3px;
   }
 }
 
 @layer components {
-  .gazon {
-    --bande: clamp(52px, 9vw, 120px);
-    background: repeating-linear-gradient(
-      90deg,
-      var(--color-gazon) 0 var(--bande),
-      var(--color-gazon-pale) var(--bande) calc(var(--bande) * 2)
-    );
-    color: var(--color-peinture);
-  }
   .wrap {
     width: 100%;
-    max-width: 70rem;
+    max-width: 72rem;
     margin-inline: auto;
     padding-inline: 1.25rem;
   }
+  .section {
+    padding-block: clamp(4.5rem, 10vw, 8rem);
+  }
+  .large,
+  .titre,
   .chiffre {
-    font-family: var(--font-display);
-    font-weight: 900;
-    font-variation-settings: "opsz" 72;
-    line-height: 0.8;
-    word-spacing: -0.08em;
-    white-space: nowrap;
-    display: inline-block;
+    font-stretch: 125%;
+    font-weight: 800;
+    letter-spacing: -0.035em;
   }
   .titre {
-    font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+    font-size: clamp(1.85rem, 5vw, 3.4rem);
+    line-height: 1.06;
+  }
+  .chiffre {
+    line-height: 0.85;
+    white-space: nowrap;
+    letter-spacing: -0.06em;
+    font-variant-numeric: lining-nums;
+  }
+  .carte {
+    background: var(--color-panneau);
+    border: 1px solid var(--color-trait);
+    border-radius: 14px;
+  }
+  /* L'eau : la seule image de marque. Plus on descend, plus c'est creux. */
+  .eau {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .eau::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: url("/eau.webp") center / cover;
+    filter: brightness(var(--eau-lumiere, 1.15));
+  }
+  .eau-hero::before {
+    inset: -12% 0;
+    filter: brightness(1.6) saturate(1.1);
+    mask-image: linear-gradient(#000 0%, rgb(0 0 0 / 0.6) 50%, transparent 92%);
   }
   .placeholder {
     background: #ffe94a;
-    color: var(--color-encre);
-    outline: 2px dashed var(--color-encre);
+    color: #111;
+    outline: 2px dashed #111;
     outline-offset: -2px;
     padding: 0.1em 0.35em;
     font-weight: 700;
@@ -81,20 +101,22 @@
   }
   .btn {
     display: inline-block;
-    background: var(--color-cone);
-    color: var(--color-encre);
+    background: var(--color-eau);
+    color: #021018;
     font-weight: 800;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     line-height: 1.2;
     text-align: center;
-    padding: 1.05rem 1.75rem;
-    border-radius: 8px;
+    padding: 1.15rem 1.75rem;
+    border-radius: 10px;
+    transition: background-color 0.15s;
   }
   .btn:hover:not(:disabled) {
-    background: #ff8540;
+    background: #8ae8ff;
   }
   .btn:disabled {
-    background: #c9cfc4;
+    background: #3a4752;
+    color: #d5dee5;
     cursor: not-allowed;
   }
   summary::-webkit-details-marker {
@@ -105,33 +127,29 @@
   }
 }
 
-/* Fenêtre d'achat : le fond de la page ne défile pas pendant qu'elle est ouverte. */
 html:has(dialog[open]) {
   overflow: hidden;
 }
 .feuille::backdrop {
-  background: rgb(20 40 27 / 0.7);
+  background: rgb(2 5 8 / 0.82);
 }
-@media (prefers-reduced-motion: no-preference) and (max-width: 39.99rem) {
-  .feuille[open] {
-    animation: monter 0.25s ease-out;
+@media (prefers-reduced-motion: no-preference) {
+  .eau-hero::before {
+    animation: derive 24s ease-in-out infinite alternate;
+  }
+  @media (max-width: 39.99rem) {
+    .feuille[open] {
+      animation: monter 0.25s ease-out;
+    }
+  }
+}
+@keyframes derive {
+  to {
+    transform: translate3d(0, 5%, 0) scale(1.08);
   }
 }
 @keyframes monter {
   from {
     transform: translateY(100%);
-  }
-}
-
-/* Hero : le 87 $ arrive. */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-prix {
-    animation: apparaitre 0.35s 0.2s ease-out backwards;
-  }
-}
-@keyframes apparaitre {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
   }
 }

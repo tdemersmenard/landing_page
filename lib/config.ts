@@ -12,4 +12,6 @@ export const SKOOL_PRICE_USD = "60 $ US";
 /** Membres affichés publiquement sur Skool : 133 le 24 novembre 2026. À garder vrai. */
 export const SKOOL_MEMBERS = "Plus de 130";
 
+export const BRAND = "Système TDM";
+
 export const PRICE = 87;

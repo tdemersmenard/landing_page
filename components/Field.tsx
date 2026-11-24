@@ -14,11 +14,11 @@ export function Field({ label, error, ...input }: Props) {
         required
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-erreur` : undefined}
-        className={`mt-1 block w-full rounded-lg border-2 bg-white px-4 py-3 text-base ${error ? "border-[#b3261e]" : "border-encre"}`}
+        className={`mt-1 block w-full rounded-lg border bg-nuit px-4 py-3 text-base ${error ? "border-erreur" : "border-[#5d7080]"}`}
         {...input}
       />
       {error && (
-        <p id={`${id}-erreur`} className="mt-1 font-semibold text-[#b3261e]">
+        <p id={`${id}-erreur`} className="mt-1 font-semibold text-erreur">
           {error}
         </p>
       )}
