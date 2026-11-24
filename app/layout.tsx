@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Inter } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import { CheckoutProvider } from "@/components/Checkout";
 import { t } from "@/lib/text";
 import "./globals.css";
 
-const bebas = Bebas_Neue({ subsets: ["latin"], weight: "400", variable: "--font-bebas" });
+const archivo = Archivo({ subsets: ["latin"], weight: ["800", "900"], variable: "--font-archivo" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   ),
 };
 
-export const viewport: Viewport = { themeColor: "#000000" };
+export const viewport: Viewport = { themeColor: "#0d0b0a" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr-CA" className={`${bebas.variable} ${inter.variable}`}>
+    <html lang="fr-CA" className={`${archivo.variable} ${inter.variable}`}>
       <body>
         <CheckoutProvider>{children}</CheckoutProvider>
       </body>

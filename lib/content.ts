@@ -1,11 +1,3 @@
-export const situations = [
-  "T'es tanné de travailler au salaire minimum pour un boss.",
-  "Tu veux partir une business, mais tu sais pas quel service choisir.",
-  "T'as pas gros d'argent pour commencer.",
-  "Ça te gêne de cogner aux portes ou d'appeler du monde pour vendre.",
-  "Le NEQ, les assurances pis les taxes, tu comprends rien là-dedans.",
-];
-
 export const modules = [
   ["Choisis ton service", "Une grille selon ton coin, ton budget et la demande, avec une calculatrice de rentabilité."],
   ["Pars avec presque rien", "Quoi acheter, où le trouver usagé et comment le payer avec ton premier client."],
@@ -17,12 +9,14 @@ export const modules = [
   ["Grossis", "Les pubs locales et ton premier employé."],
 ];
 
+/** Image (public/inclus), titre, texte. Images d'ambiance, pas des captures. */
 export const included = [
-  "Les 8 modules vidéo",
-  "Le Kit Copier-Coller",
-  "Les 25 scripts qui signent",
-  "Les automatisations IA",
-  "La communauté Skool",
+  ["modules", "Les 8 modules vidéo", "De « je sais pas quoi lancer » jusqu'à ton premier employé."],
+  ["kit", "Le Kit Copier-Coller", "Soumission, contrat, facture, flyer et annonce Marketplace."],
+  ["scripts", "Les 25 scripts qui signent", "Quoi dire à la porte, au téléphone et par texto."],
+  ["ia", "Les automatisations IA", "Prêtes à installer, pour perdre moins de temps."],
+  ["skool", "La communauté Skool", "Du monde qui veut lancer sa business, comme toi."],
+  ["garantie", "La garantie 30 jours", "Fais les modules 1 à 5 et contacte au moins 100 clients potentiels en 30 jours. Pas de client signé ? Je te rembourse tes 87 $ au complet."],
 ];
 
 export const faq = [
