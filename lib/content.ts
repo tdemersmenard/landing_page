@@ -1,0 +1,59 @@
+export const situations = [
+  "T'es tanné de travailler au salaire minimum pour un boss.",
+  "Tu veux partir une business, mais tu sais pas quel service choisir.",
+  "T'as pas gros d'argent pour commencer.",
+  "Ça te gêne de cogner aux portes ou d'appeler du monde pour vendre.",
+  "Le NEQ, les assurances pis les taxes, tu comprends rien là-dedans.",
+];
+
+export const modules = [
+  ["Choisis ton service", "Une grille selon ton coin, ton budget et la demande, avec une calculatrice de rentabilité."],
+  ["Pars avec presque rien", "Quoi acheter, où le trouver usagé et comment le payer avec ton premier client."],
+  ["Règle le légal sans stress", "NEQ, assurance responsabilité et taxes (pas de TPS/TVQ avant 30 000 $ de revenus)."],
+  ["Fixe tes prix", "Le calculateur de prix avec les vraies grilles."],
+  ["Trouve tes clients en 7 jours", "Porte-à-porte, Marketplace, groupes Facebook, flyers et références."],
+  ["Vends sans être gêné", "Des scripts pour la porte, le téléphone et les textos, plus les réponses aux objections."],
+  ["Gère la paperasse", "Soumissions, contrats, factures et automatisations."],
+  ["Grossis", "Les pubs locales et ton premier employé."],
+];
+
+export const extras = [
+  ["Le Kit Copier-Coller", "Soumission, contrat, facture, flyer et annonce Marketplace."],
+  ["Les 25 scripts qui signent", "Pour savoir quoi dire à tes clients."],
+  ["Les automatisations IA", "Prêtes à installer."],
+  ["Le Discord privé", "Pour jaser avec les autres membres."],
+];
+
+/** [élément, inclus à 87 $] */
+export const comparison: [string, boolean][] = [
+  ["Les 8 modules vidéo", true],
+  ["Le Kit Copier-Coller", true],
+  ["Les 25 scripts qui signent", true],
+  ["Les automatisations IA", true],
+  ["Le Discord privé", true],
+  ["L'appel 1-on-1", false],
+  ["12 semaines d'appels de groupe", false],
+];
+
+export const faq = [
+  [
+    "Est-ce que le coaching est inclus ?",
+    "Non. À 87 $, t'as les 8 modules vidéo, le Kit Copier-Coller, les 25 scripts, les automatisations IA et le Discord privé. L'appel 1-on-1 et les 12 semaines d'appels de groupe viennent seulement avec le programme à 997 $.",
+  ],
+  [
+    "Ça me prend combien d'argent pour partir ?",
+    "Ça dépend du service que tu choisis. Le module 1 t'aide à choisir selon ton budget, et le module 2 te montre quoi acheter, où le trouver usagé et comment le payer avec ton premier client. L'ebook gratuit présente 7 services que tu peux lancer avec moins de 500 $.",
+  ],
+  [
+    "Est-ce que ça marche si je suis aux études ?",
+    "Oui. Les modules sont préenregistrés, donc tu les écoutes quand ton horaire le permet. Par contre, va falloir que tu te gardes du temps pour contacter des clients et faire les jobs.",
+  ],
+  [
+    "Est-ce que c'est garanti que je vais faire de l'argent ?",
+    "Non. Personne peut te garantir ça. Ça dépend de ton travail, de ton coin, de ton service et de la demande. Ce que je garantis, c'est le remboursement de tes 87 $ si tu remplis les conditions de la garantie sans signer ton premier client.",
+  ],
+  [
+    "Pourquoi juste 87 $ ?",
+    "Parce que c'est les modules préenregistrés, sans les appels. Le programme à 997 $ comprend le coaching, qui demande du temps en direct avec toi. Le 87 $ est le prix Black Friday, jusqu'au lundi 30 novembre 2026 à 23 h 59, heure de l'Est.",
+  ],
+];

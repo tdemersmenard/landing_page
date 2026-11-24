@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gazon: #2c6a33;
+  --color-gazon-pale: #37803f;
+  --color-peinture: #fbfbf4;
+  --color-cone: #ff6a13;
+  --color-encre: #14281b;
+  --color-pale: #eef2e8;
+  --font-display: var(--font-big-shoulders), Impact, sans-serif;
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-padding: 1rem 0 7rem;
+  }
+  body {
+    background: var(--color-pale);
+    color: var(--color-encre);
+    overflow-wrap: break-word;
+  }
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-variation-settings: "opsz" 72;
+    line-height: 1;
+    text-wrap: balance;
+  }
+  button:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+  /* Double anneau : visible sur le gazon, le blanc, le foncé et l'orange. */
+  :focus-visible {
+    outline: 3px solid var(--color-encre);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 8px var(--color-peinture);
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .gazon {
+    --bande: clamp(52px, 9vw, 120px);
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-gazon) 0 var(--bande),
+      var(--color-gazon-pale) var(--bande) calc(var(--bande) * 2)
+    );
+    color: var(--color-peinture);
+  }
+  .wrap {
+    width: 100%;
+    max-width: 70rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  .chiffre {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-variation-settings: "opsz" 72;
+    line-height: 0.8;
+    word-spacing: -0.08em;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  .titre {
+    font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  }
+  .barre {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .barre::after {
+    content: "";
+    position: absolute;
+    left: -6%;
+    right: -6%;
+    top: 50%;
+    height: max(3px, 0.1em);
+    margin-top: calc(max(3px, 0.1em) / -2);
+    background: var(--color-cone);
+    border-radius: 99px;
+    transform: rotate(-14deg);
+  }
+  .placeholder {
+    background: #ffe94a;
+    color: var(--color-encre);
+    outline: 2px dashed var(--color-encre);
+    outline-offset: -2px;
+    padding: 0.1em 0.35em;
+    font-weight: 700;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--color-cone);
+    color: var(--color-encre);
+    font-weight: 800;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    text-align: center;
+    padding: 1.05rem 1.75rem;
+    border-radius: 8px;
+  }
+  .btn:hover:not(:disabled) {
+    background: #ff8540;
+  }
+  .btn:disabled {
+    background: #c9cfc4;
+    cursor: not-allowed;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  details[open] .plus {
+    transform: rotate(45deg);
+  }
+}
+
+/* Fenêtre d'achat : le fond de la page ne défile pas pendant qu'elle est ouverte. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+.feuille::backdrop {
+  background: rgb(20 40 27 / 0.7);
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 39.99rem) {
+  .feuille[open] {
+    animation: monter 0.25s ease-out;
+  }
+}
+@keyframes monter {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+/* Hero : le 997 $ se fait barrer, puis le 87 $ arrive. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-barre::after {
+    animation: barrer 0.45s 0.35s ease-out backwards;
+  }
+  .hero-prix {
+    animation: apparaitre 0.35s 0.85s ease-out backwards;
+  }
+}
+@keyframes barrer {
+  from {
+    clip-path: inset(-100% 100% -100% 0);
+  }
+  to {
+    clip-path: inset(-100% 0 -100% 0);
+  }
+}
+@keyframes apparaitre {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
