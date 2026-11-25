@@ -1,12 +1,11 @@
 import Image from "next/image";
 import { CheckoutProvider } from "@/components/Checkout";
 import { EbookForm } from "@/components/EbookForm";
+import { HeroMedia } from "@/components/HeroMedia";
 import { Footer } from "@/components/Footer";
 import { Ancrage, BuyButton, Countdown, CTA as cta, StickyBar } from "@/components/offer";
-import { Mur, Videos } from "@/components/Proofs";
 import { BRAND, SKOOL_MEMBERS } from "@/lib/config";
 import { faq, included, modules } from "@/lib/content";
-import { preuves } from "@/lib/proofs";
 import { t } from "@/lib/text";
 
 const chiffres = [
@@ -63,20 +62,7 @@ export default function Page() {
               </div>
               <BuyButton className="mt-5 w-full">{cta}</BuyButton>
             </div>
-            <div className="carte overflow-hidden">
-              {preuves.heroVideo ? (
-                <video {...preuves.heroVideo} controls playsInline preload="none" className="aspect-[4/5] w-full object-cover" />
-              ) : (
-                <Image
-                  src="/thomas.jpg"
-                  alt="Thomas, fondateur du programme"
-                  width={520}
-                  height={620}
-                  sizes="(min-width: 64rem) 30rem, 92vw"
-                  className="aspect-[4/5] w-full object-cover object-top"
-                />
-              )}
-            </div>
+            <HeroMedia />
           </div>
         </section>
 
@@ -90,8 +76,6 @@ export default function Page() {
             ))}
           </dl>
         </section>
-
-        <Videos />
 
         <section className="jour">
           <div className="section wrap">
@@ -139,8 +123,6 @@ export default function Page() {
           <Cta />
           </div>
         </section>
-
-        <Mur cta={cta} />
 
         <section className="section wrap !max-w-3xl">
           <Profil />
