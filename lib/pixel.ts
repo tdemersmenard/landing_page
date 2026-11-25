@@ -13,6 +13,7 @@ type Fbq = {
   loaded: boolean;
   version: string;
   disablePushState?: boolean;
+  allowDuplicatePageViews?: boolean;
   callMethod?: (...args: unknown[]) => void;
 };
 declare global {
@@ -44,6 +45,7 @@ function getFbq(): Fbq {
     f.loaded = true;
     f.version = "2.0";
     f.disablePushState = true; // On envoie PageView nous-mêmes à chaque page.
+    f.allowDuplicatePageViews = true; // Sinon Meta ignore PageView après la première page.
     window.fbq = f;
     window._fbq ??= f;
   }

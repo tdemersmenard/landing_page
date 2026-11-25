@@ -27,7 +27,7 @@ export function SkoolEmail({ email, className = "" }: { email?: string; classNam
       {email && (
         <>
           {" ("}
-          <strong className="break-all">{email}</strong>)
+          <strong className="[overflow-wrap:anywhere]">{email}</strong>)
         </>
       )}
       {t(" : c'est comme ça qu'on retrouve ton achat.")}
