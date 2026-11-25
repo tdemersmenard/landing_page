@@ -2,14 +2,12 @@ import Image from "next/image";
 import { CheckoutProvider } from "@/components/Checkout";
 import { EbookForm } from "@/components/EbookForm";
 import { Footer } from "@/components/Footer";
-import { BuyButton, Countdown, StickyBar } from "@/components/offer";
+import { Ancrage, BuyButton, Countdown, CTA as cta, StickyBar } from "@/components/offer";
 import { Mur, Videos } from "@/components/Proofs";
-import { BRAND, PRICE, SKOOL_MEMBERS, SKOOL_PRICE_USD } from "@/lib/config";
+import { BRAND, SKOOL_MEMBERS } from "@/lib/config";
 import { faq, included, modules } from "@/lib/content";
 import { preuves } from "@/lib/proofs";
-import { money, t } from "@/lib/text";
-
-const cta = `J'embarque à ${money(PRICE)}`;
+import { t } from "@/lib/text";
 
 const chiffres = [
   ["Près de 100 000 $", "de ventes en un été, avant dépenses (mon résultat)"],
@@ -21,12 +19,6 @@ const etapes = [
   ["Accède à tout", "Modules, kit, scripts et automatisations s'ouvrent tout de suite."],
   ["Va chercher ton premier client", "Tu suis les étapes et tu contactes du monde."],
 ];
-
-const Prix = ({ className = "" }: { className?: string }) => (
-  <span role="img" aria-label={`Prix Black Friday, ${PRICE} dollars canadiens`} className={`chiffre inline-block ${className}`}>
-    {money(PRICE)}
-  </span>
-);
 
 const Profil = () => (
   <p className="flex items-center gap-3 text-left leading-tight">
@@ -66,9 +58,10 @@ export default function Page() {
                   Conditions
                 </a>
               </p>
-              <Prix className="mt-7 text-[min(34vw,10rem)]" />
-              <BuyButton className="mt-7 w-full">{cta}</BuyButton>
-              <p className="mt-3 text-sm text-doux">{t(`Un seul paiement. ${PRICE} $ CAD, facturé ${SKOOL_PRICE_USD} par Skool.`)}</p>
+              <div className="mt-5">
+                <Ancrage etiquette note taille="text-[min(30vw,9rem)]" />
+              </div>
+              <BuyButton className="mt-5 w-full">{cta}</BuyButton>
             </div>
             <div className="carte overflow-hidden">
               {preuves.heroVideo ? (
@@ -192,7 +185,9 @@ export default function Page() {
                 </li>
               ))}
             </ul>
-            <Prix className="mt-8 text-[min(32vw,9rem)]" />
+            <div className="mt-6">
+              <Ancrage note taille="text-[min(30vw,9rem)]" />
+            </div>
             <BuyButton className="mt-7 w-full">{cta}</BuyButton>
           </div>
         </section>
@@ -219,7 +214,9 @@ export default function Page() {
         <section>
           <div className="wrap py-16 text-center lg:py-24">
             <h2 className="titre mx-auto max-w-2xl">{"L'été prochain, t'as un boss ou t'as des clients ?"}</h2>
-            <Prix className="mt-8 text-[min(34vw,10rem)]" />
+            <div className="mt-6">
+              <Ancrage note taille="text-[min(30vw,9rem)]" />
+            </div>
             <Cta />
           </div>
         </section>
