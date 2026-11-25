@@ -1,15 +1,25 @@
-# Projet : landing page Black Friday de Touch Grass Academy
+# Projet : funnel Black Friday de Système TDM
 
 ## L'offre
-- Programme : Touch Grass Academy, une formation pour les jeunes qui veulent lancer une business de service (tonte de gazon, piscines, lavage de vitres, déneigement, etc.).
+- Programme : Système TDM, une formation pour les jeunes qui veulent lancer une business de service (tonte de gazon, piscines, lavage de vitres, déneigement, etc.).
 - Promesse : « Lance ta business de service et signe ton premier client en 30 jours. Sinon, t'es remboursé. »
 - Offre Black Friday : le programme (8 modules préenregistrés) à 87 $ CAD, sans coaching.
-- Le prix 87 $ doit être L'ÉLÉMENT LE PLUS VISIBLE de la page. Pas de prix barré ni de comparaison avec un ancien prix.
+- Le prix 87 $ doit être L'ÉLÉMENT LE PLUS VISIBLE de la page. Seul prix barré permis : le programme avec coaching 1-on-1 (1 500 $), TOUJOURS avec la mention « avec coaching 1-on-1 ».
 - Fin de l'offre : lundi 30 novembre 2026, 23 h 59, heure de l'Est. Après, les boutons d'achat se désactivent.
 - Inclus à 87 $ : les 8 modules vidéo, le Kit Copier-Coller (soumission, contrat, facture, flyer, annonce Marketplace), les 25 scripts qui signent, les automatisations IA prêtes à installer, la communauté Skool.
-- Pas d'appels de coaching.
+- Pas d'appels de coaching dans l'offre à 87 $.
 - Garantie : « Fais les modules 1 à 5 et contacte au moins 100 clients potentiels dans les 30 jours. Si t'as pas signé ton premier client, je te rembourse tes 87 $ au complet. »
 - Preuve du fondateur : près de 100 000 $ de ventes (avant dépenses) en un été avec une business de service.
+
+## Le funnel officiel
+- Pubs froides (Meta) → /ebook → /ebook/merci (offre à 87 $) → paiement sur Skool.
+- Trafic chaud (Instagram, TikTok, lien en bio, relances) → / (page de vente à 87 $) → paiement sur Skool.
+- Pas de retargeting pour l'instant.
+- Le paiement se fait sur Skool (SKOOL_URL dans lib/config.ts), facturé 60 $ US. Il n'y a pas de Stripe sur ce site.
+- Après l'achat : un appel « Plan de match » de 20 minutes (lien de réservation dans Skool), puis le coaching à 1 500 $. Le 87 $ est crédité si la personne monte dans les 14 jours (crédit appliqué à la main).
+- Règle : une page = une action. /ebook ne mentionne jamais le prix, le Black Friday ni le compte à rebours, et n'a aucun lien vers la page de vente.
+- Toutes les valeurs (prix, nom, liens, infos légales, garantie) sont dans lib/config.ts. Aucune valeur écrite en dur dans les pages.
+- Les messages de relance sont dans content/sequences.md.
 
 ## Les 8 modules (dans l'ordre)
 1. Choisis ton service : grille selon ton coin, ton budget, la demande, avec une calculatrice de rentabilité.
@@ -31,7 +41,7 @@ Ebook gratuit : « Les 7 services que tu peux lancer avec moins de 500 $ ».
 
 ## Stack technique
 - Next.js (App Router) + TypeScript + Tailwind, déployé sur Vercel.
-- Paiement : sur Skool (lib/config.ts) : la personne rejoint la communauté gratuite, puis débloque le cours SYSTÈME TDM. Skool encaisse et donne l'accès automatiquement. Skool facture en USD.
+- Paiement : sur Skool (lib/config.ts) : Skool encaisse et donne l'accès automatiquement. Skool facture en USD.
 - Leads : envoyés à un webhook Make (variable d'environnement MAKE_WEBHOOK_URL), qui s'occupe des courriels et des textos.
 - Les secrets vont TOUJOURS dans .env.local, jamais dans le code. Tiens un fichier .env.example à jour.
 
