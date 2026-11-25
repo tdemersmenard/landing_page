@@ -1,19 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { Tracking } from "@/components/Tracking";
-import { BRAND, OFFER_END_TEXT, PRICE } from "@/lib/config";
-import { t } from "@/lib/text";
+import { BRAND, SITE_URL } from "@/lib/config";
 import "./globals.css";
 
 const archivo = Archivo({ subsets: ["latin"], weight: ["800", "900"], variable: "--font-archivo" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-export const metadata: Metadata = {
-  title: t(`${BRAND} : les 8 modules à ${PRICE} $ (Black Friday)`),
-  description: t(
-    `Lance ta business de service avec le programme ${BRAND} : 8 modules vidéo à ${PRICE} $ CAD jusqu'au ${OFFER_END_TEXT}.`,
-  ),
-};
+export const metadata: Metadata = { metadataBase: new URL(SITE_URL), title: BRAND };
 
 export const viewport: Viewport = { themeColor: "#08140e" };
 
