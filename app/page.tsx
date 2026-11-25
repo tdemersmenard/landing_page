@@ -1,13 +1,19 @@
 import Image from "next/image";
 import { CheckoutProvider } from "@/components/Checkout";
-import { EbookForm } from "@/components/EbookForm";
 import { HeroMedia } from "@/components/HeroMedia";
 import { Footer } from "@/components/Footer";
 import { Ancrage, BuyButton, Countdown, CTA as cta, StickyBar } from "@/components/offer";
 import { Proofs } from "@/components/Proofs";
-import { BRAND, SKOOL_MEMBERS } from "@/lib/config";
+import { BRAND, EBOOK_TITLE, OFFER_END_TEXT, PRICE, SKOOL_MEMBERS } from "@/lib/config";
 import { faq, included, modules } from "@/lib/content";
+import { pageMeta } from "@/lib/meta";
 import { t } from "@/lib/text";
+
+export const metadata = pageMeta({
+  title: `${BRAND} : les 8 modules à ${PRICE} $ (Black Friday)`,
+  description: `Lance ta business de service avec ${BRAND} : 8 modules vidéo à ${PRICE} $ CAD jusqu'au ${OFFER_END_TEXT}.`,
+  path: "/",
+});
 
 const chiffres = [
   ["Près de 100 000 $", "de ventes en un été, avant dépenses (mon résultat)"],
@@ -206,16 +212,12 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="ebook" className="section wrap grid !max-w-4xl items-center gap-8 lg:grid-cols-2">
-          <div className="flex items-center gap-5">
-            <Image src="/ebook-couverture.webp" alt="" width={306} height={396} className="w-24 shrink-0 rounded-md sm:w-36" />
-            <div>
-              <p className="text-sm font-semibold text-accent">Pas prêt ? Ebook gratuit</p>
-              <h2 className="large mt-1 text-xl leading-tight">{t("Les 7 services que tu peux lancer avec moins de 500 $")}</h2>
-            </div>
-          </div>
-          <EbookForm />
-        </section>
+        <p className="wrap pb-14 text-center text-doux">
+          {t("Pas prêt ? Prends l'ebook gratuit : ")}
+          <a href="/ebook" className="underline underline-offset-4">
+            {t(EBOOK_TITLE)}
+          </a>
+        </p>
       </main>
 
       <Footer />
