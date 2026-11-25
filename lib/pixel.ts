@@ -80,4 +80,4 @@ export function track(event: "PageView" | "Lead" | "InitiateCheckout", params: R
 export const trackCheckout = () => track("InitiateCheckout", { value: PRICE, currency: "CAD" });
 
 /** Laisse à Meta le temps de partir avant qu'on quitte la page. */
-export const pixelDelay = () => (PIXEL_ID ? new Promise((r) => setTimeout(r, 400)) : Promise.resolve());
+export const pixelDelay = () => (PIXEL_ID ? new Promise((r) => setTimeout(r, 300)) : Promise.resolve());
