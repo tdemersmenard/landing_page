@@ -18,11 +18,7 @@ const commun = {
   fbclid: suivi,
 };
 
-const schema = z.discriminatedUnion("type", [
-  z.object({ type: z.literal("achat_commence"), telephone, ...commun }),
-  // Le formulaire de l'ebook ne demande pas de téléphone.
-  z.object({ type: z.literal("ebook"), telephone: z.literal("").catch(""), ...commun }),
-]);
+const schema = z.object({ type: z.enum(["achat_commence", "ebook"]), telephone, ...commun });
 
 export async function POST(request: Request) {
   const parsed = schema.safeParse(await request.json().catch(() => null));

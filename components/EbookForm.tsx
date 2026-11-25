@@ -1,36 +1,32 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
+import { CHAMPS } from "@/lib/lead";
+import { track } from "@/lib/pixel";
 import { useLeadForm } from "@/lib/useLeadForm";
 
 export function EbookForm() {
-  const [state, setState] = useState<"form" | "sent" | "failed">("form");
-  const message = useRef<HTMLParagraphElement>(null);
-  const { onSubmit, pending, field } = useLeadForm("ebook", ["prenom", "email"], (r) => {
-    setState(r.status === "ok" ? "sent" : "failed");
+  const router = useRouter();
+  const [state, setState] = useState<"form" | "leaving" | "failed">("form");
+  const { onSubmit, pending, field } = useLeadForm("ebook", CHAMPS, (r) => {
+    if (r.status !== "ok") return setState("failed");
+    setState("leaving");
+    track("Lead", { content_name: "ebook" });
+    router.push("/ebook/merci"); // Navigation interne : le pixel a le temps de partir.
   });
-
-  // Le bouton disparaît : on déplace le focus sur le message pour les lecteurs d'écran.
-  useEffect(() => {
-    if (state === "sent") message.current?.focus();
-  }, [state]);
-
-  if (state === "sent")
-    return (
-      <p ref={message} tabIndex={-1} role="status" className="text-xl leading-relaxed font-semibold">
-        C&apos;est envoyé. Regarde tes courriels dans les prochaines minutes. Vérifie aussi l&apos;onglet Promotions.
-      </p>
-    );
+  const busy = pending || state === "leaving";
 
   return (
-    <form noValidate onSubmit={onSubmit} className="grid gap-4">
-      <Field label="Ton prénom" autoComplete="given-name" {...field("prenom")} />
-      <Field label="Ton courriel" type="email" autoComplete="email" {...field("email")} />
+    <form noValidate onSubmit={onSubmit} className="grid gap-3">
+      <Field label="Prénom" autoComplete="given-name" {...field("prenom")} />
+      <Field label="Téléphone" type="tel" autoComplete="tel" {...field("telephone")} />
+      <Field label="Courriel" type="email" autoComplete="email" {...field("email")} />
       <Consent />
-      <button type="submit" disabled={pending} className="btn">
-        {pending ? "Un instant…" : "Envoie-moi l'ebook"}
+      <button type="submit" disabled={busy} className="btn">
+        {busy ? "Un instant…" : "Envoie-moi l'ebook gratuit"}
       </button>
       <p role="alert" className="font-semibold text-erreur empty:hidden">
         {state === "failed" && !pending && "Ça n'a pas marché. Vérifie ta connexion et réessaie."}

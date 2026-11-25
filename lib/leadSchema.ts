@@ -3,7 +3,7 @@ import { CHAMPS, isValid, MESSAGES, normalizePhone, type Champ, type Erreurs } f
 
 const champ = (c: Champ) => z.string({ error: MESSAGES[c] }).refine(isValid[c], { error: MESSAGES[c] });
 
-/** Champs communs aux routes /api/lead et /api/checkout. */
+/** Champs de la route /api/lead. */
 export const contact = {
   prenom: champ("prenom").transform((s) => s.trim().slice(0, 100)),
   email: champ("email").transform((s) => s.trim()),
