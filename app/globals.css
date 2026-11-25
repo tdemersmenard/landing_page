@@ -137,6 +137,13 @@
   .btn:hover:not(:disabled) {
     background: #23613d;
   }
+  .btn-achat {
+    background: #ff6a13;
+    color: #000;
+  }
+  .btn-achat:hover:not(:disabled) {
+    background: #ff8a45;
+  }
   .btn:disabled {
     background: #4a4a4a;
     color: #e2e2e2;
