@@ -1,4 +1,4 @@
-import { OFFER_END_TEXT, PRICE } from "@/lib/config";
+import { OFFER_END_TEXT, PRICE, PRICE_COACHING_TXT } from "@/lib/config";
 
 export const modules = [
   ["Choisis ton service", "Une grille selon ton coin, ton budget et la demande, avec une calculatrice de rentabilité."],
@@ -41,5 +41,13 @@ export const faq = [
   [
     `Pourquoi juste ${PRICE} $ ?`,
     `C'est le prix Black Friday, pour un programme préenregistré, sans appels de coaching. L'offre finit le ${OFFER_END_TEXT}.`,
+  ],
+];
+
+/** Question de plus sur /ebook/merci. */
+export const faqMerci = [
+  [
+    "Est-ce que le coaching est inclus ?",
+    `Non. À ${PRICE} $, t'as les 8 modules préenregistrés, sans appels de coaching. Le programme avec coaching 1-on-1 est une offre séparée, à ${PRICE_COACHING_TXT}.`,
   ],
 ];

@@ -1,0 +1,56 @@
+"use client";
+
+import { useState } from "react";
+import { goToSkool, offerEnded, SkoolEmail, useCheckout } from "@/components/Checkout";
+import { Ancrage, Countdown, CTA, DuringOffer } from "@/components/offer";
+import { useSavedLead } from "@/lib/savedLead";
+import { sendLead } from "@/lib/sendLead";
+
+/** Infos déjà données sur /ebook : on va direct sur Skool. Sinon, la modale d'achat. */
+export function MerciButton({ className = "" }: { className?: string }) {
+  const lead = useSavedLead();
+  const openCheckout = useCheckout();
+  const [busy, setBusy] = useState(false);
+
+  async function onClick() {
+    if (busy || offerEnded()) return;
+    if (!lead) return openCheckout();
+    setBusy(true);
+    // Le lead ne retient jamais une vente plus de 3,5 s.
+    const r = await Promise.race([
+      sendLead({ type: "achat_commence", ...lead }),
+      new Promise<null>((done) => setTimeout(() => done(null), 3500)),
+    ]);
+    if (r?.status === "invalid") {
+      setBusy(false);
+      return openCheckout();
+    }
+    await goToSkool();
+    setTimeout(() => setBusy(false), 4000); // Retour arrière.
+  }
+
+  return (
+    <DuringOffer>
+      <div className={className}>
+        <button type="button" onClick={onClick} disabled={busy} className="btn btn-achat w-full">
+          {busy ? "Un instant…" : CTA}
+        </button>
+        <SkoolEmail email={lead?.email} className="mt-3 text-doux" />
+      </div>
+    </DuringOffer>
+  );
+}
+
+export function MerciOffer() {
+  return (
+    <DuringOffer>
+      <div className="mt-4">
+        <Ancrage etiquette note taille="text-[min(26vw,8rem)]" />
+        <div className="mt-3 text-sm">
+          <Countdown />
+        </div>
+        <MerciButton className="mt-3" />
+      </div>
+    </DuringOffer>
+  );
+}

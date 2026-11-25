@@ -11,6 +11,7 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://landingpage
 export const PRICE = 87;
 /** Programme avec appels 1-on-1. Doit être un prix réellement demandé. */
 export const PRICE_COACHING = 1500; // PRIX_COACHING
+export const PRICE_COACHING_TXT = `${String(PRICE_COACHING).replace(/(\d)(?=\d{3}$)/, "$1 ")} $`;
 
 /** LIEN_SKOOL_ACHAT. Pour l'instant : la salle de classe (le lien direct vers l'achat est à fournir). */
 export const SKOOL_URL = process.env.NEXT_PUBLIC_SKOOL_URL || "https://www.skool.com/tdm-community-1616/classroom";

@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { useCheckout } from "@/components/Checkout";
 import { useRemaining } from "@/lib/clock";
-import { PRICE, PRICE_COACHING, SKOOL_PRICE_USD } from "@/lib/config";
+import { PRICE, PRICE_COACHING_TXT, SKOOL_PRICE_USD } from "@/lib/config";
 import { money, t } from "@/lib/text";
 
 export const CTA = `J'embarque à ${money(PRICE)}`;
-const coaching = t(`${PRICE_COACHING.toLocaleString("en-CA").replace(",", " ")} $`);
+const coaching = t(PRICE_COACHING_TXT);
 
 export function Countdown() {
   const s = useRemaining();
