@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
-import { CONTACT_EMAIL } from "@/lib/config";
+import { BRAND, CONTACT_EMAIL } from "@/lib/config";
 
-export const metadata: Metadata = { title: "Conditions : Système TDM" };
+export const metadata: Metadata = { title: `Conditions : ${BRAND}` };
 
 export default function Conditions() {
   return (

@@ -1,3 +1,5 @@
+import { OFFER_END_TEXT, PRICE } from "@/lib/config";
+
 export const modules = [
   ["Choisis ton service", "Une grille selon ton coin, ton budget et la demande, avec une calculatrice de rentabilité."],
   ["Pars avec presque rien", "Quoi acheter, où le trouver usagé et comment le payer avec ton premier client."],
@@ -16,7 +18,7 @@ export const included = [
   ["scripts", "Les 25 scripts qui signent", "Quoi dire à la porte, au téléphone et par texto."],
   ["ia", "Les automatisations IA", "Prêtes à installer, pour perdre moins de temps."],
   ["skool", "La communauté Skool", "Du monde qui veut lancer sa business, comme toi."],
-  ["garantie", "La garantie 30 jours", "Fais les modules 1 à 5 et contacte au moins 100 clients potentiels en 30 jours. Pas de client signé ? Je te rembourse tes 87 $ au complet."],
+  ["garantie", "La garantie 30 jours", `Fais les modules 1 à 5 et contacte au moins 100 clients potentiels en 30 jours. Pas de client signé ? Je te rembourse tes ${PRICE} $ au complet.`],
 ];
 
 export const faq = [
@@ -34,10 +36,10 @@ export const faq = [
   ],
   [
     "Est-ce que c'est garanti que je vais faire de l'argent ?",
-    "Non. Personne peut te garantir ça. Ça dépend de ton travail, de ton coin, de ton service et de la demande. Ce que je garantis, c'est le remboursement de tes 87 $ si tu remplis les conditions de la garantie sans signer ton premier client.",
+    `Non. Personne peut te garantir ça. Ça dépend de ton travail, de ton coin, de ton service et de la demande. Ce que je garantis, c'est le remboursement de tes ${PRICE} $ si tu remplis les conditions de la garantie sans signer ton premier client.`,
   ],
   [
-    "Pourquoi juste 87 $ ?",
-    "C'est le prix Black Friday, pour un programme préenregistré, sans appels de coaching. L'offre finit le lundi 30 novembre 2026 à 23 h 59, heure de l'Est.",
+    `Pourquoi juste ${PRICE} $ ?`,
+    `C'est le prix Black Friday, pour un programme préenregistré, sans appels de coaching. L'offre finit le ${OFFER_END_TEXT}.`,
   ],
 ];

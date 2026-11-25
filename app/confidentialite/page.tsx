@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
-import { CONTACT_EMAIL } from "@/lib/config";
+import { BRAND, CONTACT_EMAIL } from "@/lib/config";
 
-export const metadata: Metadata = { title: "Politique de confidentialité : Système TDM" };
+export const metadata: Metadata = { title: `Politique de confidentialité : ${BRAND}` };
 
 export default function Confidentialite() {
   return (
@@ -11,7 +11,7 @@ export default function Confidentialite() {
       sections={[
         [
           "Qui est responsable",
-          `Système TDM est exploitée par [nom légal de l'entreprise]. La personne responsable de la protection des renseignements personnels est [nom et titre]. Pour la joindre : ${CONTACT_EMAIL}.`,
+          `${BRAND} est exploitée par [nom légal de l'entreprise]. La personne responsable de la protection des renseignements personnels est [nom et titre]. Pour la joindre : ${CONTACT_EMAIL}.`,
         ],
         [
           "Ce qu'on recueille",

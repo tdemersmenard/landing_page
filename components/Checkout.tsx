@@ -5,7 +5,7 @@ import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
 import { captureAttribution } from "@/lib/attribution";
 import { useRemaining } from "@/lib/clock";
-import { OFFER_END, PRICE, SKOOL_COURSE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
+import { BRAND, OFFER_END, PRICE, SKOOL_COURSE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
 import { CHAMPS } from "@/lib/lead";
 import { money, t } from "@/lib/text";
 import { useLeadForm } from "@/lib/useLeadForm";
@@ -80,7 +80,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
             </button>
           </div>
           <p className="mt-2 flex items-center justify-between gap-4 border-y-2 border-trait py-3 font-semibold">
-            <span>{t("Système TDM, les 8 modules :")}</span>{" "}
+            <span>{t(`${BRAND}, les 8 modules :`)}</span>{" "}
             <span className="chiffre text-5xl">{money(PRICE)}</span>
           </p>
 

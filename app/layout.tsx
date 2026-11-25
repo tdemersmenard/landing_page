@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { CheckoutProvider } from "@/components/Checkout";
+import { BRAND, OFFER_END_TEXT, PRICE } from "@/lib/config";
 import { t } from "@/lib/text";
 import "./globals.css";
 
@@ -8,9 +9,9 @@ const archivo = Archivo({ subsets: ["latin"], weight: ["800", "900"], variable: 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: t("Système TDM : les 8 modules à 87 $ (Black Friday)"),
+  title: t(`${BRAND} : les 8 modules à ${PRICE} $ (Black Friday)`),
   description: t(
-    "Lance ta business de service avec le programme Système TDM : 8 modules vidéo à 87 $ CAD jusqu'au 30 novembre 2026.",
+    `Lance ta business de service avec le programme ${BRAND} : 8 modules vidéo à ${PRICE} $ CAD jusqu'au ${OFFER_END_TEXT}.`,
   ),
 };
 
