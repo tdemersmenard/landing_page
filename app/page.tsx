@@ -4,6 +4,7 @@ import { EbookForm } from "@/components/EbookForm";
 import { HeroMedia } from "@/components/HeroMedia";
 import { Footer } from "@/components/Footer";
 import { Ancrage, BuyButton, Countdown, CTA as cta, StickyBar } from "@/components/offer";
+import { Proofs } from "@/components/Proofs";
 import { BRAND, SKOOL_MEMBERS } from "@/lib/config";
 import { faq, included, modules } from "@/lib/content";
 import { t } from "@/lib/text";
@@ -136,6 +137,8 @@ export default function Page() {
             <p className="text-sm text-doux">{"C'est mon résultat. Le tien dépend de ton travail, de ton coin et de ton service."}</p>
           </div>
         </section>
+
+        <Proofs />
 
         <section className="section wrap">
           <h2 className="titre">Ça se passe en 3 étapes</h2>
