@@ -1,16 +1,39 @@
 "use client";
 
-import { createContext, type MouseEvent, useContext, useEffect, useRef, useState } from "react";
+import { createContext, type MouseEvent, useContext, useRef, useState } from "react";
 import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
-import { captureAttribution } from "@/lib/attribution";
 import { useRemaining } from "@/lib/clock";
-import { BRAND, OFFER_END, PRICE, SKOOL_COURSE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
-import { CHAMPS } from "@/lib/lead";
+import { BRAND, OFFER_END, PRICE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
+import { CHAMPS, isValid } from "@/lib/lead";
+import { pixelDelay, trackCheckout } from "@/lib/pixel";
 import { money, t } from "@/lib/text";
 import { useLeadForm } from "@/lib/useLeadForm";
 
 const END = new Date(OFFER_END).getTime();
+export const offerEnded = () => Date.now() >= END;
+
+/** Le seul chemin vers Skool : InitiateCheckout, puis la redirection. */
+export async function goToSkool() {
+  trackCheckout();
+  await pixelDelay();
+  window.location.assign(SKOOL_URL);
+}
+
+export function SkoolEmail({ email, className = "" }: { email?: string; className?: string }) {
+  return (
+    <p className={`text-[0.95rem] leading-snug ${className}`}>
+      {"Sur Skool, utilise le même courriel"}
+      {email && (
+        <>
+          {" ("}
+          <strong className="break-all">{email}</strong>)
+        </>
+      )}
+      {t(" : c'est comme ça qu'on retrouve ton achat.")}
+    </p>
+  );
+}
 
 const CheckoutContext = createContext<() => void>(() => {});
 export const useCheckout = () => useContext(CheckoutContext);
@@ -21,28 +44,24 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   const pressedOutside = useRef(false);
   const ended = useRemaining() === 0;
   const [message, setMessage] = useState("");
-  const [ready, setReady] = useState(false); // Formulaire envoyé : on montre les étapes Skool.
-  const skoolLink = useRef<HTMLAnchorElement>(null);
+  const [email, setEmail] = useState("");
+  const [leaving, setLeaving] = useState(false);
 
-  useEffect(captureAttribution, []);
-  useEffect(() => {
-    if (ready) skoolLink.current?.focus();
-  }, [ready]);
-
-  const { onSubmit, pending, field } = useLeadForm("achat_commence", CHAMPS, () => {
+  const { onSubmit, pending, field } = useLeadForm("achat_commence", CHAMPS, async () => {
     // Fenêtre fermée pendant l'envoi : la personne a changé d'idée, on ne la redirige pas.
     if (!dialog.current?.open) return;
-    setMessage("");
-    // Étapes Skool, même si le lead n'est pas parti : rien ne bloque une vente.
-    if (Date.now() >= END) return setMessage("L'offre Black Friday est terminée.");
-    setReady(true);
+    if (offerEnded()) return setMessage("L'offre Black Friday est terminée.");
+    // On redirige même si le lead n'est pas parti : rien ne bloque une vente.
+    setLeaving(true);
+    await goToSkool();
+    setTimeout(() => setLeaving(false), 4000); // Retour arrière, ou navigation bloquée.
   });
 
   // Synchrone dans le clic : iOS n'ouvre le clavier que dans ce cas.
   function open() {
     setMessage("");
     if (!dialog.current?.open) dialog.current?.showModal();
-    (first.current ?? skoolLink.current)?.focus();
+    first.current?.focus();
   }
 
   const isOutside = (e: MouseEvent<HTMLDialogElement>) => {
@@ -51,6 +70,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
     return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
   };
 
+  const busy = pending || leaving;
   return (
     <CheckoutContext value={open}>
       {children}
@@ -80,50 +100,33 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
             </button>
           </div>
           <p className="mt-2 flex items-center justify-between gap-4 border-y-2 border-trait py-3 font-semibold">
-            <span>{t(`${BRAND}, les 8 modules :`)}</span>{" "}
+            <span>
+              {t(`${BRAND}, les 8 modules`)}
+              <span className="block text-sm font-normal text-doux">{t(`CAD, facturé ${SKOOL_PRICE_USD} par Skool`)}</span>
+            </span>
             <span className="chiffre text-5xl">{money(PRICE)}</span>
           </p>
-
-          {ready ? (
-            <div className="mt-4">
-              <h3 className="text-xl font-extrabold">Il te reste 3 étapes sur Skool</h3>
-              <ol className="mt-3 list-decimal space-y-3 pl-6 text-lg leading-snug">
-                <li>Rejoins la communauté. C&apos;est gratuit.</li>
-                <li>
-                  Va dans la salle de classe et choisis <strong>{SKOOL_COURSE}</strong>.
-                </li>
-                <li>
-                  {"Clique sur « Débloquer » et paie "}
-                  <strong>{t(SKOOL_PRICE_USD)}</strong>
-                  {". Ton accès s'ouvre tout seul."}
-                </li>
-              </ol>
-              <p className="mt-4 text-[0.95rem]">Utilise le même courriel que dans le formulaire.</p>
-              {ended ? (
-                <p className="mt-5 font-bold">{"L'offre Black Friday est terminée."}</p>
-              ) : (
-                <a ref={skoolLink} href={SKOOL_URL} className="btn mt-5 w-full">
-                  Ouvrir Skool
-                </a>
-              )}
-            </div>
-          ) : (
-          <form noValidate onSubmit={onSubmit} className="mt-4 grid gap-4">
+          <form
+            noValidate
+            onSubmit={onSubmit}
+            onInput={(e) => {
+              const i = e.target as HTMLInputElement;
+              if (i.name === "email") setEmail(i.value.trim());
+            }}
+            className="mt-4 grid gap-4"
+          >
             <Field ref={first} label="Prénom" autoComplete="given-name" {...field("prenom")} />
             <Field label="Téléphone" type="tel" autoComplete="tel" {...field("telephone")} />
             <Field label="Courriel" type="email" autoComplete="email" {...field("email")} />
             <Consent />
-            <p className="text-[0.95rem] leading-snug">
-              {t(`Le paiement se fait sur Skool, en dollars américains : ${SKOOL_PRICE_USD}. Utilise le même courriel.`)}
-            </p>
-            <button type="submit" disabled={pending || ended} className="btn">
-              {ended ? "Offre terminée" : pending ? "Un instant…" : "Continuer vers le paiement"}
+            <SkoolEmail email={isValid.email(email) ? email : undefined} />
+            <button type="submit" disabled={busy || ended} className="btn btn-achat">
+              {ended ? "Offre terminée" : busy ? "Un instant…" : "Continuer vers le paiement"}
             </button>
             <p role="alert" className="font-semibold text-erreur empty:hidden">
               {message}
             </p>
           </form>
-          )}
         </div>
       </dialog>
     </CheckoutContext>

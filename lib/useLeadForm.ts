@@ -1,12 +1,13 @@
 import { type FormEvent, useState } from "react";
 import { type Champ, type Erreurs, type LeadType, validate } from "@/lib/lead";
-import { sendLead, type SendResult } from "@/lib/sendLead";
+import { saveLead } from "@/lib/savedLead";
+import { sendLead, type SendResult, type Values } from "@/lib/sendLead";
 
 /** Validation, messages d'erreur et envoi, communs au formulaire d'achat et à celui de l'ebook. */
 export function useLeadForm(
   type: LeadType,
   champs: readonly Champ[],
-  onSent: (r: Exclude<SendResult, { status: "invalid" }>) => void,
+  onSent: (r: Exclude<SendResult, { status: "invalid" }>, values: Values) => void,
 ) {
   const [erreurs, setErreurs] = useState<Erreurs>({});
   const [pending, setPending] = useState(false);
@@ -31,7 +32,10 @@ export function useLeadForm(
     const result = await sendLead({ type, ...values });
     setPending(false);
     if (result.status === "invalid") show(result.erreurs);
-    else onSent(result);
+    else {
+      saveLead(values);
+      onSent(result, values);
+    }
   }
 
   const field = (c: Champ) => ({

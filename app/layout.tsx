@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Inter } from "next/font/google";
-import { CheckoutProvider } from "@/components/Checkout";
+import { Tracking } from "@/components/Tracking";
 import { BRAND, OFFER_END_TEXT, PRICE } from "@/lib/config";
 import { t } from "@/lib/text";
 import "./globals.css";
@@ -21,7 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr-CA" className={`${archivo.variable} ${inter.variable}`}>
       <body>
-        <CheckoutProvider>{children}</CheckoutProvider>
+        {children}
+        <Tracking />
       </body>
     </html>
   );

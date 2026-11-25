@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { Contact } from "@/components/Contact";
+import { CheckoutProvider } from "@/components/Checkout";
 import { EbookForm } from "@/components/EbookForm";
+import { Footer } from "@/components/Footer";
 import { BuyButton, Countdown, StickyBar } from "@/components/offer";
 import { Mur, Videos } from "@/components/Proofs";
 import { BRAND, PRICE, SKOOL_MEMBERS, SKOOL_PRICE_USD } from "@/lib/config";
@@ -45,7 +46,7 @@ const Cta = () => (
 
 export default function Page() {
   return (
-    <>
+    <CheckoutProvider>
       <div className="border-b border-trait bg-nuit px-4 py-2 text-center text-[0.95rem]">
         <Countdown />
       </div>
@@ -235,32 +236,9 @@ export default function Page() {
         </section>
       </main>
 
-      <footer className="border-t border-trait pt-12 pb-40 text-doux">
-        <div className="wrap">
-          <p className="max-w-3xl">
-            Les revenus ne sont pas garantis. Les résultats mentionnés sont ceux du fondateur. Les tiens vont dépendre de
-            ton travail, de ton coin, de ton service et de la demande.
-          </p>
-          <nav aria-label="Liens légaux" className="mt-8 flex flex-col gap-x-8 gap-y-4 sm:flex-row sm:flex-wrap">
-            {[
-              ["/remboursement", "Politique de remboursement"],
-              ["/confidentialite", "Politique de confidentialité"],
-              ["/conditions", "Conditions"],
-            ].map(([href, label]) => (
-              <a key={href} href={href} className="underline underline-offset-4">
-                {label}
-              </a>
-            ))}
-          </nav>
-          <p className="mt-6">
-            {t("Contact : ")}
-            <Contact />
-          </p>
-          <p className="mt-8">© 2026 {BRAND}</p>
-        </div>
-      </footer>
+      <Footer />
 
       <StickyBar heroId="hero" />
-    </>
+    </CheckoutProvider>
   );
 }
