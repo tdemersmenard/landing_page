@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { CheckoutProvider } from "@/components/Checkout";
-import { HeroMedia } from "@/components/HeroMedia";
 import { Footer } from "@/components/Footer";
-import { Ancrage, BuyButton, Countdown, CTA as cta, StickyBar } from "@/components/offer";
+import { Ancrage, BuyButton, Countdown, CTA as cta, DuringOffer, StickyBar } from "@/components/offer";
 import { Proofs } from "@/components/Proofs";
+import { Vsl } from "@/components/Vsl";
 import { BRAND, EBOOK_TITLE, OFFER_END_TEXT, PRICE, SKOOL_MEMBERS } from "@/lib/config";
 import { faq, included, modules } from "@/lib/content";
 import { pageMeta } from "@/lib/meta";
@@ -26,14 +26,28 @@ const etapes = [
   ["Va chercher ton premier client", "Tu suis les étapes et tu contactes du monde."],
 ];
 
-const Profil = () => (
-  <p className="flex items-center gap-3 text-left leading-tight">
-    <Image src="/thomas-visage.jpg" alt="" width={96} height={96} className="size-13 rounded-full" />
+const Profil = ({ className = "" }: { className?: string }) => (
+  <p className={`flex items-center gap-3 text-left leading-tight ${className}`}>
+    <Image
+      src="/thomas-visage.jpg"
+      alt=""
+      width={96}
+      height={96}
+      className="size-13 rounded-full ring-2 ring-accent ring-offset-2 ring-offset-nuit"
+    />
     <span>
       <span className="block font-bold">Thomas</span>
       <span className="text-sm font-semibold text-accent">{t("Plus de 54 000 j'aime sur TikTok")}</span>
     </span>
   </p>
+);
+
+const Entete = ({ etiquette, titre, sous }: { etiquette: string; titre: string; sous?: string }) => (
+  <div className="text-center">
+    <p className="etiquette-verte">{etiquette}</p>
+    <h2 className="titre mx-auto mt-4 max-w-3xl">{t(titre)}</h2>
+    {sous && <p className="mt-3 text-doux">{t(sous)}</p>}
+  </div>
 );
 
 const Cta = () => (
@@ -45,184 +59,208 @@ const Cta = () => (
 export default function Page() {
   return (
     <CheckoutProvider>
-      <div className="border-b border-trait bg-nuit px-4 py-2 text-center text-[0.95rem]">
-        <Countdown />
-      </div>
+      <div className="keo">
+        <div className="border-b border-trait bg-[#0f2418] px-4 py-2 text-center text-[0.95rem]">
+          <Countdown />
+        </div>
 
-      <main>
-        <section id="hero">
-          <div className="wrap grid items-center gap-10 pt-6 pb-12 lg:grid-cols-[1.25fr_1fr] lg:gap-16 lg:py-16">
-            <div>
-              <Profil />
-              <h1 className="large mt-5 text-[clamp(2rem,5vw,3.7rem)] leading-[1.08]">
+        <main>
+          <section id="hero" className="keo-haut">
+            <div className="wrap pt-8 pb-12 text-center lg:pt-12 lg:pb-16">
+              <Profil className="mx-auto w-fit" />
+              <DuringOffer>
+                <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-trait bg-panneau px-3 py-1 text-xs font-bold">
+                  <span aria-hidden="true" className="size-2 rounded-full bg-accent" />
+                  Black Friday
+                  <span className="text-doux">{BRAND}</span>
+                </p>
+              </DuringOffer>
+              <h1 className="large mx-auto mt-4 max-w-3xl text-[clamp(2rem,5vw,3.4rem)] leading-[1.08]">
                 {t("Lance ta business de service et signe ton ")}
                 premier client en 30 jours
               </h1>
-              <p className="mt-3 text-lg font-semibold">
-                {"Sinon, t'es remboursé. "}
-                <a href="#garantie" className="font-medium underline underline-offset-4">
-                  Conditions
-                </a>
-              </p>
-              <div className="mt-5">
-                <Ancrage etiquette note taille="text-[min(30vw,9rem)]" />
+              <p className="mt-3 text-doux">Regarde la vidéo pour voir comment.</p>
+              <a href="#garantie" className="etiquette-verte mt-4">
+                <span aria-hidden="true">✓</span>
+                {"Sinon, t'es remboursé (conditions)"}
+              </a>
+
+              <div className="mx-auto mt-8 grid max-w-5xl items-start gap-5 text-left lg:grid-cols-[minmax(0,22rem)_1fr] lg:justify-center lg:gap-6">
+                <Vsl />
+
+                <div className="carte p-5 sm:p-7">
+                  <h2 className="large text-center text-3xl">{BRAND}</h2>
+                  <p className="mt-1 text-center text-[0.95rem] text-doux">
+                    Tout ce que ça te prend pour lancer ta business de service
+                  </p>
+                  <p className="mt-4 text-center">
+                    <span className="etiquette-verte">Ce qui est inclus</span>
+                  </p>
+                  <ul className="mt-4 divide-y divide-trait">
+                    {included.map(([id, titre]) => (
+                      <li key={id} className="flex items-center justify-between gap-3 py-2.5 text-[0.95rem] leading-snug font-semibold">
+                        {titre}
+                        <span className="inclus">Inclus</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 border-t border-trait pt-5">
+                    <Ancrage etiquette note taille="text-[min(28vw,7.5rem)]" />
+                  </div>
+                  <BuyButton className="mt-6 w-full">{cta}</BuyButton>
+                </div>
               </div>
-              <BuyButton className="mt-5 w-full">{cta}</BuyButton>
+
+              <dl className="mx-auto mt-6 grid max-w-3xl grid-cols-2 gap-3 sm:gap-5">
+                {chiffres.map(([n, d]) => (
+                  <div key={n} className="carte px-3 py-4 text-center sm:px-5">
+                    <dt className="large text-xl leading-tight text-accent sm:text-3xl">{t(n)}</dt>
+                    <dd className="mt-1 text-xs leading-snug text-doux sm:text-sm">{d}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-            <HeroMedia />
-          </div>
-        </section>
+          </section>
 
-        <section aria-label="En chiffres" className="border-y border-trait bg-panneau">
-          <dl className="wrap grid grid-cols-2 gap-5 py-6 lg:py-8">
-            {chiffres.map(([n, d]) => (
-              <div key={n}>
-                <dt className="large text-2xl leading-tight lg:text-4xl">{t(n)}</dt>
-                <dd className="mt-1 text-sm leading-snug text-doux lg:text-base">{d}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
-
-        <section className="jour">
-          <div className="section wrap">
-          <h2 className="titre">Ce que tu débloques</h2>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
-            {included.map(([id, titre, texte]) => (
-              <li key={id} id={id === "garantie" ? "garantie" : undefined} className="carte flex overflow-hidden sm:block">
-                <Image
-                  src={`/inclus/${id}.webp`}
-                  alt=""
-                  width={900}
-                  height={600}
-                  sizes="(min-width: 64rem) 23rem, 45vw"
-                  className="w-28 shrink-0 object-cover sm:aspect-[3/2] sm:w-full"
-                />
-                <div className="p-4 sm:p-6">
-                  <h3 className="sous text-lg">{titre}</h3>
-                  <p className="mt-1 text-[0.95rem] leading-snug text-doux">{t(texte)}</p>
-                  {id === "garantie" && (
-                    <a href="/remboursement" className="mt-1 inline-block text-sm underline underline-offset-4">
-                      Conditions
-                    </a>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-          <details className="carte mt-5 px-5">
-            <summary className="flex items-center justify-between gap-4 py-4 font-bold text-accent">
-              Voir les 8 modules
-              <span aria-hidden="true" className="plus text-2xl leading-none">
-                +
-              </span>
-            </summary>
-            <ol className="grid gap-x-10 gap-y-4 pb-6 md:grid-cols-2">
-              {modules.map(([titre, texte], i) => (
-                <li key={titre}>
-                  <strong>{`${i + 1}. ${titre}`}</strong>
-                  <p className="text-[0.95rem] leading-snug text-doux">{t(texte)}</p>
-                </li>
-              ))}
-            </ol>
-          </details>
-          <p className="mt-4 text-sm text-doux">{"Images d'ambiance. Préenregistré, sans appels de coaching."}</p>
-          <Cta />
-          </div>
-        </section>
-
-        <section className="section wrap !max-w-3xl">
-          <Profil />
-          <h2 className="titre mt-5">Pourquoi je fais ça</h2>
-          <div className="mt-5 space-y-4 text-left">
-            <p>
-              {"J'ai 18 ans. Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. Fait que j'ai lancé une business bien physique : l'entretien de piscines."}
-            </p>
-            <p className="text-lg font-bold">{t("Près de 100 000 $ de ventes en un seul été, avant dépenses.")}</p>
-            <p>{"Aujourd'hui, j'aide ceux qui veulent lancer leur business de service à leur tour."}</p>
-            <p className="text-sm text-doux">{"C'est mon résultat. Le tien dépend de ton travail, de ton coin et de ton service."}</p>
-          </div>
-        </section>
-
-        <Proofs />
-
-        <section className="section wrap">
-          <h2 className="titre">Ça se passe en 3 étapes</h2>
-          <ol className="mt-8 grid gap-4 md:grid-cols-3">
-            {etapes.map(([titre, texte], i) => (
-              <li key={titre} className="carte flex items-center gap-5 p-5 md:block md:p-7">
-                <span aria-hidden="true" className="large w-9 shrink-0 text-5xl leading-none text-accent">
-                  {i + 1}
-                </span>
-                <div className="md:mt-4">
-                  <h3 className="sous text-lg">{titre}</h3>
-                  <p className="mt-1 text-[0.95rem] leading-snug text-doux">{texte}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="wrap pb-[clamp(3rem,6vw,5rem)]">
-          <div className="jour mx-auto max-w-2xl rounded-2xl p-6 sm:p-10">
-            <h2 className="titre">{`${BRAND}, au complet`}</h2>
-            <ul className="mt-5 divide-y divide-trait border-y border-trait">
-              {included.map(([id, x]) => (
-                <li key={id} className="flex items-center gap-3 py-3 text-lg leading-snug font-semibold">
-                  <span aria-hidden="true" className="text-accent">
-                    ✓
-                  </span>
-                  {x}
+          <section className="section wrap">
+            <Entete etiquette="Inclus" titre={`Ce que tu débloques dans ${BRAND}`} sous="Tout s'ouvre dès ton inscription." />
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {included.map(([id, titre, texte]) => (
+                <li key={id} id={id === "garantie" ? "garantie" : undefined} className="carte overflow-hidden">
+                  <Image
+                    src={`/inclus/${id}.webp`}
+                    alt=""
+                    width={900}
+                    height={600}
+                    sizes="(min-width: 64rem) 23rem, (min-width: 40rem) 45vw, 92vw"
+                    className="aspect-[16/9] w-full object-cover"
+                  />
+                  <div className="p-5 sm:p-6">
+                    <span className="etiquette-verte !px-2.5 !py-0.5 !text-xs">Inclus</span>
+                    <h3 className="sous mt-3 text-lg">{titre}</h3>
+                    <p className="mt-1 text-[0.95rem] leading-snug text-doux">{t(texte)}</p>
+                    {id === "garantie" && (
+                      <a href="/remboursement" className="mt-1 inline-block text-sm underline underline-offset-4">
+                        Conditions
+                      </a>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
-            <div className="mt-6">
-              <Ancrage note taille="text-[min(30vw,9rem)]" />
-            </div>
-            <BuyButton className="mt-7 w-full">{cta}</BuyButton>
-          </div>
-        </section>
+            <details className="carte mt-5 px-5 sm:px-6">
+              <summary className="flex items-center justify-between gap-4 py-4 font-bold">
+                Voir les 8 modules
+                <span aria-hidden="true" className="plus text-2xl leading-none text-accent">
+                  +
+                </span>
+              </summary>
+              <ol className="grid gap-x-10 gap-y-4 pb-6 md:grid-cols-2">
+                {modules.map(([titre, texte], i) => (
+                  <li key={titre}>
+                    <strong>{`${i + 1}. ${titre}`}</strong>
+                    <p className="text-[0.95rem] leading-snug text-doux">{t(texte)}</p>
+                  </li>
+                ))}
+              </ol>
+            </details>
+            <p className="mt-4 text-center text-sm text-doux">{"Images d'ambiance. Préenregistré, sans appels de coaching."}</p>
+            <Cta />
+          </section>
 
-        <section className="jour">
-          <div className="section wrap !max-w-3xl">
-          <h2 className="titre">Tes questions</h2>
-          <div className="mt-8 border-b border-trait">
-            {faq.map(([q, a]) => (
-              <details key={q} className="border-t border-trait">
-                <summary className="flex items-center justify-between gap-4 py-5 text-lg font-bold">
-                  {t(q)}
-                  <span aria-hidden="true" className="plus text-3xl leading-none">
-                    +
-                  </span>
-                </summary>
-                <p className="pb-6 text-doux">{t(a)}</p>
-              </details>
-            ))}
-          </div>
-          </div>
-        </section>
-
-        <section>
-          <div className="wrap py-16 text-center lg:py-24">
-            <h2 className="titre mx-auto max-w-2xl">{"L'été prochain, t'as un boss ou t'as des clients ?"}</h2>
-            <div className="mt-6">
-              <Ancrage note taille="text-[min(30vw,9rem)]" />
+          <section className="section wrap !max-w-2xl">
+            <Entete etiquette="Mon histoire" titre="Pourquoi je fais ça" />
+            <Profil className="mx-auto mt-8 w-fit" />
+            <div className="mt-6 space-y-4 text-doux">
+              <p>
+                {"J'ai 18 ans. Pendant des années, j'ai essayé de faire de l'argent en ligne, sans grand succès. Fait que j'ai lancé une business bien physique : l'entretien de piscines."}
+              </p>
+              <p className="text-lg font-bold text-clair">{t("Près de 100 000 $ de ventes en un seul été, avant dépenses.")}</p>
+              <p>{"Aujourd'hui, j'aide ceux qui veulent lancer leur business de service à leur tour."}</p>
+              <p className="text-sm">{"C'est mon résultat. Le tien dépend de ton travail, de ton coin et de ton service."}</p>
             </div>
             <Cta />
-          </div>
-        </section>
+          </section>
 
-        <p className="wrap pb-14 text-center text-doux">
-          {t("Pas prêt ? Prends l'ebook gratuit : ")}
-          <a href="/ebook" className="underline underline-offset-4">
-            {t(EBOOK_TITLE)}
-          </a>
-        </p>
-      </main>
+          <Proofs />
 
-      <Footer />
+          <section className="section wrap !max-w-5xl">
+            <Entete etiquette="3 étapes simples" titre="Ça se passe en 3 étapes" />
+            <ol className="mt-10 grid gap-4 md:grid-cols-3">
+              {etapes.map(([titre, texte], i) => (
+                <li key={titre} className="carte p-6">
+                  <span
+                    aria-hidden="true"
+                    className="grid size-9 place-items-center rounded-full bg-[#2b7549] font-bold text-white shadow-[0_0_18px_rgb(66_178_112/0.45)]"
+                  >
+                    {i + 1}
+                  </span>
+                  <h3 className="sous mt-4 text-lg">{titre}</h3>
+                  <p className="mt-1 text-[0.95rem] leading-snug text-doux">{texte}</p>
+                </li>
+              ))}
+            </ol>
+            <Cta />
+          </section>
 
-      <StickyBar heroId="hero" />
+          <section className="section wrap text-center">
+            <p className="etiquette-verte">À toi de choisir</p>
+            <h2 className="large mx-auto mt-4 max-w-3xl text-[clamp(2.2rem,6vw,4rem)] leading-[1.05]">
+              {"L'été prochain, t'as un boss ou t'as des clients ?"}
+            </h2>
+            <Cta />
+          </section>
+
+          <section className="section wrap !max-w-3xl">
+            <Entete etiquette="Questions" titre="Tes questions" />
+            <div className="mt-10 space-y-3">
+              {faq.map(([q, a]) => (
+                <details key={q} className="carte px-5 sm:px-6">
+                  <summary className="flex items-center justify-between gap-4 py-5 font-bold">
+                    {t(q)}
+                    <span aria-hidden="true" className="plus text-2xl leading-none text-accent">
+                      +
+                    </span>
+                  </summary>
+                  <p className="pb-5 text-doux">{t(a)}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <section className="wrap pb-[clamp(3rem,6vw,5rem)]">
+            <div className="carte mx-auto max-w-xl p-6 text-center sm:p-10">
+              <p className="etiquette-verte">Démarrer</p>
+              <h2 className="titre mt-4">{`${BRAND}, au complet`}</h2>
+              <ul className="mt-6 divide-y divide-trait border-y border-trait text-left">
+                {included.map(([id, x]) => (
+                  <li key={id} className="flex items-center gap-3 py-3 leading-snug font-semibold">
+                    <span aria-hidden="true" className="text-accent">
+                      ✓
+                    </span>
+                    {x}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <Ancrage note taille="text-[min(30vw,9rem)]" />
+              </div>
+              <BuyButton className="mt-7 w-full">{cta}</BuyButton>
+            </div>
+          </section>
+
+          <p className="wrap pb-14 text-center text-doux">
+            {t("Pas prêt ? Prends l'ebook gratuit : ")}
+            <a href="/ebook" className="underline underline-offset-4">
+              {t(EBOOK_TITLE)}
+            </a>
+          </p>
+        </main>
+
+        <Footer />
+
+        <StickyBar heroId="hero" />
+      </div>
     </CheckoutProvider>
   );
 }
