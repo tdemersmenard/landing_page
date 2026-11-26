@@ -32,7 +32,7 @@ export function MerciButton({ className = "" }: { className?: string }) {
   return (
     <DuringOffer>
       <div className={className}>
-        <button type="button" onClick={onClick} disabled={busy} className="btn btn-achat w-full">
+        <button type="button" onClick={onClick} disabled={busy} className="btn w-full">
           {busy ? "Un instant…" : CTA}
         </button>
         <SkoolEmail email={lead?.email} className="mt-3 text-doux" />
@@ -44,7 +44,7 @@ export function MerciButton({ className = "" }: { className?: string }) {
 export function MerciOffer() {
   return (
     <DuringOffer>
-      <div className="mt-4">
+      <div>
         <Ancrage etiquette note taille="text-[min(26vw,8rem)]" />
         <div className="mt-3 text-sm">
           <Countdown />

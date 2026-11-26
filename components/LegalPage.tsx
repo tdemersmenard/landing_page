@@ -21,20 +21,20 @@ export type Section = [titre: string, ...blocs: (string | string[])[]];
 export function LegalPage({ titre, sections }: { titre: string; sections: Section[] }) {
   return (
     <>
-      <header className="bg-nuit">
-        <div className="wrap py-10">
-          <a href="/" className="font-semibold underline underline-offset-4">
-            Retour à la page
+      <header className="keo-haut">
+        <div className="wrap !max-w-3xl pt-10 pb-8 lg:pt-14">
+          <a href="/" className="etiquette-verte">
+            ← Retour à la page
           </a>
           <h1 className="titre mt-5">{titre}</h1>
-          <p className="mt-3">Dernière mise à jour : 24 novembre 2026</p>
+          <p className="mt-3 text-doux">Dernière mise à jour : 24 novembre 2026</p>
         </div>
       </header>
-      <main className="jour">
-        <div className="wrap py-12 lg:py-16">
-        <div className="max-w-3xl">
+      <main>
+        <div className="wrap !max-w-3xl pb-12 lg:pb-16">
+        <div className="carte p-5 sm:p-9">
           {sections.map(([h, ...blocs]) => (
-            <section key={h} className="mb-9">
+            <section key={h} className="mb-9 last:mb-0">
               <h2 className="sous text-xl">
                 <Texte>{h}</Texte>
               </h2>
@@ -44,7 +44,7 @@ export function LegalPage({ titre, sections }: { titre: string; sections: Sectio
                     <Texte>{b}</Texte>
                   </p>
                 ) : (
-                  <ul key={i} className="mt-3 list-disc space-y-2 pl-6 leading-relaxed">
+                  <ul key={i} className="mt-3 list-disc space-y-2 pl-6 leading-relaxed marker:text-accent">
                     {b.map((x) => (
                       <li key={x}>
                         <Texte>{x}</Texte>

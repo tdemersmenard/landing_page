@@ -73,7 +73,7 @@ export function BuyButton({ children, className = "" }: { children: React.ReactN
   const ended = useRemaining() === 0;
   const openCheckout = useCheckout();
   return (
-    <button type="button" disabled={ended} onClick={openCheckout} className={`btn btn-achat ${className}`}>
+    <button type="button" disabled={ended} onClick={openCheckout} className={`btn ${className}`}>
       {ended ? "Offre terminée" : children}
     </button>
   );

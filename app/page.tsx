@@ -59,7 +59,7 @@ const Cta = () => (
 export default function Page() {
   return (
     <CheckoutProvider>
-      <div className="keo">
+      <div>
         <div className="border-b border-trait bg-[#0f2418] px-4 py-2 text-center text-[0.95rem]">
           <Countdown />
         </div>

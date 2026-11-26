@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = { metadataBase: new URL(SITE_URL), title: BRAND };
 
-export const viewport: Viewport = { themeColor: "#08140e" };
+export const viewport: Viewport = { themeColor: "#090d0b" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

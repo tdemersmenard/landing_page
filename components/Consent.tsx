@@ -4,7 +4,7 @@ import { BRAND } from "@/lib/config";
 export function Consent() {
   return (
     <label className="flex gap-3 text-[0.95rem] leading-snug">
-      <input type="checkbox" name="consentement" className="mt-0.5 size-5 shrink-0 accent-clair" />
+      <input type="checkbox" name="consentement" className="mt-0.5 size-5 shrink-0 accent-accent" />
       <span>
         J&apos;accepte de recevoir des courriels et des textos de {BRAND}. Je peux me désabonner
         n&apos;importe quand.

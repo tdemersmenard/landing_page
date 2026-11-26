@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
-/* Vert nuit et crème, vert sapin pour les boutons seulement. */
+/* Tout le site : noir verdâtre, cartes arrondies, boutons pilule vert sapin avec lueur. */
 @theme {
-  --color-nuit: #08140e;
-  --color-panneau: #10211a;
-  --color-trait: #24392f;
+  --color-nuit: #090d0b;
+  --color-panneau: #111814;
+  --color-trait: #1f2c25;
   --color-clair: #f6f8f3;
-  --color-doux: #a9b8af;
+  --color-doux: #a2b0a7;
   --color-erreur: #ff8f85;
-  --color-accent: #b9cdbf;
+  --color-accent: #5fc98a;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-titre: var(--font-archivo), system-ui, sans-serif;
 }
@@ -50,18 +50,22 @@
   .section {
     padding-block: clamp(3rem, 6vw, 5rem);
   }
-  /* Sections claires : mêmes classes, couleurs inversées. */
-  .jour {
-    --color-nuit: #ffffff;
-    --color-panneau: #ffffff;
-    --color-trait: #dededb;
-    --color-clair: #0a0a0a;
-    --color-doux: #565656;
-    --color-erreur: #b3261e;
-    --color-accent: #23613d;
-    background: #f4f1e8;
-    color: var(--color-clair);
-    color-scheme: light;
+  /* Haut de page : lueur verte et quadrillé qui s'efface vers le bas. */
+  .keo-haut {
+    position: relative;
+    isolation: isolate;
+  }
+  .keo-haut::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgb(43 117 73 / 0.55), transparent 70%),
+      linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
+      linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px) 0 0 / 44px 44px;
+    mask-image: linear-gradient(#000 55%, transparent);
   }
   .large,
   .titre,
@@ -81,22 +85,14 @@
     letter-spacing: -0.05em;
   }
   .carte {
-    background: var(--color-panneau);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.035), transparent 60%), var(--color-panneau);
     border: 1px solid var(--color-trait);
-    border-radius: 14px;
+    border-radius: 22px;
   }
   .sous {
     font-weight: 700;
     letter-spacing: -0.015em;
     line-height: 1.25;
-  }
-  .pastille {
-    display: inline-block;
-    border-radius: 99px;
-    padding: 0.35rem 0.9rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    line-height: 1.3;
   }
   .etiquette {
     display: inline-block;
@@ -109,6 +105,31 @@
     font-weight: 900;
     font-size: 1.15rem;
     line-height: 1.2;
+    text-transform: uppercase;
+  }
+  .etiquette-verte {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid rgb(95 201 138 / 0.35);
+    background: rgb(95 201 138 / 0.1);
+    color: var(--color-accent);
+    border-radius: 999px;
+    padding: 0.3rem 0.85rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+  .inclus {
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: #fff;
+    color: #000;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
   }
   .placeholder {
@@ -131,23 +152,38 @@
     line-height: 1.2;
     text-align: center;
     padding: 1.15rem 1.75rem;
-    border-radius: 12px;
+    border-radius: 999px;
+    box-shadow:
+      0 0 0 2px var(--color-nuit),
+      0 0 28px rgb(66 178 112 / 0.45),
+      inset 0 1px 0 rgb(255 255 255 / 0.2);
     transition: background 0.15s;
   }
   .btn:hover:not(:disabled) {
-    background: #23613d;
-  }
-  .btn-achat {
-    background: #ff6a13;
-    color: #000;
-  }
-  .btn-achat:hover:not(:disabled) {
-    background: #ff8a45;
+    background: #33885a;
   }
   .btn:disabled {
-    background: #4a4a4a;
+    background: #3a3f3c;
     color: #e2e2e2;
+    box-shadow: none;
     cursor: not-allowed;
+  }
+  .champ {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    border: 1px solid #6b7f73;
+    border-radius: 14px;
+    background: var(--color-nuit);
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.15s;
+  }
+  .champ:focus {
+    border-color: var(--color-accent);
+  }
+  .champ[aria-invalid="true"] {
+    border-color: var(--color-erreur);
   }
   summary::-webkit-details-marker {
     display: none;
@@ -172,73 +208,4 @@ html:has(dialog[open]) {
   from {
     transform: translateY(100%);
   }
-}
-
-/* Page de vente : fond noir quadrillé, lueur et boutons pilule verts. */
-.keo {
-  --color-nuit: #090d0b;
-  --color-panneau: #111814;
-  --color-trait: #1f2c25;
-  --color-doux: #a2b0a7;
-  --color-accent: #5fc98a;
-  background: var(--color-nuit);
-}
-.keo-haut {
-  position: relative;
-  isolation: isolate;
-}
-.keo-haut::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% -5%, rgb(43 117 73 / 0.55), transparent 70%),
-    linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px) 0 0 / 44px 44px,
-    linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px) 0 0 / 44px 44px;
-  mask-image: linear-gradient(#000 55%, transparent);
-}
-.keo .carte {
-  border-radius: 22px;
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.035), transparent 60%), var(--color-panneau);
-}
-.keo .btn-achat:not(:disabled) {
-  background: #2b7549;
-  color: #fff;
-  border-radius: 999px;
-  box-shadow:
-    0 0 0 2px var(--color-nuit),
-    0 0 28px rgb(66 178 112 / 0.45),
-    inset 0 1px 0 rgb(255 255 255 / 0.2);
-}
-.keo .btn-achat:hover:not(:disabled) {
-  background: #33885a;
-}
-.keo .btn-achat:disabled {
-  border-radius: 999px;
-}
-.etiquette-verte {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  border: 1px solid rgb(95 201 138 / 0.35);
-  background: rgb(95 201 138 / 0.1);
-  color: var(--color-accent);
-  border-radius: 999px;
-  padding: 0.3rem 0.85rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1.3;
-}
-.inclus {
-  flex-shrink: 0;
-  border-radius: 999px;
-  background: #fff;
-  color: #000;
-  padding: 0.15rem 0.55rem;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
 }

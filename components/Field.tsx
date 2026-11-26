@@ -14,7 +14,7 @@ export function Field({ label, error, ...input }: Props) {
         required
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-erreur` : undefined}
-        className={`mt-1 block w-full rounded-lg border bg-nuit px-4 py-3 text-base ${error ? "border-erreur" : "border-[#858585]"}`}
+        className="champ"
         {...input}
       />
       {error && (

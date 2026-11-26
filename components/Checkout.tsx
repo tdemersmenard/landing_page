@@ -83,7 +83,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
         onClick={(e) => {
           if (pressedOutside.current && isOutside(e)) dialog.current?.close();
         }}
-        className="feuille jour mx-0 mt-auto mb-0 max-h-[94dvh] w-full max-w-none overflow-y-auto overscroll-contain rounded-t-2xl border border-trait !bg-white text-clair sm:m-auto sm:max-w-lg sm:rounded-2xl"
+        className="feuille carte mx-0 mt-auto mb-0 max-h-[94dvh] w-full max-w-none overflow-y-auto overscroll-contain !rounded-b-none !bg-panneau text-clair sm:m-auto sm:max-w-lg sm:!rounded-b-[22px]"
       >
         <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:p-8">
           <div className="flex items-start justify-between gap-4">
@@ -99,7 +99,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
               ×
             </button>
           </div>
-          <p className="mt-2 flex items-center justify-between gap-4 border-y-2 border-trait py-3 font-semibold">
+          <p className="mt-3 flex items-center justify-between gap-4 rounded-2xl border border-trait bg-nuit px-4 py-3 font-semibold">
             <span>
               {t(`${BRAND}, les 8 modules`)}
               <span className="block text-sm font-normal text-doux">{t(`CAD, facturé ${SKOOL_PRICE_USD} par Skool`)}</span>
@@ -120,7 +120,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
             <Field label="Courriel" type="email" autoComplete="email" {...field("email")} />
             <Consent />
             <SkoolEmail email={isValid.email(email) ? email : undefined} />
-            <button type="submit" disabled={busy || ended} className="btn btn-achat">
+            <button type="submit" disabled={busy || ended} className="btn">
               {ended ? "Offre terminée" : busy ? "Un instant…" : "Continuer vers le paiement"}
             </button>
             <p role="alert" className="font-semibold text-erreur empty:hidden">
