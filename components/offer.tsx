@@ -10,7 +10,7 @@ const coaching = t(PRICE_COACHING_TXT);
 
 export function Countdown() {
   const s = useRemaining();
-  if (s === 0) return <p className="font-bold">{"Black Friday : offre terminée"}</p>;
+  if (s === 0) return <p className="font-bold">{"Offre du Black Friday : terminée"}</p>;
   const parts: [string, number | null][] = [
     ["j", s && Math.floor(s / 86400)],
     ["h", s && Math.floor(s / 3600) % 24],
@@ -19,7 +19,7 @@ export function Countdown() {
   ];
   return (
     <p className="font-semibold">
-      {"Black Friday : finit dans "}
+      {"Offre du Black Friday : finit dans "}
       <span role="timer" className="inline-block font-extrabold whitespace-nowrap tabular-nums">
         {parts.map(([unit, v]) => `${v === null ? "--" : String(v).padStart(2, "0")} ${unit}`).join(" ")}
       </span>
