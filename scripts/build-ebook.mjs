@@ -15,7 +15,10 @@ const NB = " ";
 try {
   process.loadEnvFile(file(".env.local"));
 } catch {} // Pas de .env.local : le lien sort en placeholder.
-const site = (process.env.NEXT_PUBLIC_SITE_URL ?? "").trim().replace(/\/+$/, "");
+// Même repli que lib/config.ts : sans NEXT_PUBLIC_SITE_URL, on pointe vers le domaine Vercel.
+const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://landingpage-gilt-phi.vercel.app").trim().replace(/\/+$/, "");
+// Appel « Plan de match » gratuit (même lien que PLAN_DE_MATCH_URL dans lib/config.ts).
+const CALENDLY = "https://calendly.com/tdemersmenard-agencetdm/coaching";
 
 const md = fs.readFileSync(file("content", "ebook.md"), "utf8").replace(/\r\n/g, "\n");
 
@@ -50,7 +53,7 @@ const services = rows("prix").map(([id, nom, min, max, unite, contrats, saison, 
   s.total = { v: s.equip.reduce((t, e) => t + e.cout.v, 0), est: s.equip.some((e) => e.cout.est) };
   s.revMin = times(s.min, s.contrats);
   s.revMax = times(s.max, s.contrats);
-  if (s.total.v >= BUDGET) throw new Error(`${nom} : ${s.total.v} $ d'équipement, le titre promet moins de ${BUDGET} $`);
+  if (s.total.v >= BUDGET) throw new Error(`${nom} : ${s.total.v} $ d'équipement, au-dessus du plafond de départ de ${BUDGET} $`);
   return s;
 });
 for (const e of equip) if (!services.some((s) => s.id === e.id)) throw new Error(`Équipement « ${e.nom} » : id « ${e.id} » inconnu`);
@@ -95,10 +98,15 @@ const recapEquipement = () =>
   );
 // Les utm permettent de voir dans Make quelles ventes viennent de l'ebook.
 const lien = site && `${site}/?utm_source=ebook&utm_medium=pdf&utm_campaign=7-services`;
-const bouton = () =>
-  site
-    ? `<a class="bouton" href="${lien.replace(/&/g, "&amp;")}">Embarque à 87${NB}$</a><p class="adresse">${site.replace(/^https?:\/\//, "")}</p>`
-    : `<div class="bouton">Embarque à 87${NB}$</div><p class="adresse"><mark>[NEXT_PUBLIC_SITE_URL : le lien de ta page]</mark></p>`;
+const amp = (u) => u.replace(/&/g, "&amp;");
+// CTA principal : réserver l'appel Plan de match gratuit. En dessous, plus petit : commencer seul avec les 8 modules.
+const bouton = () => {
+  const appel = `<a class="bouton" href="${amp(CALENDLY)}">Réserve ton appel Plan de match gratuit (20${NB}min)</a><p class="adresse">${CALENDLY.replace(/^https?:\/\//, "")}</p>`;
+  const modules = site
+    ? `<p class="aussi"><a href="${amp(lien)}">Ou commence seul avec les 8 modules</a></p>`
+    : `<p class="aussi"><mark>[NEXT_PUBLIC_SITE_URL : le lien de ta page]</mark></p>`;
+  return appel + modules;
+};
 
 // ---------- Pages ----------
 /** Espaces insécables, comme lib/text.ts. */

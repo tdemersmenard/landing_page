@@ -13,7 +13,7 @@ Chaque page commence par « page: ... ». Les {{...}} sont remplis par le script
 
 <!-- page: couverture -->
 
-# Les {{n}} services que tu peux lancer avec moins de 500 $
+# Les {{n}} services qui peuvent te rapporter jusqu'à 900 $ par semaine cet été
 
 Le guide gratuit pour choisir ta business de service
 
@@ -51,7 +51,7 @@ Ce sont des ventes, avant les dépenses. C'est mon résultat à moi, pas une pro
 
 ## Ce que je t'ai mis dans ce guide
 
-Sept services que tu peux commencer avec un budget de départ de moins de 500 $. Pour chacun, une page : l'équipement, le prix à charger, la saison, la difficulté et un conseil pour éviter une erreur de débutant.
+Sept services, ce qu'ils coûtent pour partir et combien chacun peut te rapporter par semaine. Pour chacun, une page : l'équipement, le prix à charger, la saison, la difficulté et un conseil pour éviter une erreur de débutant.
 
 Lis-les au complet une fois. Après, va au tableau comparatif, pis choisis-en un. Un seul.
 
