@@ -1,4 +1,3 @@
-import { CheckoutProvider } from "@/components/Checkout";
 import { Footer } from "@/components/Footer";
 import { MerciButton, MerciOffer } from "@/components/MerciOffer";
 import { DuringOffer } from "@/components/offer";
@@ -31,7 +30,7 @@ const Entete = ({ etiquette, titre }: { etiquette: string; titre: string }) => (
 
 export default function Merci() {
   return (
-    <CheckoutProvider>
+    <>
       <main>
         <section className="keo-haut">
           <div className="wrap pt-6 pb-12 lg:py-16">
@@ -41,11 +40,14 @@ export default function Merci() {
                 <Pdf />
               </span>
             </p>
+            <p className="mx-auto mt-2 max-w-md text-center text-sm text-doux">
+              {t("Tu le vois pas ? Check tes courriels indésirables (pourriel) et déplace-le dans ta boîte de réception pour recevoir la suite.")}
+            </p>
             <DuringOffer
               after={
                 <div className="py-16 text-center">
                   <h1 className="titre">Merci !</h1>
-                  <p className="mt-4 text-lg">Bonne lecture. Si le courriel tarde, vérifie tes promotions.</p>
+                  <p className="mt-4 text-lg">Bonne lecture. Si le courriel tarde, vérifie tes indésirables (pourriel).</p>
                   <Pdf className="mt-5 inline-block text-lg font-semibold" />
                 </div>
               }
@@ -106,6 +108,6 @@ export default function Merci() {
         </DuringOffer>
       </main>
       <Footer className="pb-16" />
-    </CheckoutProvider>
+    </>
   );
 }

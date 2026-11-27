@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useCheckout } from "@/components/Checkout";
 import { useRemaining } from "@/lib/clock";
 import { PRICE, PRICE_COACHING_TXT } from "@/lib/config";
 import { money, t } from "@/lib/text";
@@ -82,13 +81,26 @@ export function Ancrage({
   );
 }
 
-export function BuyButton({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ended = useRemaining() === 0;
-  const openCheckout = useCheckout();
+/** Lien simple vers /paiement. Après la fin de l'offre : bouton désactivé. */
+export function BuyButton({
+  children,
+  className = "",
+  href = "/paiement",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  href?: string;
+}) {
+  if (useRemaining() === 0)
+    return (
+      <button type="button" disabled className={`btn ${className}`}>
+        Offre terminée
+      </button>
+    );
   return (
-    <button type="button" disabled={ended} onClick={openCheckout} className={`btn ${className}`}>
-      {ended ? "Offre terminée" : children}
-    </button>
+    <a href={href} className={`btn ${className}`}>
+      {children}
+    </a>
   );
 }
 

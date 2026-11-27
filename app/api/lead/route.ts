@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { normalizePhone } from "@/lib/lead";
 import { contact, invalidResponse, telephone } from "@/lib/leadSchema";
 import { errorText, postToMake } from "@/lib/make";
 
@@ -18,7 +19,18 @@ const commun = {
   fbclid: suivi,
 };
 
-const schema = z.object({ type: z.enum(["achat_commence", "ebook"]), telephone, ...commun });
+// Ebook : les 3 champs sont obligatoires.
+const ebook = z.object({ type: z.literal("ebook"), telephone, ...commun });
+
+// Panier abandonné : envoyé dès que le courriel est valide sur /paiement, souvent avant le prénom ou le téléphone.
+const achatCommence = z.object({
+  type: z.literal("achat_commence"),
+  ...commun,
+  prenom: z.string().catch("").transform((s) => s.trim().slice(0, 100)),
+  telephone: z.string().catch("").transform((s) => (normalizePhone(s).length === 10 ? normalizePhone(s) : "")),
+});
+
+const schema = z.discriminatedUnion("type", [ebook, achatCommence]);
 
 export async function POST(request: Request) {
   const parsed = schema.safeParse(await request.json().catch(() => null));

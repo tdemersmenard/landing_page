@@ -192,20 +192,3 @@
     transform: rotate(45deg);
   }
 }
-
-html:has(dialog[open]) {
-  overflow: hidden;
-}
-.feuille::backdrop {
-  background: rgb(0 0 0 / 0.8);
-}
-@media (prefers-reduced-motion: no-preference) and (max-width: 39.99rem) {
-  .feuille[open] {
-    animation: monter 0.25s ease-out;
-  }
-}
-@keyframes monter {
-  from {
-    transform: translateY(100%);
-  }
-}

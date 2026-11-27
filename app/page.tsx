@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { CheckoutProvider } from "@/components/Checkout";
 import { Footer } from "@/components/Footer";
 import { Ancrage, BuyButton, Countdown, CTA as cta, DuringOffer, StickyBar } from "@/components/offer";
 import { Proofs } from "@/components/Proofs";
@@ -58,7 +57,7 @@ const Cta = () => (
 
 export default function Page() {
   return (
-    <CheckoutProvider>
+    <>
       <div>
         <div className="border-b border-trait bg-[#0f2418] px-4 py-2 text-center text-[0.95rem]">
           <Countdown />
@@ -261,6 +260,6 @@ export default function Page() {
 
         <StickyBar heroId="hero" />
       </div>
-    </CheckoutProvider>
+    </>
   );
 }

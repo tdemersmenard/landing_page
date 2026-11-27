@@ -1,12 +1,44 @@
 "use client";
 
 import { type FormEvent, useEffect, useRef, useState } from "react";
+import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
 import { readAttribution } from "@/lib/attribution";
 import { CURRENCY, PRICE, PRICE_CENTS } from "@/lib/config";
-import { type Champ, CHAMPS, type Erreurs, validate } from "@/lib/lead";
-import { readReference, saveLead, useSavedLead } from "@/lib/savedLead";
+import { type Champ, CHAMPS, type Erreurs, isValid, validate } from "@/lib/lead";
+import { trackCheckout } from "@/lib/pixel";
+import { readLead, readReference, saveLead, saveReference } from "@/lib/savedLead";
+import { sendLead } from "@/lib/sendLead";
 import { money } from "@/lib/text";
+
+type Prefill = Partial<Record<Champ, string>>;
+
+/**
+ * Infos de départ : l'URL (?prenom=&email=&telephone=) a priorité sur ce qui est gardé en session.
+ * On retire ensuite ces infos de l'URL, pour qu'elles ne partent pas au pixel Meta avec l'adresse de la page.
+ */
+function lirePrefill(): Prefill {
+  const url = new URL(window.location.href);
+  const lead = readLead();
+  const out: Prefill = {};
+  for (const c of CHAMPS) {
+    const v = url.searchParams.get(c)?.trim().slice(0, 254);
+    if (v) out[c] = v;
+    else if (lead?.[c]) out[c] = lead[c];
+    url.searchParams.delete(c);
+  }
+  if (url.href !== window.location.href) history.replaceState(history.state, "", url);
+  return out;
+}
+
+/** Une seule fois par session, même si la page est rechargée. */
+function unePrSession(cle: string): boolean {
+  try {
+    if (sessionStorage.getItem(cle)) return false;
+    sessionStorage.setItem(cle, "1");
+  } catch {}
+  return true;
+}
 
 const PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? "";
 
@@ -97,7 +129,9 @@ async function creerIntent(infos: Infos): Promise<{ clientSecret?: string; erreu
 const returnUrl = () => `${window.location.origin}/merci-achat`;
 
 export function PaiementForm() {
-  const lead = useSavedLead();
+  const [prefill, setPrefill] = useState<Prefill | null>(null);
+  const [emailOk, setEmailOk] = useState(false);
+  const panierEnvoye = useRef(false);
   const stripe = useRef<StripeJs | null>(null);
   const elements = useRef<StripeElements | null>(null);
   const paymentBox = useRef<HTMLDivElement>(null);
@@ -107,6 +141,33 @@ export function PaiementForm() {
   const [erreurs, setErreurs] = useState<Erreurs>({});
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+
+  // Avant le PageView du pixel (les effets des enfants passent avant ceux du layout).
+  useEffect(() => {
+    const p = lirePrefill();
+    setPrefill(p);
+    setEmailOk(isValid.email(p.email ?? ""));
+    if (unePrSession("checkout_suivi")) trackCheckout();
+  }, []);
+
+  /** Panier abandonné : achat_commence dès que le courriel est valide, une fois par session. */
+  function capturerPanier(form: HTMLFormElement | null) {
+    if (!form || panierEnvoye.current) return;
+    const data = new FormData(form);
+    const email = String(data.get("email") ?? "").trim();
+    if (!isValid.email(email)) return;
+    panierEnvoye.current = true;
+    if (!unePrSession("panier_envoye")) return;
+    void sendLead({
+      type: "achat_commence",
+      prenom: String(data.get("prenom") ?? "").trim(),
+      email,
+      telephone: String(data.get("telephone") ?? ""),
+      consentement: data.get("consentement") === "on",
+    }).then((r) => {
+      if (r.status === "ok") saveReference(r.reference);
+    });
+  }
 
   useEffect(() => {
     if (!PK) return;
@@ -185,13 +246,14 @@ export function PaiementForm() {
       return !!first;
     };
     const champsOk = !show(validate(infos, CHAMPS));
+    capturerPanier(form); // Courriel prérempli ou rempli automatiquement, jamais quitté.
 
     setBusy(true);
     // Valide aussi la carte, pour montrer toutes les erreurs d'un coup.
     const { error: carte } = await elements.current.submit();
     if (!champsOk || carte) return setBusy(false);
 
-    saveLead({ ...infos, consentement: lead?.consentement ?? false });
+    saveLead({ ...infos, consentement: data.get("consentement") === "on" });
     const r = await creerIntent({ source: "form", ...infos });
     if (!r.clientSecret) {
       setBusy(false);
@@ -230,12 +292,24 @@ export function PaiementForm() {
   return (
     <form noValidate onSubmit={onSubmit} className="grid gap-4">
       <h2 className="large text-2xl">Tes infos</h2>
-      {/* Remonté quand les infos de la session arrivent, pour préremplir. */}
-      <div key={lead?.email ?? "vide"} className="grid gap-4">
-        <Field label="Prénom" autoComplete="given-name" defaultValue={lead?.prenom} {...field("prenom")} />
-        <Field label="Courriel" type="email" autoComplete="email" defaultValue={lead?.email} {...field("email")} />
-        <Field label="Téléphone" type="tel" autoComplete="tel" defaultValue={lead?.telephone} {...field("telephone")} />
+      {/* Remonté une fois les infos de départ lues (URL ou session), pour préremplir. */}
+      <div key={prefill ? "pret" : "vide"} className="grid gap-4">
+        <Field label="Prénom" autoComplete="given-name" defaultValue={prefill?.prenom} {...field("prenom")} />
+        <Field
+          label="Courriel"
+          type="email"
+          autoComplete="email"
+          defaultValue={prefill?.email}
+          {...field("email")}
+          onChange={(e) => {
+            setEmailOk(isValid.email(e.currentTarget.value));
+            if (erreurs.email) setErreurs({ ...erreurs, email: undefined });
+          }}
+          onBlur={(e) => capturerPanier(e.currentTarget.form)}
+        />
+        <Field label="Téléphone" type="tel" autoComplete="tel" defaultValue={prefill?.telephone} {...field("telephone")} />
       </div>
+      <Consent />
 
       <h2 className="large mt-4 text-2xl">Paiement</h2>
       <div hidden={!express}>
@@ -246,7 +320,7 @@ export function PaiementForm() {
       </div>
       <div ref={paymentBox} className="min-h-[12rem]" aria-busy={!pret} />
 
-      <button type="submit" disabled={busy || !pret} className="btn mt-2 w-full">
+      <button type="submit" disabled={busy || !pret || !emailOk} className="btn mt-2 w-full">
         {busy ? "Un instant…" : `Payer ${money(PRICE)} et accéder au programme`}
       </button>
       <p className="text-center text-sm leading-snug text-doux">

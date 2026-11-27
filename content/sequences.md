@@ -91,6 +91,8 @@ Thomas
 
 ## 2. Type « achat_commence », sans « achat_complete »
 
+Envoyé par /paiement dès que le courriel est valide (une fois par session). `prenom` et `telephone` peuvent être vides : le texto part seulement s'il y a un téléphone, et le courriel dit « Salut » sans prénom s'il manque.
+
 ### Texto : après 1 h
 
 Salut {{prenom}}, c'est Thomas de Système TDM. T'as commencé ton inscription, mais je vois pas ton achat. Besoin d'aide? C'est ici : {{lien_paiement}} Réponds STOP pour te désabonner
