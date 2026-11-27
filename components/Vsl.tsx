@@ -2,9 +2,9 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { HeroVideo } from "@/components/HeroVideo";
 
-/** Vidéo de vente (NEXT_PUBLIC_HERO_VIDEO_URL). En attendant : placeholder bien visible. */
+/** Vidéo de vente : public/video.mp4 par défaut (NEXT_PUBLIC_HERO_VIDEO_URL pour la remplacer). */
 export function Vsl() {
-  const url = process.env.NEXT_PUBLIC_HERO_VIDEO_URL;
+  const url = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/video.mp4";
   const poster = existsSync(path.join(process.cwd(), "public", "video-poster.jpg")) ? "/video-poster.jpg" : undefined;
   return (
     <div className="carte mx-auto w-full max-w-[22rem] overflow-hidden p-2">
