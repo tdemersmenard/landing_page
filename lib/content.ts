@@ -28,7 +28,7 @@ export const faq = [
   ],
   [
     "Ça me prend combien d'argent pour partir ?",
-    "Ça dépend du service que tu choisis. Le module 1 t'aide à choisir selon ton budget, et le module 2 te montre quoi acheter, où le trouver usagé et comment le payer avec ton premier client. L'ebook gratuit présente 7 services que tu peux lancer avec moins de 500 $.",
+    "Ça dépend du service que tu choisis. Le module 1 t'aide à choisir selon ton budget, et le module 2 te montre quoi acheter, où le trouver usagé et comment le payer avec ton premier client. L'ebook gratuit te présente 7 services que tu peux lancer avec un petit budget de départ.",
   ],
   [
     "Est-ce que ça marche si je suis aux études ?",

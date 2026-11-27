@@ -25,7 +25,7 @@ Pied de page des courriels :
 
 Salut {{prenom}},
 
-Voici ton ebook, « Les 7 services que tu peux lancer avec moins de 500 $ » : {{lien_pdf}}
+Voici ton ebook, « Les 7 services qui peuvent te rapporter jusqu'à 900 $ par semaine cet été » : {{lien_pdf}}
 
 Commence par la page « Choisis en 10 minutes ». T'as juste besoin d'un crayon.
 
