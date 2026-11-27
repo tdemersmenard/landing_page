@@ -63,10 +63,14 @@ function matching(): Record<string, string> {
 
 let sentMatching: string | undefined;
 
-export function track(event: "PageView" | "Lead" | "InitiateCheckout", params: Record<string, unknown> = {}) {
+export function track(
+  event: "PageView" | "Lead" | "InitiateCheckout" | "Purchase",
+  params: Record<string, unknown> = {},
+  options?: { eventID: string },
+) {
   const match = matching();
   if (debugOn())
-    console.log("[pixel]", event, JSON.stringify(params), "correspondance:", Object.keys(match).join(",") || "aucune", PIXEL_ID ? "envoyé" : "PAS envoyé (aucun ID)");
+    console.log("[pixel]", event, JSON.stringify(params), options ? `eventID=${options.eventID}` : "", "correspondance:", Object.keys(match).join(",") || "aucune", PIXEL_ID ? "envoyé" : "PAS envoyé (aucun ID)");
   if (!PIXEL_ID) return;
   const fbq = getFbq();
   const key = JSON.stringify(match);
@@ -74,7 +78,8 @@ export function track(event: "PageView" | "Lead" | "InitiateCheckout", params: R
     fbq("init", PIXEL_ID, match);
     sentMatching = key;
   }
-  fbq("track", event, params);
+  if (options) fbq("track", event, params, options);
+  else fbq("track", event, params);
 }
 
 export const trackCheckout = () => track("InitiateCheckout", { value: PRICE, currency: "CAD" });

@@ -2,7 +2,7 @@ import { CheckoutProvider } from "@/components/Checkout";
 import { Footer } from "@/components/Footer";
 import { MerciButton, MerciOffer } from "@/components/MerciOffer";
 import { DuringOffer } from "@/components/offer";
-import { Vsl } from "@/components/Vsl";
+import { offreGrille, Vsl } from "@/components/Vsl";
 import { EBOOK_PDF, PRICE } from "@/lib/config";
 import { faq, faqMerci, modules } from "@/lib/content";
 import { pageMeta } from "@/lib/meta";
@@ -53,7 +53,7 @@ export default function Merci() {
               <h1 className="large mx-auto mt-5 max-w-3xl text-center text-[clamp(1.55rem,3.6vw,2.8rem)] leading-[1.12]">
                 {t("Avant que tu partes : t'as choisi ton service ? Voici comment signer ton premier client.")}
               </h1>
-              <div className="mx-auto mt-8 grid max-w-5xl items-start gap-5 lg:grid-cols-[minmax(0,22rem)_1fr] lg:justify-center lg:gap-6">
+              <div className={offreGrille}>
                 <Vsl />
                 <div className="carte p-5 sm:p-7">
                   <MerciOffer />

@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { goToSkool, offerEnded, SkoolEmail, useCheckout } from "@/components/Checkout";
+import { goToPaiement, offerEnded, useCheckout } from "@/components/Checkout";
 import { Ancrage, Countdown, CTA, DuringOffer } from "@/components/offer";
-import { useSavedLead } from "@/lib/savedLead";
+import { saveReference, useSavedLead } from "@/lib/savedLead";
 import { sendLead } from "@/lib/sendLead";
 
-/** Infos déjà données sur /ebook : on va direct sur Skool. Sinon, la modale d'achat. */
+/** Infos déjà données sur /ebook : on va direct sur /paiement. Sinon, la modale d'achat. */
 export function MerciButton({ className = "" }: { className?: string }) {
   const lead = useSavedLead();
   const openCheckout = useCheckout();
@@ -25,7 +25,8 @@ export function MerciButton({ className = "" }: { className?: string }) {
       setBusy(false);
       return openCheckout();
     }
-    await goToSkool();
+    if (r?.status === "ok") saveReference(r.reference);
+    await goToPaiement();
     setTimeout(() => setBusy(false), 4000); // Retour arrière.
   }
 
@@ -35,7 +36,6 @@ export function MerciButton({ className = "" }: { className?: string }) {
         <button type="button" onClick={onClick} disabled={busy} className="btn w-full">
           {busy ? "Un instant…" : CTA}
         </button>
-        <SkoolEmail email={lead?.email} className="mt-3 text-doux" />
       </div>
     </DuringOffer>
   );

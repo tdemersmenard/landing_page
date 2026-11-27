@@ -12,11 +12,11 @@
 - Preuve du fondateur : près de 100 000 $ de ventes (avant dépenses) en un été avec une business de service.
 
 ## Le funnel officiel
-- Pubs froides (Meta) → /ebook → /ebook/merci (offre à 87 $) → paiement sur Skool.
-- Trafic chaud (Instagram, TikTok, lien en bio, relances) → / (page de vente à 87 $) → paiement sur Skool.
+- Pubs froides (Meta) → /ebook → /ebook/merci (offre à 87 $) → /paiement → /merci-achat.
+- Trafic chaud (Instagram, TikTok, lien en bio, relances) → / (page de vente à 87 $) → /paiement → /merci-achat.
 - Pas de retargeting pour l'instant.
-- Le paiement se fait sur Skool (SKOOL_URL dans lib/config.ts), facturé 60 $ US. Il n'y a pas de Stripe sur ce site.
-- Après l'achat : un appel « Plan de match » de 20 minutes (lien de réservation dans Skool), puis le coaching à 1 500 $. Le 87 $ est crédité si la personne monte dans les 14 jours (crédit appliqué à la main).
+- Le paiement se fait sur le site, à /paiement : Stripe Payment Element + Apple Pay / Google Pay, 87 $ CAD fixé côté serveur. Le webhook Stripe (/api/stripe-webhook) envoie « achat_complete » à Make, qui envoie l'accès Skool par courriel.
+- Après l'achat : un appel « Plan de match » de 20 minutes (PLAN_DE_MATCH_URL, Calendly), puis le coaching à 1 500 $. Le 87 $ est crédité si la personne monte dans les 14 jours (crédit appliqué à la main).
 - Règle : une page = une action. /ebook ne mentionne jamais le prix, le Black Friday ni le compte à rebours, et n'a aucun lien vers la page de vente.
 - Toutes les valeurs (prix, nom, liens, infos légales, garantie) sont dans lib/config.ts. Aucune valeur écrite en dur dans les pages.
 - Les messages de relance sont dans content/sequences.md.
@@ -41,7 +41,7 @@ Ebook gratuit : « Les 7 services que tu peux lancer avec moins de 500 $ ».
 
 ## Stack technique
 - Next.js (App Router) + TypeScript + Tailwind, déployé sur Vercel.
-- Paiement : sur Skool (lib/config.ts) : Skool encaisse et donne l'accès automatiquement. Skool facture en USD.
+- Paiement : Stripe (clés dans .env.local : STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, STRIPE_WEBHOOK_SECRET). L'accès à Skool est envoyé par Make après « achat_complete ».
 - Leads : envoyés à un webhook Make (variable d'environnement MAKE_WEBHOOK_URL), qui s'occupe des courriels et des textos.
 - Les secrets vont TOUJOURS dans .env.local, jamais dans le code. Tiens un fichier .env.example à jour.
 

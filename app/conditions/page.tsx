@@ -1,6 +1,6 @@
 // Faire valider par un avocat.
 import { LegalPage } from "@/components/LegalPage";
-import { BRAND, CONTACT_EMAIL, LEGAL, OFFER_END_TEXT, PRICE, SKOOL_COURSE, SKOOL_PRICE_USD } from "@/lib/config";
+import { BRAND, CONTACT_EMAIL, LEGAL, OFFER_END_TEXT, PRICE, SKOOL_COURSE } from "@/lib/config";
 import { pageMeta } from "@/lib/meta";
 
 export const metadata = pageMeta({
@@ -30,11 +30,11 @@ export default function Conditions() {
         ],
         [
           "Le prix et le paiement",
-          `Le prix Black Friday est de ${PRICE} $ CAD, paiement unique, jusqu'au ${OFFER_END_TEXT}. Le paiement se fait sur Skool, qui facture en dollars américains : ${SKOOL_PRICE_USD}. Le taux de change et les frais de ta carte peuvent changer le montant final. Le total à payer, taxes comprises s'il y a lieu, est affiché par Skool avant que tu confirmes.`,
+          `Le prix Black Friday est de ${PRICE} $ CAD, paiement unique, jusqu'au ${OFFER_END_TEXT}. Le paiement se fait sur ce site, par l'entremise de Stripe, en dollars canadiens. Le total à payer, taxes comprises s'il y a lieu, est affiché avant que tu confirmes.`,
         ],
         [
           "Ton accès",
-          `Ton accès au cours ${SKOOL_COURSE} est donné sur Skool, une fois le paiement confirmé. Il est personnel : tu ne peux pas le partager, le revendre ni redistribuer le contenu. Les modèles du Kit peuvent être adaptés et utilisés dans ta propre business.`,
+          `Ton accès au cours ${SKOOL_COURSE}, sur Skool, t'est envoyé par courriel une fois le paiement confirmé. Il est personnel : tu ne peux pas le partager, le revendre ni redistribuer le contenu. Les modèles du Kit peuvent être adaptés et utilisés dans ta propre business.`,
         ],
         ["Les remboursements", "Les conditions de la garantie sont dans la politique de remboursement, dans le pied de page du site."],
         [

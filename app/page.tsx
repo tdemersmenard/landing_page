@@ -3,8 +3,8 @@ import { CheckoutProvider } from "@/components/Checkout";
 import { Footer } from "@/components/Footer";
 import { Ancrage, BuyButton, Countdown, CTA as cta, DuringOffer, StickyBar } from "@/components/offer";
 import { Proofs } from "@/components/Proofs";
-import { Vsl } from "@/components/Vsl";
-import { BRAND, EBOOK_TITLE, OFFER_END_TEXT, PRICE, SKOOL_MEMBERS } from "@/lib/config";
+import { offreGrille, Vsl } from "@/components/Vsl";
+import { BRAND, EBOOK_TITLE, OFFER_END_TEXT, PRICE, SKOOL_MEMBERS, VIDEO_URL } from "@/lib/config";
 import { faq, included, modules } from "@/lib/content";
 import { pageMeta } from "@/lib/meta";
 import { t } from "@/lib/text";
@@ -21,8 +21,8 @@ const chiffres = [
 ];
 
 const etapes = [
-  ["Rejoins le programme", "Tu remplis le formulaire et tu paies sur Skool."],
-  ["Accède à tout", "Modules, kit, scripts et automatisations s'ouvrent tout de suite."],
+  ["Rejoins le programme", "Tu remplis le formulaire et tu paies par carte, Apple Pay ou Google Pay."],
+  ["Accède à tout", "Ton accès arrive par courriel tout de suite : modules, kit, scripts et automatisations."],
   ["Va chercher ton premier client", "Tu suis les étapes et tu contactes du monde."],
 ];
 
@@ -79,13 +79,13 @@ export default function Page() {
                 {t("Lance ta business de service et signe ton ")}
                 premier client en 30 jours
               </h1>
-              <p className="mt-3 text-doux">Regarde la vidéo pour voir comment.</p>
+              {VIDEO_URL && <p className="mt-3 text-doux">Regarde la vidéo pour voir comment.</p>}
               <a href="#garantie" className="etiquette-verte mt-4">
                 <span aria-hidden="true">✓</span>
                 {"Sinon, t'es remboursé (conditions)"}
               </a>
 
-              <div className="mx-auto mt-8 grid max-w-5xl items-start gap-5 text-left lg:grid-cols-[minmax(0,22rem)_1fr] lg:justify-center lg:gap-6">
+              <div className={offreGrille}>
                 <Vsl />
 
                 <div className="carte p-5 sm:p-7">

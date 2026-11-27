@@ -9,15 +9,14 @@ export const CONTACT_EMAIL = "academytouchgrass@gmail.com"; // COURRIEL_CONTACT
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://landingpage-gilt-phi.vercel.app";
 
 export const PRICE = 87;
+/** Montant envoyé à Stripe, en cents (CAD). Fixé ici, jamais par le navigateur. */
+export const PRICE_CENTS = PRICE * 100;
+export const CURRENCY = "cad";
 /** Programme avec appels 1-on-1. Doit être un prix réellement demandé. */
 export const PRICE_COACHING = 1500; // PRIX_COACHING
 export const PRICE_COACHING_TXT = `${String(PRICE_COACHING).replace(/(\d)(?=\d{3}$)/, "$1 ")} $`;
 
-/** LIEN_SKOOL_ACHAT. Pour l'instant : la salle de classe (le lien direct vers l'achat est à fournir). */
-export const SKOOL_URL = process.env.NEXT_PUBLIC_SKOOL_URL || "https://www.skool.com/tdm-community-1616/classroom";
 export const SKOOL_COURSE = "SYSTÈME TDM";
-/** Prix affiché sur Skool (toujours en dollars américains). Doit revenir à 87 $ CAD ou moins. */
-export const SKOOL_PRICE_USD = "60 $ US";
 /** Membres affichés publiquement sur Skool : 133 le 24 novembre 2026. À garder vrai. */
 export const SKOOL_MEMBERS = "Plus de 130";
 
@@ -44,6 +43,12 @@ export const GARANTIE = {
   delaiDemande: "14 jours après la fin des 30 jours",
   delaiTraitement: "10 jours ouvrables",
 };
+
+/** Appel « Plan de match » de 20 minutes, offert après l'achat. */
+export const PLAN_DE_MATCH_URL = "https://calendly.com/tdemersmenard-agencetdm/coaching";
+
+/** Vidéo de vente : public/video.mp4 par défaut (NEXT_PUBLIC_HERO_VIDEO_URL pour la remplacer). */
+export const VIDEO_URL = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/video.mp4";
 
 /** Crédit appliqué à la main si la personne passe au coaching. */
 export const CREDIT_JOURS = 14;

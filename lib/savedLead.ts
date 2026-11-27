@@ -35,3 +35,22 @@ export const readLead = () => parse(raw());
 const never = () => () => {};
 /** null pendant le rendu serveur. */
 export const useSavedLead = () => parse(useSyncExternalStore(never, raw, () => null));
+
+const REF_KEY = "reference";
+let refMemory = "";
+
+/** Référence du lead achat_commence, pour la relier au paiement Stripe. */
+export function saveReference(reference: string) {
+  refMemory = reference;
+  try {
+    sessionStorage.setItem(REF_KEY, reference);
+  } catch {}
+}
+
+export function readReference(): string {
+  try {
+    return sessionStorage.getItem(REF_KEY) ?? refMemory;
+  } catch {
+    return refMemory;
+  }
+}

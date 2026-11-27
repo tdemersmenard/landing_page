@@ -4,35 +4,21 @@ import { createContext, type MouseEvent, useContext, useRef, useState } from "re
 import { Consent } from "@/components/Consent";
 import { Field } from "@/components/Field";
 import { useRemaining } from "@/lib/clock";
-import { BRAND, OFFER_END, PRICE, SKOOL_PRICE_USD, SKOOL_URL } from "@/lib/config";
-import { CHAMPS, isValid } from "@/lib/lead";
+import { BRAND, OFFER_END, PRICE } from "@/lib/config";
+import { CHAMPS } from "@/lib/lead";
 import { pixelDelay, trackCheckout } from "@/lib/pixel";
+import { saveReference } from "@/lib/savedLead";
 import { money, t } from "@/lib/text";
 import { useLeadForm } from "@/lib/useLeadForm";
 
 const END = new Date(OFFER_END).getTime();
 export const offerEnded = () => Date.now() >= END;
 
-/** Le seul chemin vers Skool : InitiateCheckout, puis la redirection. */
-export async function goToSkool() {
+/** Le seul chemin vers /paiement : InitiateCheckout, puis la redirection. */
+export async function goToPaiement() {
   trackCheckout();
   await pixelDelay();
-  window.location.assign(SKOOL_URL);
-}
-
-export function SkoolEmail({ email, className = "" }: { email?: string; className?: string }) {
-  return (
-    <p className={`text-[0.95rem] leading-snug ${className}`}>
-      {"Sur Skool, utilise le même courriel"}
-      {email && (
-        <>
-          {" ("}
-          <strong className="[overflow-wrap:anywhere]">{email}</strong>)
-        </>
-      )}
-      {t(" : c'est comme ça qu'on retrouve ton achat.")}
-    </p>
-  );
+  window.location.assign("/paiement");
 }
 
 const CheckoutContext = createContext<() => void>(() => {});
@@ -44,16 +30,16 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
   const pressedOutside = useRef(false);
   const ended = useRemaining() === 0;
   const [message, setMessage] = useState("");
-  const [email, setEmail] = useState("");
   const [leaving, setLeaving] = useState(false);
 
-  const { onSubmit, pending, field } = useLeadForm("achat_commence", CHAMPS, async () => {
+  const { onSubmit, pending, field } = useLeadForm("achat_commence", CHAMPS, async (r) => {
+    if (r.status === "ok") saveReference(r.reference);
     // Fenêtre fermée pendant l'envoi : la personne a changé d'idée, on ne la redirige pas.
     if (!dialog.current?.open) return;
     if (offerEnded()) return setMessage("L'offre Black Friday est terminée.");
     // On redirige même si le lead n'est pas parti : rien ne bloque une vente.
     setLeaving(true);
-    await goToSkool();
+    await goToPaiement();
     setTimeout(() => setLeaving(false), 4000); // Retour arrière, ou navigation bloquée.
   });
 
@@ -102,24 +88,19 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
           <p className="mt-3 flex items-center justify-between gap-4 rounded-2xl border border-trait bg-nuit px-4 py-3 font-semibold">
             <span>
               {t(`${BRAND}, les 8 modules`)}
-              <span className="block text-sm font-normal text-doux">{t(`CAD, facturé ${SKOOL_PRICE_USD} par Skool`)}</span>
+              <span className="block text-sm font-normal text-doux">CAD, un seul paiement</span>
             </span>
             <span className="chiffre text-5xl">{money(PRICE)}</span>
           </p>
           <form
             noValidate
             onSubmit={onSubmit}
-            onInput={(e) => {
-              const i = e.target as HTMLInputElement;
-              if (i.name === "email") setEmail(i.value.trim());
-            }}
             className="mt-4 grid gap-4"
           >
             <Field ref={first} label="Prénom" autoComplete="given-name" {...field("prenom")} />
             <Field label="Téléphone" type="tel" autoComplete="tel" {...field("telephone")} />
             <Field label="Courriel" type="email" autoComplete="email" {...field("email")} />
             <Consent />
-            <SkoolEmail email={isValid.email(email) ? email : undefined} />
             <button type="submit" disabled={busy || ended} className="btn">
               {ended ? "Offre terminée" : busy ? "Un instant…" : "Continuer vers le paiement"}
             </button>
