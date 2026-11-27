@@ -47,8 +47,8 @@ export const GARANTIE = {
 /** Appel « Plan de match » de 20 minutes, offert après l'achat. */
 export const PLAN_DE_MATCH_URL = "https://calendly.com/tdemersmenard-agencetdm/coaching";
 
-/** Vidéo de vente (fichier .mp4). Vide = le bloc vidéo est caché. */
-export const VIDEO_URL = process.env.NEXT_PUBLIC_HERO_VIDEO_URL ?? "";
+/** Vidéo de vente : public/video.mp4 par défaut (NEXT_PUBLIC_HERO_VIDEO_URL pour la remplacer). */
+export const VIDEO_URL = process.env.NEXT_PUBLIC_HERO_VIDEO_URL || "/video.mp4";
 
 /** Crédit appliqué à la main si la personne passe au coaching. */
 export const CREDIT_JOURS = 14;
