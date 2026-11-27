@@ -139,7 +139,7 @@ export function PaiementForm() {
           buttonHeight: 52,
           buttonType: { applePay: "buy", googlePay: "buy" },
           buttonTheme: { applePay: "white", googlePay: "white" },
-          paymentMethods: { applePay: "auto", googlePay: "auto", link: "never", paypal: "never", amazonPay: "never" },
+          paymentMethods: { applePay: "auto", googlePay: "auto", link: "never", paypal: "never", amazonPay: "never", klarna: "never" },
         });
         exp.on("ready", (e) => setExpress(Object.values(e.availablePaymentMethods ?? {}).some(Boolean)));
         exp.on("click", (e) => e.resolve?.({ emailRequired: true, phoneNumberRequired: true }));
