@@ -22,7 +22,7 @@ export const SKOOL_MEMBERS = "Plus de 130";
 
 /** Le PDF de l'ebook, dans public/. */
 export const EBOOK_PDF = "/ebook-7-services.pdf";
-export const EBOOK_TITLE = "Les 7 services que tu peux lancer avec moins de 500 $";
+export const EBOOK_TITLE = "Les 7 services qui peuvent te rapporter jusqu'à 900 $ par semaine cet été";
 
 /** Infos légales. Vide = la ligne n'apparaît pas. À remplir avant de lancer les pubs. */
 export const LEGAL = {

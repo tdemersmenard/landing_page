@@ -14,11 +14,11 @@ function liste(): Preuve[] {
 }
 
 export function Proofs() {
-  const items = liste();
+  const items = liste().slice(0, 6); // 3 à 6 images, pas plus.
   if (!items.length) return null;
   return (
     <section className="section wrap">
-      <h2 className="titre">Les preuves</h2>
+      <h2 className="titre text-center">{"C'est pas de la théorie."}</h2>
       <ul className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3">
         {items.map((p) => (
           <li key={p.fichier} className="carte mb-4 break-inside-avoid overflow-hidden">

@@ -1,8 +1,10 @@
 import { Footer } from "@/components/Footer";
 import { MerciButton, MerciOffer } from "@/components/MerciOffer";
 import { DuringOffer } from "@/components/offer";
+import { Proofs } from "@/components/Proofs";
+import { TrackView } from "@/components/TrackView";
 import { offreGrille, Vsl } from "@/components/Vsl";
-import { EBOOK_PDF, PRICE } from "@/lib/config";
+import { EBOOK_PDF, OFFER_END_TEXT, PRICE } from "@/lib/config";
 import { faq, faqMerci, modules } from "@/lib/content";
 import { pageMeta } from "@/lib/meta";
 import { t } from "@/lib/text";
@@ -31,6 +33,7 @@ const Entete = ({ etiquette, titre }: { etiquette: string; titre: string }) => (
 export default function Merci() {
   return (
     <>
+      <TrackView />
       <main>
         <section className="keo-haut">
           <div className="wrap pt-6 pb-12 lg:py-16">
@@ -55,6 +58,9 @@ export default function Merci() {
               <h1 className="large mx-auto mt-5 max-w-3xl text-center text-[clamp(1.55rem,3.6vw,2.8rem)] leading-[1.12]">
                 {t("Avant que tu partes : t'as choisi ton service ? Voici comment signer ton premier client.")}
               </h1>
+              <p className="mx-auto mt-4 max-w-2xl rounded-2xl border border-accent/40 bg-[#0f2418] px-4 py-3 text-center text-[0.95rem] font-semibold leading-snug">
+                {t(`Offre réservée à ceux qui viennent de prendre l'ebook : les 8 modules à ${PRICE} $, jusqu'au ${OFFER_END_TEXT}.`)}
+              </p>
               <div className={offreGrille}>
                 <Vsl />
                 <div className="carte p-5 sm:p-7">
@@ -64,6 +70,8 @@ export default function Merci() {
             </DuringOffer>
           </div>
         </section>
+
+        <Proofs />
 
         <DuringOffer>
           <section className="section wrap !max-w-4xl">

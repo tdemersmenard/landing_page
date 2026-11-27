@@ -6,7 +6,12 @@ import { useSavedLead } from "@/lib/savedLead";
 /** Lien vers /paiement, avec le prénom et le courriel donnés sur /ebook pour préremplir. */
 export function MerciButton({ className = "" }: { className?: string }) {
   const lead = useSavedLead();
-  const href = lead ? `/paiement?${new URLSearchParams({ prenom: lead.prenom, email: lead.email })}` : "/paiement";
+  const params = new URLSearchParams({ utm_source: "merci" });
+  if (lead) {
+    params.set("prenom", lead.prenom);
+    params.set("email", lead.email);
+  }
+  const href = `/paiement?${params}`;
   return (
     <DuringOffer>
       <div className={className}>

@@ -64,7 +64,7 @@ function matching(): Record<string, string> {
 let sentMatching: string | undefined;
 
 export function track(
-  event: "PageView" | "Lead" | "InitiateCheckout" | "Purchase",
+  event: "PageView" | "ViewContent" | "Lead" | "InitiateCheckout" | "AddPaymentInfo" | "Purchase",
   params: Record<string, unknown> = {},
   options?: { eventID: string },
 ) {
@@ -82,5 +82,7 @@ export function track(
   else fbq("track", event, params);
 }
 
+export const trackView = () => track("ViewContent", { value: PRICE, currency: "CAD" });
 export const trackCheckout = () => track("InitiateCheckout", { value: PRICE, currency: "CAD" });
+export const trackAddPayment = () => track("AddPaymentInfo", { value: PRICE, currency: "CAD" });
 

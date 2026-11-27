@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Footer } from "@/components/Footer";
 import { Ancrage, BuyButton, Countdown, CTA as cta, DuringOffer, StickyBar } from "@/components/offer";
 import { Proofs } from "@/components/Proofs";
+import { TrackView } from "@/components/TrackView";
 import { offreGrille, Vsl } from "@/components/Vsl";
 import { BRAND, EBOOK_TITLE, OFFER_END_TEXT, PRICE, SKOOL_MEMBERS, VIDEO_URL } from "@/lib/config";
 import { faq, included, modules } from "@/lib/content";
@@ -58,6 +59,7 @@ const Cta = () => (
 export default function Page() {
   return (
     <>
+      <TrackView />
       <div>
         <div className="border-b border-trait bg-[#0f2418] px-4 py-2 text-center text-[0.95rem]">
           <Countdown />
@@ -121,6 +123,8 @@ export default function Page() {
             </div>
           </section>
 
+          <Proofs />
+
           <section className="section wrap">
             <Entete etiquette="Inclus" titre={`Ce que tu débloques dans ${BRAND}`} sous="Tout s'ouvre dès ton inscription." />
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -163,7 +167,7 @@ export default function Page() {
                 ))}
               </ol>
             </details>
-            <p className="mt-4 text-center text-sm text-doux">{"Images d'ambiance. Préenregistré, sans appels de coaching."}</p>
+            <p className="mt-4 text-center text-sm text-doux">{"Préenregistré, sans appels de coaching."}</p>
             <Cta />
           </section>
 
@@ -180,8 +184,6 @@ export default function Page() {
             </div>
             <Cta />
           </section>
-
-          <Proofs />
 
           <section className="section wrap !max-w-5xl">
             <Entete etiquette="3 étapes simples" titre="Ça se passe en 3 étapes" />

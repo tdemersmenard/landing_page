@@ -104,9 +104,19 @@ export function BuyButton({
   );
 }
 
-/** Barre collée en bas, visible une fois le hero dépassé. */
+/** Compte à rebours compact pour la barre collante : « 02j 05h 12min » ou « 05h 12min 30s ». */
+function Compact({ s }: { s: number }) {
+  const d = Math.floor(s / 86400);
+  const parts: [number, string][] = d
+    ? [[d, "j"], [Math.floor(s / 3600) % 24, "h"], [Math.floor(s / 60) % 60, "min"]]
+    : [[Math.floor(s / 3600), "h"], [Math.floor(s / 60) % 60, "min"], [s % 60, "s"]];
+  return <span className="font-bold tabular-nums whitespace-nowrap">{parts.map(([v, u]) => `${String(v).padStart(2, "0")} ${u}`).join(" ")}</span>;
+}
+
+/** Barre collée en bas sur mobile (< 768 px), visible une fois le premier bouton d'achat dépassé. */
 export function StickyBar({ heroId }: { heroId: string }) {
   const [show, setShow] = useState(false);
+  const s = useRemaining();
   useEffect(() => {
     const hero = document.getElementById(heroId);
     if (!hero) return;
@@ -115,24 +125,24 @@ export function StickyBar({ heroId }: { heroId: string }) {
     return () => io.disconnect();
   }, [heroId]);
 
+  if (!s) return null; // Offre terminée (0) ou pas encore calculée (null) : pas de barre.
+
   return (
     <div
       hidden={!show}
       role="region"
       aria-label="Offre Black Friday"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-trait bg-nuit pb-[env(safe-area-inset-bottom)] text-clair"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-trait bg-nuit pb-[env(safe-area-inset-bottom)] text-clair md:hidden"
     >
-      <div className="wrap flex items-center justify-between gap-3 py-2">
-        <div className="min-w-0 text-xs leading-tight">
-          <p className="text-doux">
-            Programme <Barre />
-          </p>
-          <p className="mt-1.5 flex items-center gap-2">
-            <Prix className="text-4xl" />
-            <span className="font-semibold">8 modules seuls</span>
-          </p>
-        </div>
-        <BuyButton className="shrink-0 !px-4 !py-3 !text-base sm:!px-8">J&apos;embarque</BuyButton>
+      <div className="wrap flex items-center justify-between gap-3 py-2.5">
+        <p className="flex min-w-0 items-baseline gap-2 leading-none">
+          <Prix className="text-3xl" />
+          <span className="truncate text-xs text-doux">
+            {"· finit dans "}
+            <Compact s={s} />
+          </span>
+        </p>
+        <BuyButton className="shrink-0 !px-5 !py-3 !text-base">J&apos;embarque</BuyButton>
       </div>
     </div>
   );

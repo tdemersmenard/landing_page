@@ -6,7 +6,7 @@ import { Field } from "@/components/Field";
 import { readAttribution } from "@/lib/attribution";
 import { CURRENCY, PRICE, PRICE_CENTS } from "@/lib/config";
 import { type Champ, CHAMPS, type Erreurs, isValid, validate } from "@/lib/lead";
-import { trackCheckout } from "@/lib/pixel";
+import { trackAddPayment, trackCheckout } from "@/lib/pixel";
 import { readLead, readReference, saveLead, saveReference } from "@/lib/savedLead";
 import { sendLead } from "@/lib/sendLead";
 import { money } from "@/lib/text";
@@ -233,6 +233,7 @@ export function PaiementForm() {
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (busy || !stripe.current || !elements.current) return;
+    if (unePrSession("add_payment_suivi")) trackAddPayment();
     setMessage("");
     const form = e.currentTarget;
     const data = new FormData(form);
