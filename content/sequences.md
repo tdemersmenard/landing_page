@@ -3,12 +3,12 @@
 ## Règles
 
 - **Consentement.** Tout ce qui est promotionnel part seulement si `consentement = true`. Seule exception : le courriel immédiat de l'ebook, parce que la personne l'a demandé (version sans promotion).
-- **Arrêts.** On arrête toute relance dès un achat sur Skool, un STOP ou un désabonnement.
+- **Arrêts.** On arrête toute relance dès un achat (événement « achat_complete » envoyé par le webhook Stripe), un STOP ou un désabonnement.
 - **Chaque courriel** finit par le pied de page plus bas (nom, adresse, désabonnement).
 - **Chaque texto** finit par « Réponds STOP pour te désabonner ». Envoi entre 9 h et 20 h.
 - **Rien après le lundi 30 novembre 2026, 23 h 59.** Un envoi dont l'heure est passée est sauté, pas reporté.
 - Aucun revenu promis. Aucun faux témoignage.
-- Variables : `{{prenom}}`, `{{email}}`, `{{lien_page}}` (la page de vente, /), `{{lien_pdf}}`, `{{lien_skool}}`, `{{lien_reservation}}` (dans Skool), `{{lien_desabonnement}}`, `{{adresse_entreprise}}`, `{{date_limite_credit}}` (achat + 14 jours).
+- Variables : `{{prenom}}`, `{{email}}`, `{{lien_page}}` (la page de vente, /), `{{lien_pdf}}`, `{{lien_paiement}}` (/paiement), `{{lien_skool}}` (le cours, envoyé après l'achat), `{{lien_reservation}}` (Calendly, PLAN_DE_MATCH_URL), `{{lien_desabonnement}}`, `{{adresse_entreprise}}`, `{{date_limite_credit}}` (achat + 14 jours).
 
 Pied de page des courriels :
 
@@ -89,11 +89,11 @@ Thomas
 
 ---
 
-## 2. Type « achat_commence », sans achat sur Skool
+## 2. Type « achat_commence », sans « achat_complete »
 
 ### Texto : après 1 h
 
-Salut {{prenom}}, c'est Thomas de Système TDM. T'as commencé ton inscription, mais je vois pas ton achat sur Skool. Besoin d'aide? C'est ici : {{lien_skool}} Réponds STOP pour te désabonner
+Salut {{prenom}}, c'est Thomas de Système TDM. T'as commencé ton inscription, mais je vois pas ton achat. Besoin d'aide? C'est ici : {{lien_paiement}} Réponds STOP pour te désabonner
 
 ### Courriel : après 24 h
 
@@ -103,9 +103,9 @@ Salut {{prenom}},
 
 T'as commencé ton inscription à Système TDM, mais elle est pas finie.
 
-1. Va ici : {{lien_skool}}
-2. Utilise le même courriel : {{email}}. C'est comme ça qu'on retrouve ton achat.
-3. Skool facture 60 $ US. Ça fait environ 87 $ CAD, selon le taux de ta carte.
+1. Va ici : {{lien_paiement}}
+2. Paie par carte, Apple Pay ou Google Pay : 87 $ CAD, un seul paiement.
+3. Ton accès arrive par courriel tout de suite après.
 
 Une question? Réponds à ce courriel, c'est moi qui lis.
 
@@ -113,11 +113,11 @@ Thomas
 
 ### Texto : lundi 30 novembre, 18 h
 
-{{prenom}}, c'est Thomas de Système TDM. Le prix de 87 $ finit ce soir à 23 h 59 : {{lien_skool}} Réponds STOP pour te désabonner
+{{prenom}}, c'est Thomas de Système TDM. Le prix de 87 $ finit ce soir à 23 h 59 : {{lien_paiement}} Réponds STOP pour te désabonner
 
 ---
 
-## 3. Après l'achat : message de bienvenue dans Skool
+## 3. Après l'achat (« achat_complete ») : courriel de bienvenue avec l'accès
 
 Bienvenue dans Système TDM, {{prenom}}!
 

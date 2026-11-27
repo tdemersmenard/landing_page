@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useCheckout } from "@/components/Checkout";
 import { useRemaining } from "@/lib/clock";
-import { PRICE, PRICE_COACHING_TXT, SKOOL_PRICE_USD } from "@/lib/config";
+import { PRICE, PRICE_COACHING_TXT } from "@/lib/config";
 import { money, t } from "@/lib/text";
 
 export const CTA = `J'embarque à ${money(PRICE)}`;
@@ -47,7 +47,17 @@ const Barre = () => (
   </>
 );
 
-export function Ancrage({ taille, etiquette = false, note = false }: { taille: string; etiquette?: boolean; note?: boolean }) {
+export function Ancrage({
+  taille,
+  etiquette = false,
+  note = false,
+  devise = false,
+}: {
+  taille: string;
+  etiquette?: boolean;
+  note?: boolean;
+  devise?: boolean;
+}) {
   return (
     <div>
       {etiquette && (
@@ -59,10 +69,13 @@ export function Ancrage({ taille, etiquette = false, note = false }: { taille: s
         Le programme <Barre />
       </p>
       <p className="font-bold">Les 8 modules seuls :</p>
-      <Prix className={`mt-3 ${taille}`} />
+      <p className="mt-3">
+        <Prix className={taille} />
+        {devise && <span className="large ml-3 text-3xl">CAD</span>}
+      </p>
       {note && (
         <p className="mt-4 text-sm leading-snug text-doux">
-          {t(`Préenregistré, sans appels de coaching. Un seul paiement : ${PRICE} $ CAD, facturé ${SKOOL_PRICE_USD} par Skool.`)}
+          {t(`Préenregistré, sans appels de coaching. Un seul paiement : ${PRICE} $ CAD.`)}
         </p>
       )}
     </div>

@@ -1,6 +1,6 @@
 // Faire valider par un avocat.
 import { LegalPage } from "@/components/LegalPage";
-import { BRAND, CONTACT_EMAIL, GARANTIE, PRICE, SKOOL_PRICE_USD } from "@/lib/config";
+import { BRAND, CONTACT_EMAIL, GARANTIE, PRICE } from "@/lib/config";
 import { pageMeta } from "@/lib/meta";
 
 export const metadata = pageMeta({
@@ -31,7 +31,7 @@ export default function Remboursement() {
         ],
         [
           "Le montant et le délai",
-          `Si les conditions sont remplies, tu es remboursé au complet, sur le mode de paiement utilisé pour l'achat. Le paiement passe par Skool, qui facture ${SKOOL_PRICE_USD} : on te rembourse le montant facturé. Le montant en dollars canadiens sur ton relevé peut varier un peu selon le taux de change de ta carte. Délai de traitement : ${GARANTIE.delaiTraitement}.`,
+          `Si les conditions sont remplies, tu es remboursé au complet, sur le mode de paiement utilisé pour l'achat. Le paiement passe par Stripe, en dollars canadiens : on te rembourse ${PRICE} $ CAD. Délai de traitement : ${GARANTIE.delaiTraitement}.`,
         ],
         [
           "Tes droits",

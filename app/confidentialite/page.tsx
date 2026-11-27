@@ -25,7 +25,7 @@ export default function Confidentialite() {
             "Avec chaque formulaire : la date, la page, un numéro de référence et, s'il y en a dans le lien, les paramètres de campagne (utm et fbclid).",
             "Par le pixel Meta : les pages vues, la demande de l'ebook, le départ vers le paiement, ainsi que des données techniques comme l'adresse IP, le navigateur et les témoins (cookies) de Meta. Si tu as rempli un formulaire, ton courriel et ton téléphone sont aussi transmis à Meta sous forme hachée.",
           ],
-          "Tes renseignements et les paramètres de campagne sont gardés dans le stockage de session de ton navigateur (sessionStorage) jusqu'à ce que tu fermes l'onglet, pour ne pas te les redemander. On ne reçoit pas ton numéro de carte : le paiement se fait sur Skool.",
+          "Tes renseignements et les paramètres de campagne sont gardés dans le stockage de session de ton navigateur (sessionStorage) jusqu'à ce que tu fermes l'onglet, pour ne pas te les redemander. On ne reçoit pas ton numéro de carte : il est traité directement par Stripe.",
           "Si tu remplis le formulaire d'achat sans payer, ou si tu cliques sur le bouton d'achat après avoir demandé l'ebook, on reçoit quand même les renseignements que tu as envoyés.",
         ],
         [
@@ -45,7 +45,8 @@ export default function Confidentialite() {
           "Avec qui on les partage",
           "On ne vend pas tes renseignements. Ils sont transmis à ces fournisseurs :",
           [
-            "Skool, pour le paiement et l'accès à la formation. Skool recueille tes renseignements selon sa propre politique ;",
+            "Stripe, pour le paiement. Stripe traite ta carte selon sa propre politique ;",
+            "Skool, pour l'accès à la formation et à la communauté. Skool recueille tes renseignements selon sa propre politique ;",
             "Meta, pour mesurer les publicités ;",
             `${LEGAL.outilMessages}, pour traiter les formulaires et t'écrire ;`,
             "Vercel, pour héberger le site.",
